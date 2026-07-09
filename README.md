@@ -4,7 +4,7 @@ Cette plateforme basée sur l'intelligence artificielle est conçue pour aider l
 
 ---
 
-## 🚀 Fonctionnalités Clés
+## Fonctionnalités Clés
 
 *   **Audit Financier & Analyse (BI)** : Importation et agrégation de relevés bancaires (CSV) avec analyse automatisée des charges (SYSCOHADA).
 *   **Scoring de Crédit (ML)** : Calcul en temps réel d'un score de confiance (0 à 100) basé sur un modèle prédictif **XGBoost**.
@@ -15,7 +15,7 @@ Cette plateforme basée sur l'intelligence artificielle est conçue pour aider l
 
 ---
 
-## 🛠️ Stack Technique
+## Stack Technique
 
 *   **Frontend** : React 18, TypeScript, Vite, composants UI modulaires polis (Glassmorphism & accessibilité).
 *   **Backend Core** : Django, Django REST Framework, Django Channels.
@@ -26,7 +26,7 @@ Cette plateforme basée sur l'intelligence artificielle est conçue pour aider l
 
 ---
 
-## 📁 Structure du Projet
+## Structure du Projet
 
 ```text
 ├── backend-core/         # Serveur Django (Logique métier, PDF, Facturation)
@@ -41,7 +41,7 @@ Cette plateforme basée sur l'intelligence artificielle est conçue pour aider l
 
 ---
 
-## ⚙️ Démarrage Local (Docker)
+## Démarrage Local (Docker)
 
 ### 1. Prérequis
 Assurez-vous d'avoir installé **Docker** et **Docker Compose** sur votre machine.
@@ -67,7 +67,7 @@ Une fois les conteneurs démarrés, l'application est accessible aux adresses su
 
 ---
 
-## 🔒 Sécurité et Protection de Production
+## Sécurité et Protection de Production
 
 *   **Isolation des Bases** : Les ports PostgreSQL (`5432`) et Redis (`6379`) ne sont plus exposés vers l'extérieur pour éviter les accès frauduleux.
 *   **Protection SQL** : Validation regex stricte du nom du schéma de chaque locataire avant toute exécution de requête dynamique.
