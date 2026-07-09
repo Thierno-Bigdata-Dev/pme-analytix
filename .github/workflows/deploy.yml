@@ -1,0 +1,65 @@
+name: Production Deployment Pipeline
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install flake8 bandit
+          pip install -r backend-core/requirements.txt
+
+      - name: Run Linter (Flake8)
+        run: flake8 backend-core --exclude=migrations,settings.py
+
+      - name: Run Security Audit (Bandit)
+        run: bandit -r backend-core/ -x tests.py
+
+  build-and-push:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-3
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and Push backend-core
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend-core
+          push: true
+          tags: ${{ steps.login-ecr.outputs.registry }}/pme-backend-core:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to AWS ECS (Rolling Update)
+        run: |
+          aws ecs update-service --cluster pme-prod-cluster --service pme-backend-core-service --force-new-deployment
+          aws ecs update-service --cluster pme-prod-cluster --service pme-backend-ml-service --force-new-deployment

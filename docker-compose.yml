@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: pme-db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: pme-redis
+
+  backend-core:
+    build:
+      context: ./backend-core
+    container_name: pme-backend-core
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend-core:/app
+    environment:
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      - REDIS_URL=${REDIS_URL}
+      - SECRET_KEY=${SECRET_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+
+  backend-ml:
+    build:
+      context: ./backend-ml
+    container_name: pme-backend-ml
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+    volumes:
+      - ./backend-ml:/app
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      - REDIS_URL=${REDIS_URL}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - B2B_API_KEY=${B2B_API_KEY}
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+      - redis
+
+  nginx:
+    image: nginx:1.26-alpine
+    container_name: pme-nginx
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - backend-core
+      - backend-ml
+
+  celery:
+    build:
+      context: ./backend-core
+    container_name: pme-celery-worker
+    command: celery -A core worker --loglevel=info
+    volumes:
+      - ./backend-core:/app
+    environment:
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      - REDIS_URL=${REDIS_URL}
+      - SECRET_KEY=${SECRET_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:

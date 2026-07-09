@@ -1,0 +1,9 @@
+date,montant,type,categorie,description
+2026-06-01,1500000,credit,Ventes,Paiement Facture FAC-2026-001 - Client Senegal Tech
+2026-06-02,600000,debit,Loyer,Loyer Bureaux Dakar Plateau - Immeuble Keur
+2026-06-05,25000,debit,Fournisseurs,Achat de matériel informatique - Bureau
+2026-06-10,150000,debit,Télécom,Facture Internet Orange Business Fibre
+2026-06-15,3500000,credit,Ventes,Paiement Facture FAC-2026-003 - Client Touba Distribution
+2026-06-20,80000,debit,Frais,Achat Fournitures de bureau Librairie Ndakaaru
+2026-06-25,250000,credit,Ventes,Virement Facture FAC-2026-002 - Client Dakar Dev
+2026-06-28,1800000,debit,Salaires,Virements Salaires Equipe Juin 2026

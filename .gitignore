@@ -1,0 +1,38 @@
+# Environment configuration (DO NOT COMMIT SECRETS)
+.env
+.env*.local
+
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+.eslintcache
+.vite/
+
+# Python / Backends
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+ENV/
+*.joblib
+*.pkl
+ml-models/*.json
+ml-models/*.joblib
+
+# Docker & Databases
+postgres_data/
+
+# IDE / System files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.DS_Store
+Thumbs.db
