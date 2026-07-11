@@ -18,6 +18,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --default-timeout=1000 --retries 10 -r requirements.txt
 
 # Install and compile CmdStan 2.33.1 in the exact directory expected by Prophet
+# Limit compiler to 1 core to prevent OOM (Out of Memory) container crashes during building
+ENV MAKEFLAGS="-j1"
 RUN python -c "import cmdstanpy; cmdstanpy.install_cmdstan(version='2.33.1', dir='/usr/local/lib/python3.11/site-packages/prophet/stan_model', overwrite=True)"
 
 COPY . .
