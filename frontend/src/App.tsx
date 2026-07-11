@@ -822,7 +822,7 @@ export default function App() {
     }
   };
 
-  const handleSendChatMessage = (e: React.FormEvent) => {
+  const handleSendChatMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!chatInput.trim()) return;
 
@@ -831,30 +831,40 @@ export default function App() {
     setChatMessages(newMsgs);
     setChatInput('');
 
-    // Simulate bot response
-    setTimeout(() => {
-      let reply = "Désolé, je n'ai pas bien compris votre question. Vous pouvez m'interroger sur l'estimation de votre Note de Confiance, les Prévisions de votre Trésorerie, le téléchargement de vos Rapports Comptables Officiels (PDF), la Sécurité de vos informations, les Forfaits de la plateforme, ou encore la prise de rendez-vous avec un conseiller ADPME.";
-      const lower = userMsg.toLowerCase();
-      
-      if (lower.includes('onboard') || lower.includes('passer') || lower.includes('bloqu') || lower.includes('commencer') || lower.includes('débuter') || lower.includes('debuter') || lower.includes('grand livre') || lower.includes('charger') || lower.includes('upload') || lower.includes('fichier')) {
-        reply = "💡 **Comment débuter sur la plateforme** :\n\n- **Fichier Financier** : Pour démarrer les analyses, vous pouvez importer un document d'activité (au format CSV ou Excel) répertoriant vos mouvements financiers.\n- **Essayer sans fichier** : Si vous n'avez pas de fichier comptable sous la main et préférez découvrir la plateforme immédiatement, cliquez sur le bouton bleu **'Passer l'Onboarding'** tout en haut à droite. Vous accéderez alors directement au Tableau de Bord et à l'espace de démonstration !";
-      } else if (lower.includes('eda') || lower.includes('analyse libre') || lower.includes('prediction') || lower.includes('prédiction') || lower.includes('machine learning') || lower.includes('ml') || lower.includes('r2') || lower.includes('mae') || lower.includes('rmse') || lower.includes('forêt') || lower.includes('forest') || lower.includes('regress') || lower.includes('entrain')) {
-        reply = "📊 **Analyse de Fichiers & Estimations par Intelligence Artificielle** :\n\n- **Analyse de Fichiers** : Notre outil vous permet de charger n'importe quel tableau (ventes, stocks, immobilier). Il nettoie le fichier et affiche des graphiques de répartition et des statistiques simples.\n- **Prédictions IA Personnalisées** : Choisissez la valeur que vous voulez estimer (par exemple, le prix de vente d'un produit) et cochez les critères explicatifs. Notre intelligence artificielle s'entraîne automatiquement sur vos données et affiche sa précision.\n- **Simulateur** : Saisissez des critères fictifs à droite et estimez instantanément la valeur prédite par l'ordinateur.";
-      } else if (lower.includes('syscohada') || lower.includes('ohada') || lower.includes('conforme') || lower.includes('uemoa') || lower.includes('pdf') || lower.includes('rapport') || lower.includes('bilan') || lower.includes('compte de résultat') || lower.includes('resultat')) {
-        reply = "📄 **Rapports Financiers Officiels (PDF)** :\n\nTous les documents financiers générés par l'application (Bilan, Compte de Résultat) respectent scrupuleusement les normes comptables officielles en vigueur au Sénégal et dans la zone UEMOA (exigences SYSCOHADA). Ces rapports PDF sont prêts à être téléchargés et remis directement à votre banque ou à vos partenaires financiers pour appuyer votre demande de crédit.";
-      } else if (lower.includes('prophet') || lower.includes('meta') || lower.includes('tresor') || lower.includes('trésor') || lower.includes('prevision') || lower.includes('prévision') || lower.includes('courbe') || lower.includes('24 mois')) {
-        reply = "📈 **Prévisions de Trésorerie** :\n\nNotre intelligence artificielle analyse l'historique de vos recettes et de vos dépenses pour identifier vos habitudes (saisons, périodes fortes et faibles). Elle dessine ensuite une courbe prévisionnelle qui projette le solde futur de votre compte bancaire à l'avance, afin de vous avertir en cas de risque de manque d'argent.";
-      } else if (lower.includes('xgboost') || lower.includes('score') || lower.includes('credit') || lower.includes('crédit') || lower.includes('risq') || lower.includes('banque') || lower.includes('éligib') || lower.includes('eligib')) {
-        reply = "🛡️ **Note de Confiance pour les Banques** :\n\nVotre note de confiance (de 0 à 100) est calculée en temps réel par notre ordinateur en analysant la régularité de vos revenus et la maîtrise de vos dépenses. Une note supérieure à 55 montre que votre entreprise gère bien son argent, ce qui rassure les banques et facilite l'obtention de prêts.";
-      } else if (lower.includes('secu') || lower.includes('sécu') || lower.includes('stock') || lower.includes('donnee') || lower.includes('donnée') || lower.includes('schema') || lower.includes('schéma') || lower.includes('tenant') || lower.includes('sql') || lower.includes('postgres') || lower.includes('isole')) {
-        reply = "🔒 **Sécurité et Confidentialité de vos Données** :\n\nLa confidentialité de vos informations est notre priorité absolue. Vos données financières et vos documents importés sont stockés dans un espace numérique privé et chiffré, totalement séparé des autres entreprises. Personne d'autre que vous ne peut y avoir accès.";
-      } else if (lower.includes('tarif') || lower.includes('monet') || lower.includes('monét') || lower.includes('prix') || lower.includes('wave') || lower.includes('pay') || lower.includes('forfait') || lower.includes('plan') || lower.includes('abonnement') || lower.includes('starter') || lower.includes('pilote') || lower.includes('croissance')) {
-        reply = "💳 **Forfaits et Moyens de Paiement** :\n\n- **Starter** (Gratuit) : Accès aux graphiques financiers de base.\n- **Pilote** (15 000 FCFA/mois) : Accès à la note de confiance et aux prévisions de trésorerie.\n- **Croissance** (45 000 FCFA/mois) : Accès à toutes les prévisions d'activité, téléchargement de rapports officiels en PDF, et mise en relation directe avec les conseillers ADPME.\n\n*Le règlement s'effectue en ligne de manière sécurisée (par carte bancaire Visa/Mastercard ou paiement mobile Wave / Orange Money).*";
-      } else if (lower.includes('rendez') || lower.includes('rdv') || lower.includes('conseil') || lower.includes('adpme') || lower.includes('partenaire') || lower.includes('agenda') || lower.includes('rencontr')) {
-        reply = "📅 **Prise de Rendez-vous & Accompagnement** :\n\nVous pouvez prendre rendez-vous directement depuis le tableau de bord avec :\n1. Des conseillers d'accompagnement de l'**ADPME** pour vous aider à structurer vos finances.\n2. Des chargés d'affaires de nos **banques partenaires** pour étudier vos dossiers d'emprunt.\nIl vous suffit de sélectionner un créneau disponible dans le calendrier intégré pour fixer la rencontre.";
-      }
-      setChatMessages(prev => [...prev, { sender: 'bot', text: reply }]);
-    }, 800);
+    // Add typing placeholder
+    setChatMessages(prev => [...prev, { sender: 'bot', text: "En cours d'analyse...", isTyping: true }]);
+
+    try {
+      const currentPmeId = selectedPmeId || api.getPmeId() || 1;
+      const data = await api.sendChatMessage(currentPmeId, userMsg);
+      setChatMessages(prev => prev.filter(m => !m.isTyping).concat({ sender: 'bot', text: data.reply }));
+    } catch (err) {
+      console.error(err);
+      // Fallback local response
+      setTimeout(() => {
+        let reply = "Désolé, je n'ai pas pu interroger la base de données en direct. Vous pouvez m'interroger sur l'estimation de votre Note de Confiance XGBoost, vos Prévisions de Trésorerie Prophet, le téléchargement de vos Rapports Comptables (PDF) ou la prise de rendez-vous avec un conseiller ADPME.";
+        const lower = userMsg.toLowerCase();
+        
+        if (lower.includes('onboard') || lower.includes('passer') || lower.includes('bloqu') || lower.includes('commencer') || lower.includes('débuter') || lower.includes('debuter') || lower.includes('grand livre') || lower.includes('charger') || lower.includes('upload') || lower.includes('fichier')) {
+          reply = "💡 **Comment débuter sur la plateforme** :\n\n- **Fichier Financier** : Pour démarrer les analyses, vous pouvez importer un document d'activité (au format CSV ou Excel) répertoriant vos mouvements financiers.\n- **Essayer sans fichier** : Si vous n'avez pas de fichier comptable sous la main et préférez découvrir la plateforme immédiatement, cliquez sur le bouton bleu **'Passer l'Onboarding'** tout en haut à droite. Vous accéderez alors directement au Tableau de Bord et à l'espace de démonstration !";
+        } else if (lower.includes('eda') || lower.includes('analyse libre') || lower.includes('prediction') || lower.includes('prédiction') || lower.includes('machine learning') || lower.includes('ml') || lower.includes('r2') || lower.includes('mae') || lower.includes('rmse') || lower.includes('forêt') || lower.includes('forest') || lower.includes('regress') || lower.includes('entrain')) {
+          reply = "📊 **Analyse de Fichiers & Estimations par Intelligence Artificielle** :\n\n- **Analyse de Fichiers** : Notre outil vous permet de charger n'importe quel tableau (ventes, stocks, immobilier). Il nettoie le fichier et affiche des graphiques de répartition et des statistiques simples.\n- **Prédictions IA Personnalisées** : Choisissez la valeur que vous voulez estimer (par exemple, le prix de vente d'un produit) et cochez les critères explicatifs. Notre intelligence artificielle s'entraîne automatiquement sur vos données et affiche sa précision.\n- **Simulateur** : Saisissez des critères fictifs à droite et estimez instantanément la valeur prédite par l'ordinateur.";
+        } else if (lower.includes('syscohada') || lower.includes('ohada') || lower.includes('conforme') || lower.includes('uemoa') || lower.includes('pdf') || lower.includes('rapport') || lower.includes('bilan') || lower.includes('compte de résultat') || lower.includes('resultat')) {
+          reply = "📄 **Rapports Financiers Officiels (PDF)** :\n\nTous les documents financiers générés par l'application (Bilan, Compte de Résultat) respectent scrupuleusement les normes comptables officielles en vigueur au Sénégal et dans la zone UEMOA (exigences SYSCOHADA). Ces rapports PDF sont prêts à être téléchargés et remis directement à votre banque ou à vos partenaires financiers pour appuyer votre demande de crédit.";
+        } else if (lower.includes('prophet') || lower.includes('meta') || lower.includes('tresor') || lower.includes('trésor') || lower.includes('prevision') || lower.includes('prévision') || lower.includes('courbe') || lower.includes('24 mois')) {
+          reply = "📈 **Prévisions de Trésorerie** :\n\nNotre intelligence artificielle analyse l'historique de vos recettes et de vos dépenses pour identifier vos habitudes (saisons, périodes fortes et faibles). Elle dessine ensuite une courbe prévisionnelle qui projette le solde futur de votre compte bancaire à l'avance, afin de vous avertir en cas de risque de manque d'argent.";
+        } else if (lower.includes('xgboost') || lower.includes('score') || lower.includes('credit') || lower.includes('crédit') || lower.includes('risq') || lower.includes('banque') || lower.includes('éligib') || lower.includes('eligib')) {
+          reply = "🛡️ **Note de Confiance pour les Banques** :\n\nVotre note de confiance (de 0 à 100) est calculée en temps réel par notre ordinateur en analysant la régularité de vos revenus et la maîtrise de vos dépenses. Une note supérieure à 55 montre que votre entreprise gère bien son argent, ce qui rassure les banques et facilite l'obtention de prêts.";
+        } else if (lower.includes('secu') || lower.includes('sécu') || lower.includes('stock') || lower.includes('donnee') || lower.includes('donnée') || lower.includes('schema') || lower.includes('schéma') || lower.includes('tenant') || lower.includes('sql') || lower.includes('postgres') || lower.includes('isole')) {
+          reply = "🔒 **Sécurité et Confidentialité de vos Données** :\n\nLa confidentialité de vos informations est notre priorité absolue. Vos données financières et vos documents importés sont stockés dans un espace numérique privé et chiffré, totalement séparé des autres entreprises. Personne d'autre que vous ne peut y avoir accès.";
+        } else if (lower.includes('tarif') || lower.includes('monet') || lower.includes('monét') || lower.includes('prix') || lower.includes('wave') || lower.includes('pay') || lower.includes('forfait') || lower.includes('plan') || lower.includes('abonnement') || lower.includes('starter') || lower.includes('pilote') || lower.includes('croissance')) {
+          reply = "💳 **Forfaits et Moyens de Paiement** :\n\n- **Starter** (Gratuit) : Accès aux graphiques financiers de base.\n- **Pilote** (15 000 FCFA/mois) : Accès à la note de confiance et aux prévisions de trésorerie.\n- **Croissance** (45 000 FCFA/mois) : Accès à toutes les prévisions d'activité, téléchargement de rapports officiels en PDF, et mise en relation directe avec les conseillers ADPME.\n\n*Le règlement s'effectue en ligne de manière sécurisée (par carte bancaire Visa/Mastercard ou paiement mobile Wave / Orange Money).*";
+        } else if (lower.includes('rendez') || lower.includes('rdv') || lower.includes('conseil') || lower.includes('adpme') || lower.includes('partenaire') || lower.includes('agenda') || lower.includes('rencontr')) {
+          reply = "📅 **Prise de Rendez-vous & Accompagnement** :\n\nVous pouvez prendre rendez-vous directement depuis le tableau de bord avec :\n1. Des conseillers d'accompagnement de l'**ADPME** pour vous aider à structurer vos finances.\n2. Des chargés d'affaires de nos **banques partenaires** pour étudier vos dossiers d'emprunt.\nIl vous suffit de sélectionner un créneau disponible dans le calendrier intégré pour fixer la rencontre.";
+        }
+        setChatMessages(prev => prev.filter(m => !m.isTyping).concat({ sender: 'bot', text: reply }));
+      }, 500);
+    }
   };
 
   const handleBookRendezvous = async (e: React.FormEvent) => {

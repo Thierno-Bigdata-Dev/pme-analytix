@@ -264,5 +264,12 @@ export const api = {
             method: 'PUT',
             body: JSON.stringify({ statut: status })
         });
+    },
+    
+    sendChatMessage(pmeId: number, message: string) {
+        return apiFetch(`/api/ml/chat/${pmeId}/`, {
+            method: 'POST',
+            body: JSON.stringify({ message })
+        });
     }
 };

@@ -562,3 +562,126 @@ async def parse_invoice_ocr(
         },
         "confidence": 94.2
     }
+
+class ChatRequest(BaseModel):
+    message: str
+
+@app.post("/api/ml/chat/{pme_id}/", tags=["ML Models"])
+async def chat_financial_assistant(
+    pme_id: int,
+    req: ChatRequest,
+    user_info: dict = Depends(get_current_user),
+    db: AsyncSession = Depends(get_tenant_db)
+):
+    """
+    Dynamic Financial Assistant Chatbot.
+    Queries the database and ML indicators to answer financial questions with real data.
+    """
+    user_role = user_info.get("role")
+    user_pme_id = user_info.get("pme_id")
+
+    if user_role != "operateur" and user_pme_id != pme_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Vous n'êtes pas autorisé à accéder aux données de cette PME"
+        )
+
+    # 1. Fetch PME details
+    pme_res = await db.execute(text("SELECT nom FROM core_pme WHERE id = :id"), {"id": pme_id})
+    pme_name = pme_res.scalar() or "Votre PME"
+
+    # 2. Fetch basic statistics
+    tx_count_res = await db.execute(text("SELECT COUNT(*) FROM core_transaction"))
+    total_transactions = tx_count_res.scalar() or 0
+
+    balance_res = await db.execute(text(
+        "SELECT SUM(CASE WHEN type = 'CREDIT' THEN montant ELSE -montant END) FROM core_transaction"
+    ))
+    solde = balance_res.scalar() or 0.0
+
+    # 3. Get score if plan allows
+    pme_plan = db.info.get('pme_plan', 'starter')
+    score_str = "Non disponible (plan Starter)"
+    risk_label = ""
+    score_val = None
+    if pme_plan != 'starter':
+        try:
+            score_info = await calculate_pme_score(db, pme_id)
+            if score_info.get("status") != "insufficient_data":
+                score_val = score_info["score"]
+                score_str = f"{score_val}/100"
+                risk_label = score_info.get("risk_segment", "")
+        except Exception:
+            pass
+
+    lower = req.message.lower()
+
+    # 4. Generate dynamic response
+    if 'score' in lower or 'confiance' in lower or 'crédit' in lower or 'credit' in lower:
+        if pme_plan == 'starter':
+            reply = (
+                f"Bonjour ! Pour **{pme_name}**, la Note de Confiance n'est pas calculée car vous utilisez actuellement le **plan Starter (gratuit)**.\n\n"
+                "Pour permettre à notre modèle XGBoost d'analyser vos données en temps réel et d'afficher votre note crédit pour les banques, "
+                "veuillez passer au plan **Pilote** ou **Croissance**."
+            )
+        elif score_val is not None:
+            reply = (
+                f"📊 **Note de Confiance (Crédit Score)** pour **{pme_name}** :\n\n"
+                f"- **Note actuelle** : **{score_str}**\n"
+                f"- **Segment de risque** : **{risk_label}**\n\n"
+                f"Ce score est calculé en analysant les {total_transactions} transactions enregistrées. "
+                "Un score supérieur à 55 facilite grandement l'octroi de crédits auprès de nos banques partenaires."
+            )
+        else:
+            reply = (
+                f"📊 **Note de Confiance (Crédit Score)** pour **{pme_name}** :\n\n"
+                "Données insuffisantes actuellement pour calculer une note fiable. Veuillez importer un journal avec plus d'historique de transactions."
+            )
+
+    elif 'solde' in lower or 'trésor' in lower or 'tresor' in lower or 'argent' in lower or 'caisse' in lower:
+        reply = (
+            f"💰 **État de votre Trésorerie** pour **{pme_name}** :\n\n"
+            f"- **Solde net actuel en base de données** : **{solde:,.0f} XOF**\n"
+            f"- **Nombre de mouvements comptabilisés** : {total_transactions} transactions.\n\n"
+            "Notre modèle d'analyse prévisionnelle (Meta Prophet) peut projeter ce solde sur 90 jours pour vous alerter en cas de découvert."
+        )
+
+    elif 'anomalie' in lower or 'fraude' in lower or 'bizarre' in lower or 'suspect' in lower:
+        # Call detect anomalies logic
+        anomalies_data = await detect_anomalies(pme_id, user_info, db)
+        anoms = anomalies_data.get("anomalies", [])
+        if anoms:
+            reply = (
+                f"🔍 **Détection d'anomalies financières** pour **{pme_name}** :\n\n"
+                f"Nous avons identifié **{len(anoms)} transaction(s)** suspectes (déviant de plus de 2 écarts-types) :\n\n"
+            )
+            for a in anoms[:3]:
+                reply += f"- Le **{a['date']}** : **{float(a['montant']):,.0f} XOF** ({a['type']} - {a['categorie']}) - *Déviation : +{a['deviation_stdev']}σ*\n"
+            if len(anoms) > 3:
+                reply += f"- ... et {len(anoms) - 3} autres transactions."
+        else:
+            reply = (
+                f"🔍 **Détection d'anomalies financières** pour **{pme_name}** :\n\n"
+                "Aucune anomalie critique ou transaction suspecte n'a été détectée. Vos dépenses et recettes restent régulières !"
+            )
+
+    elif 'aide' in lower or 'onboard' in lower or 'passer' in lower or 'charger' in lower or 'commencer' in lower:
+        reply = (
+            f"💡 **Débuter sur la plateforme PME Analytix** :\n\n"
+            f"- **Statut actuel** : Votre PME **{pme_name}** a configuré {total_transactions} transactions dans son espace.\n"
+            "- **Importer** : Vous pouvez à tout moment téléverser un nouveau relevé bancaire ou grand livre CSV pour actualiser le tableau de bord.\n"
+            "- **Aide** : Vous pouvez m'interroger directement sur vos anomalies, votre solde de caisse ou votre note de confiance XGBoost !"
+        )
+
+    else:
+        # Fallback incorporating live facts
+        reply = (
+            f"Bonjour ! Je suis votre conseiller financier virtuel pour **{pme_name}**.\n\n"
+            f"Grâce aux **{total_transactions} transactions** de votre base de données, je peux répondre de manière personnalisée à vos questions :\n"
+            f"- Demandez-moi '**mon score**' (Note crédit calculée par l'IA).\n"
+            f"- Demandez-moi '**mon solde**' (État de votre trésorerie actuelle de {solde:,.0f} XOF).\n"
+            f"- Demandez-moi '**mes anomalies**' (Pour détecter des dépenses inhabituelles).\n\n"
+            "Que souhaitez-vous analyser aujourd'hui ?"
+        )
+
+    return {"reply": reply}
