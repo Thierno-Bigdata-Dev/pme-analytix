@@ -21,8 +21,8 @@ pipeline {
 
         stage('Reconstruction Docker') {
             steps {
-                // Construit les images Docker (l'analyse statique s'effectuera sur l'image bâtie)
-                sh 'docker compose build'
+                // Construit les images Docker en ciblant le projet 'pme' pour aligner la nomenclature
+                sh 'docker compose -p pme build'
             }
         }
 
@@ -36,9 +36,9 @@ pipeline {
 
         stage('Déploiement local') {
             steps {
-                // Arrête et relance les conteneurs de production proprement
-                sh 'docker compose down'
-                sh 'docker compose up -d'
+                // Arrête et relance les conteneurs du projet 'pme' pour éviter les conflits de noms de conteneurs
+                sh 'docker compose -p pme down'
+                sh 'docker compose -p pme up -d'
             }
         }
     }
