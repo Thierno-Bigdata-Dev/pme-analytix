@@ -21,10 +21,8 @@ pipeline {
 
         stage('Lint & Sécurité') {
             steps {
-                // Installe et lance flake8 et bandit sur Linux
-                sh 'pip install flake8 bandit'
-                sh 'flake8 backend-core --exclude=migrations,settings.py'
-                sh 'bandit -r backend-core/ -x tests.py'
+                // Utilise un conteneur python temporaire pour exécuter le lint sans avoir besoin de installer python sur l'hôte Jenkins
+                sh 'docker run --rm -v ${WORKSPACE}:/apps python:3.11-slim /bin/sh -c "pip install --no-cache-dir flake8 bandit && flake8 /apps/backend-core --exclude=migrations,settings.py && bandit -r /apps/backend-core/ -x tests.py"'
             }
         }
 
