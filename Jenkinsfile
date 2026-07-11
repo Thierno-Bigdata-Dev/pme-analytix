@@ -19,24 +19,24 @@ pipeline {
             }
         }
 
-        stage('Lint & Sécurité') {
+        stage('Reconstruction Docker') {
             steps {
-                // Utilise un conteneur python temporaire pour exécuter le lint sans avoir besoin de installer python sur l'hôte Jenkins
-                sh 'docker run --rm -v ${WORKSPACE}:/apps python:3.11-slim /bin/sh -c "pip install --no-cache-dir flake8 bandit && flake8 /apps/backend-core --exclude=migrations,settings.py && bandit -r /apps/backend-core/ -x tests.py"'
+                // Construit les images Docker (l'analyse statique s'effectuera sur l'image bâtie)
+                sh 'docker compose build'
             }
         }
 
-        stage('Reconstruction Docker') {
+        stage('Lint & Sécurité') {
             steps {
-                // Arrête et reconstruit proprement les conteneurs avec les correctifs de sécurité
-                sh 'docker compose down'
-                sh 'docker compose build'
+                // Utilise l'image backend-core construite pour exécuter le lint sans montage de volume (sécurise le DooD)
+                sh 'docker run --rm --entrypoint="" pme-backend-core /bin/sh -c "pip install --no-cache-dir flake8 bandit && flake8 core --exclude=migrations,settings.py && bandit -r core -x tests.py"'
             }
         }
 
         stage('Déploiement local') {
             steps {
-                // Relance les services durcis en tâche de fond
+                // Arrête et relance les conteneurs de production proprement
+                sh 'docker compose down'
                 sh 'docker compose up -d'
             }
         }

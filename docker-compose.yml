@@ -18,6 +18,7 @@ services:
   backend-core:
     build:
       context: ./backend-core
+    image: pme-backend-core
     container_name: pme-backend-core
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -36,6 +37,7 @@ services:
   backend-ml:
     build:
       context: ./backend-ml
+    image: pme-backend-ml
     container_name: pme-backend-ml
     command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
     volumes:
