@@ -36,7 +36,7 @@ Cette plateforme basée sur l'intelligence artificielle est conçue pour aider l
 │   └── nginx/            # Configuration Reverse Proxy Nginx
 ├── Jenkinsfile           # Pipeline d'Intégration & Déploiement Local
 ├── docker-compose.yml    # Orchestration des services conteneurisés
-└── .env.example          # Modèle de configuration des variables d'environnement
+└── .env          # Modèle de configuration des variables d'environnement
 ```
 
 ---
