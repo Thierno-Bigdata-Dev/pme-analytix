@@ -21,6 +21,8 @@ services:
     image: pme-backend-core
     container_name: pme-backend-core
     command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - media_data:/app/media
     environment:
       - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
       - REDIS_URL=${REDIS_URL}
@@ -65,6 +67,8 @@ services:
       context: ./backend-core
     container_name: pme-celery-worker
     command: celery -A core worker --loglevel=info
+    volumes:
+      - media_data:/app/media
     environment:
       - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
       - REDIS_URL=${REDIS_URL}
@@ -76,3 +80,4 @@ services:
 
 volumes:
   postgres_data:
+  media_data:
