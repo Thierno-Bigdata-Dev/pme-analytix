@@ -54,10 +54,10 @@ services:
       - redis
 
   nginx:
-    image: nginx:1.26-alpine
+    build:
+      context: ./infra/nginx
+    image: pme-nginx
     container_name: pme-nginx
-    volumes:
-      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - "80:80"
     depends_on:
