@@ -22,6 +22,9 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \
     libcairo2 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    gobject-introspection \
     shared-mime-info \
     && rm -rf /var/lib/apt/lists/*
 
