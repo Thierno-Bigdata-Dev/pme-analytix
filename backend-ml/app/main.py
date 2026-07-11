@@ -665,6 +665,39 @@ async def chat_financial_assistant(
                 "Aucune anomalie critique ou transaction suspecte n'a été détectée. Vos dépenses et recettes restent régulières !"
             )
 
+    elif 'dashbord' in lower or 'dashboard' in lower or 'tableau' in lower or 'comprendre' in lower or 'indicateur' in lower:
+        # Retrieve score features for detailed explanation
+        features_explanation = ""
+        if pme_plan != 'starter':
+            try:
+                score_info = await calculate_pme_score(db, pme_id)
+                if score_info.get("status") != "insufficient_data":
+                    feats = score_info["features"]
+                    liq = feats.get("liquidity_ratio", 1.0)
+                    div = feats.get("client_diversification", 100.0)
+                    reg = feats.get("supplier_payment_regularity", 100.0)
+                    fisc = feats.get("fiscal_compliance", 100.0)
+                    
+                    features_explanation = (
+                        f"\n🔍 **Diagnostic de vos Indicateurs Clés** :\n\n"
+                        f"- **Ratio de Liquidité ({liq:.2f})** : " + ("Excellent. Votre trésorerie couvre largement vos dettes immédiates (>1.0)." if liq >= 1.0 else "Attention. Vos liquidités à court terme sont tendues (<1.0).") + "\n"
+                        f"- **Diversification Clients ({div:.0f}%)** : " + ("Très bonne répartition du chiffre d'affaires entre vos clients." if div >= 50 else "Concentration élevée sur peu de clients. Risque de dépendance.") + "\n"
+                        f"- **Régularité Fournisseurs ({reg:.0f}%)** : " + ("Vos règlements fournisseurs sont lissés et réguliers." if reg >= 75 else "Irrégularité dans le paiement de vos fournisseurs.") + "\n"
+                        f"- **Conformité Fiscale ({fisc:.0f}%)** : " + ("Parfait. Pas de retards de taxes ou déclarations majeures." if fisc >= 80 else "Des anomalies de retards fiscaux pénalisent votre note.") + "\n"
+                    )
+            except Exception:
+                pass
+                
+        reply = (
+            f"🧭 **Guide de Compréhension du Tableau de Bord** pour **{pme_name}** :\n\n"
+            f"Votre tableau de bord centralise l'état de santé financière de votre PME :\n"
+            f"1. **Solde Actuel ({solde:,.0f} XOF)** : C'est la somme disponible dans votre base.\n"
+            f"2. **Note de Confiance ({score_str})** : Évaluée par IA XGBoost. " + ("Un score au-dessus de 55 montre une bonne gestion de trésorerie." if score_val is not None and score_val >= 55 else "Un score bas nécessite des optimisations.") + "\n"
+            f"3. **Graphique de Trésorerie (Meta Prophet)** : Identifie vos cycles de ventes saisonnières pour prévoir les soldes futurs.\n"
+            f"{features_explanation}\n"
+            "💡 *Conseil : Améliorez la régularité fournisseurs et la diversification client pour optimiser vos chances d'obtenir un crédit.*"
+        )
+
     elif 'aide' in lower or 'onboard' in lower or 'passer' in lower or 'charger' in lower or 'commencer' in lower:
         reply = (
             f"💡 **Débuter sur la plateforme PME Analytix** :\n\n"
