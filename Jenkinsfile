@@ -21,25 +21,25 @@ pipeline {
 
         stage('Lint & Sécurité') {
             steps {
-                // Installe et lance flake8 et bandit sur Windows
-                bat 'pip install flake8 bandit'
-                bat 'flake8 backend-core --exclude=migrations,settings.py'
-                bat 'bandit -r backend-core/ -x tests.py'
+                // Installe et lance flake8 et bandit sur Linux
+                sh 'pip install flake8 bandit'
+                sh 'flake8 backend-core --exclude=migrations,settings.py'
+                sh 'bandit -r backend-core/ -x tests.py'
             }
         }
 
         stage('Reconstruction Docker') {
             steps {
                 // Arrête et reconstruit proprement les conteneurs avec les correctifs de sécurité
-                bat 'docker compose down'
-                bat 'docker compose build'
+                sh 'docker compose down'
+                sh 'docker compose build'
             }
         }
 
         stage('Déploiement local') {
             steps {
                 // Relance les services durcis en tâche de fond
-                bat 'docker compose up -d'
+                sh 'docker compose up -d'
             }
         }
     }
