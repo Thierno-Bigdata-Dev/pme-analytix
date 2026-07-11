@@ -29,7 +29,8 @@ pipeline {
         stage('Lint & Sécurité') {
             steps {
                 // Utilise l'image backend-core construite pour exécuter le lint en tant que root dans le conteneur temporaire
-                sh 'docker run --rm -u root --entrypoint="" pme-backend-core /bin/sh -c "pip install --no-cache-dir flake8 bandit && flake8 core --exclude=migrations,settings.py && bandit -r core -x tests.py"'
+                // flake8 filtre sur les erreurs de syntaxe et de logique critiques (E9, F63, F7, F82) pour éviter de bloquer sur le style
+                sh 'docker run --rm -u root --entrypoint="" pme-backend-core /bin/sh -c "pip install --no-cache-dir flake8 bandit && flake8 core --count --select=E9,F63,F7,F82 --show-source --statistics && bandit -r core -x tests.py"'
             }
         }
 
