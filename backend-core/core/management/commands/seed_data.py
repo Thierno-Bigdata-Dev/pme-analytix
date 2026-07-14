@@ -8,11 +8,13 @@ class Command(BaseCommand):
     help = "Génère des données de transactions historiques réalistes pour Dakar Tech"
     
     def handle(self, *args, **options):
-        # 1. Find Dakar Tech PME
+        # 1. Find Dakar Tech PME by name
         try:
-            pme = PME.objects.get(nom_schema="tenant_dakar_tech")
+            pme = PME.objects.filter(nom="Dakar Tech").first()
+            if not pme:
+                raise PME.DoesNotExist()
         except PME.DoesNotExist:
-            self.stdout.write(self.style.ERROR("PME 'Dakar Tech' avec le schéma 'tenant_dakar_tech' non trouvée. Veuillez d'abord la créer dans l'administration."))
+            self.stdout.write(self.style.ERROR("PME 'Dakar Tech' non trouvée. Veuillez d'abord la créer dans l'administration."))
             return
             
         self.stdout.write(f"Activation du schéma : {pme.nom_schema}...")

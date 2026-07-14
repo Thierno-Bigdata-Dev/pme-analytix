@@ -1,0 +1,884 @@
+
+PME ANALYTIX
+Plateforme d'analyse de données et de prédiction pour PME
+
+
+CAHIER DES CHARGES FONCTIONNEL ET TECHNIQUE
+
+Version
+2.0 — Architecture hybride Django + FastAPI
+Date
+Juin 2026
+Statut
+Document de référence
+Confidentialité
+Usage interne — Confidentiel
+Périmètre
+Sénégal (extension UEMOA — M12)
+Mise à jour v2
+Section 5 architecture technique (hybride Django/FastAPI)
+
+1. Contexte et vision du projet
+
+
+1.1 Contexte
+Les PME représentent plus de 90 % du tissu économique sénégalais et contribuent à environ 30 % du PIB. Pourtant, la grande majorité d'entre elles gèrent leur activité sans outil de pilotage financier : les décisions sont prises à l'intuition, sans visibilité sur la trésorerie future, et sans alerte précoce sur les risques.
+
+Ce déficit d'information est la première cause de mortalité des PME : selon la Banque Mondiale, plus de 60 % des PME africaines ferment dans les 5 premières années, non pas faute de marché, mais faute de pilotage.
+
+1.2 Vision
+Mission de PME Analytix
+Donner à chaque dirigeant de PME les mêmes outils d'analyse financière que ceux dont
+disposent les grandes entreprises — simplement, en français, en FCFA, et adaptés au
+contexte réglementaire OHADA/SYSCOHADA.
+
+1.3 Problèmes résolus
+Problème
+Impact actuel
+Solution apportée
+Absence de tableau de bord
+Décisions à l'aveugle
+Dashboard temps réel
+Crises de trésorerie non anticipées
+1ère cause de faillite PME
+Alertes prédictives J-30/J-60
+Accès au crédit bloqué
+Dossiers incomplets, refus bancaires
+Score crédit + rapport certifié
+Décisions d'investissement intuitives
+Erreurs d'allocation
+Simulateur de croissance IA
+Pas de benchmark sectoriel
+Marge de manœuvre inconnue
+Comparatif sectoriel anonymisé
+
+2. Parties prenantes
+
+
+2.1 Utilisateurs cibles
+Profil
+Description
+Plan cible
+Nb visé M12
+Dirigeant PME
+PDG/Gérant, 5–50 employés, commerce/services/industrie
+Pilote
+400+
+Comptable PME
+Collaborateur financier interne ou cabinet
+Pilote
+80+
+Banquier/Analyste
+Institution financière partenaire
+Institutionnel
+3–5 banques
+Investisseur impact
+Fonds, ONG de développement économique
+API B2B
+5–10
+
+2.2 Parties prenantes institutionnelles
+ADPME (Agence de Développement et d'Encadrement des PME) — partenaire de distribution
+BNDE (Banque Nationale pour le Développement Économique) — partenaire financier cible
+BCEAO — conformité réglementaire
+APIX — accès au registre des entreprises
+DGI — conformité fiscale et TVA
+
+3. Périmètre fonctionnel
+
+
+3.1 Module 1 — Tableau de bord dirigeant
+3.1.1 KPIs financiers temps réel
+Chiffre d'affaires mensuel/trimestriel/annuel avec comparaison N-1
+Marge brute et marge nette avec suivi de l'objectif
+Trésorerie disponible avec projection à 30, 60 et 90 jours
+Score crédit PME Analytix (0–100) mis à jour en temps réel
+Ratio de liquidité immédiate (normes OHADA)
+
+3.1.2 Visualisations graphiques
+Courbe d'évolution du CA sur 12 mois glissants
+Répartition des revenus par secteur, client, produit
+Graphique trésorerie avec zone de tension mise en surbrillance
+Histogramme des charges fixes vs variables
+
+3.2 Module 2 — Alertes intelligentes
+Principe clé : l'alerte est actionnable, pas seulement informative
+Chaque alerte indique : (1) le problème détecté, (2) la date critique,
+(3) le montant en jeu, (4) l'action recommandée avec un lien direct.
+
+Type d'alerte
+Déclencheur
+Canal
+Délai
+Trésorerie critique
+Solde < seuil à J+30
+SMS + Push + Email
+Immédiat
+Retard de paiement client
+Facture > 30 jours impayée
+Email + Dashboard
+J+1
+Marge sous benchmark
+Marge < moyenne sectorielle -3pts
+Dashboard
+Hebdomadaire
+Score crédit en baisse
+Variation > -5 points
+Email + Dashboard
+Immédiat
+Stock critique
+Niveau < seuil de réapprovisionnement
+SMS + Dashboard
+Immédiat
+Anomalie de dépenses
+Dépense > 2 écarts-types
+Email
+J+1
+
+3.3 Module 3 — Prévisions et modèles IA
+3.3.1 Prévision de trésorerie
+Modèle Prophet (Meta) pour prévisions à 3 et 6 mois — exposé via FastAPI
+Intervalle de confiance à 80% et 95% affiché sur les graphiques
+Prise en compte de la saisonnalité sectorielle
+Réentraînement automatique mensuel avec les nouvelles données (Celery worker)
+
+3.3.2 Modèle de risque de défaillance
+Algorithme XGBoost entraîné sur données PME UEMOA — exposé via FastAPI
+Variables : ratio de liquidité, ancienneté, secteur, régularité fiscale, concentration clients
+Score de risque 0–100 avec segmentation Faible / Moyen / Élevé / Critique
+Précision cible : >85% sur jeu de test — validé par MLflow
+
+3.3.3 Simulateur de croissance
+Simulation d'impact : investissement marketing, recrutement, nouveaux marchés
+Projection CA sur 12 mois avec scénarios optimiste / médian / pessimiste
+Calcul du point mort et du délai de retour sur investissement
+
+3.4 Module 4 — Score crédit et rapport certifié
+Le score crédit PME Analytix est le passeport financier du dirigeant auprès des institutions bancaires. Le calcul est assuré par le service FastAPI, la persistance et la génération PDF par Django.
+
+Composante
+Poids
+Source de données
+Ratio de liquidité immédiate
+25%
+Données comptables importées
+Régularité des paiements fournisseurs
+20%
+Historique de trésorerie
+Évolution du CA sur 12 mois
+20%
+Données de vente
+Diversification des clients
+15%
+Portefeuille clients
+Ancienneté et stabilité
+10%
+Données d'inscription
+Conformité fiscale déclarée
+10%
+Auto-déclaration + DGI
+
+3.4.1 Rapport PDF certifié
+Document PDF signé électroniquement avec cachet PME Analytix — généré par Django/Celery
+Ratios OHADA/SYSCOHADA calculés automatiquement
+Benchmark sectoriel : positionnement relatif de la PME
+Recommandations personnalisées pour améliorer le score
+Disponible à la demande — 25 000 FCFA par rapport
+
+3.5 Module 5 — Place de marché financière
+Dossier de crédit pré-rempli automatiquement depuis le profil PME (Django)
+Mise en relation avec banques, microfinances et fintechs partenaires
+Score FastAPI transmis automatiquement dans le dossier
+Suivi du statut de la demande en temps réel
+Module d'assurance : souscription en ligne, assurance-crédit, assurance stock
+
+3.6 Module 6 — Import et connecteurs de données
+Source de données
+Intégration
+Géré par
+Phase
+Fichier Excel/CSV
+Import drag & drop
+Django
+M1
+Wave Business
+API temps réel
+Django webhooks
+M1
+Orange Money
+API transactions
+Django webhooks
+M4
+Sage 50 Afrique
+Import XML
+Django
+M7
+CEGID / EBP
+Import export
+Django
+M7
+Saisie manuelle
+Formulaire structuré
+Django
+M1
+
+4. Exigences non fonctionnelles
+
+
+4.1 Performance
+Exigence
+Cible
+Condition
+Temps de chargement dashboard
+< 2 secondes
+Connexion 3G
+Temps de calcul score crédit (FastAPI)
+< 1 seconde
+Toutes conditions
+Temps de calcul prévision 6 mois (FastAPI)
+< 3 secondes
+Toutes conditions
+Disponibilité (SLA)
+99,5%
+Hors maintenance planifiée
+Utilisateurs concurrents
+5 000
+Sans dégradation de perf
+Taille du bundle frontend
+< 200 KB
+Gzip, sans dépendances tierces
+
+4.2 Sécurité et conformité
+4.2.1 Sécurité des données
+Chiffrement AES-256 de toutes les données financières au repos
+TLS 1.3 pour toutes les communications en transit (y compris entre Django et FastAPI)
+Authentification JWT émise par Django, validée par FastAPI sur chaque requête ML
+MFA obligatoire pour le plan Croissance
+Audit log immuable de toutes les actions (Django)
+Rate limiting API : 1 000 requêtes/heure par compte (Nginx + Django middleware)
+
+4.2.2 Conformité réglementaire
+RGPD — Règlement Général sur la Protection des Données (UE)
+CDP — Commission de Protection des Données Personnelles (Sénégal)
+Droit à l'effacement et à la portabilité des données
+Anonymisation irréversible des données agrégées B2B
+Archivage des données comptables : 10 ans (obligation OHADA)
+
+4.3 Accessibilité et internationalisation
+Interface disponible en français (langue principale)
+Support du Wolof pour l'onboarding et les tutoriels vidéo
+Bambara prévu pour l'extension Mali (M18+)
+PWA (Progressive Web App) — fonctionne hors ligne en mode lecture
+Optimisée pour appareils Android d'entrée de gamme (512 Mo RAM)
+Compatible avec les navigateurs Chrome, Firefox, Opera Mini (Android)
+
+5. Architecture technique — v2.0
+
+
+Mise à jour v2.0 — Architecture hybride Django + FastAPI
+La version 2.0 de ce cahier des charges introduit une architecture hybride :
+Django gère le core métier, FastAPI gère les modèles ML et l'API haute performance.
+Les deux services partagent la même base PostgreSQL et communiquent via JWT.
+Aucun appel HTTP direct entre les deux services — couplage minimal garanti.
+
+5.1 Principe de séparation des responsabilités
+La règle de décision est simple et sans exception : Django possède les données et la logique métier. FastAPI possède les calculs et les modèles ML. Chaque nouvelle fonctionnalité est assignée selon ce critère avant toute ligne de code.
+
+Fonctionnalité
+Service responsable
+Justification
+Authentification JWT + MFA
+Django
+Sécurité, sessions, gestion utilisateurs
+Gestion PME, abonnements, facturation
+Django
+CRUD, ORM, logique métier
+Admin back-office opérateur
+Django
+Admin panel natif — 0 code supplémentaire
+Génération rapport PDF certifié
+Django (Celery)
+Tâche async, pas de calcul ML
+Alertes trésorerie — déclenchement
+Django
+Règles métier, envoi SMS/email
+Webhooks Wave / Orange Money
+Django
+Logique métier, persistance
+Prévision trésorerie (Prophet)
+FastAPI
+Async natif, calcul intensif, < 1s
+Score crédit (XGBoost)
+FastAPI
+ML pur, réponse temps réel
+Insights LLM + anomalie detection
+FastAPI
+IA générative, haute performance
+API B2B banques / ADPME / BCEAO
+FastAPI
+Swagger auto, SLA strict, perf critique
+Alertes trésorerie — calcul seuil
+FastAPI
+Modèle ML pour date critique
+Webhooks haute fréquence (Mobile Money)
+FastAPI
+Async, throughput élevé
+
+5.2 Stack technologique
+5.2.1 Service Django — Core métier
+Composant
+Technologie
+Version
+Rôle
+Framework
+Django
+5.1
+ORM, routing, middleware, admin
+API REST
+Django REST Framework
+3.15
+Sérialisation, ViewSets, auth
+Admin back-office
+Django Admin + SQLAdmin
+—
+Interface opérateur, gestion PME
+Tâches async
+Celery + Redis
+5.4
+PDF, emails, SMS, réentraînement ML
+Auth
+djangorestframework-simplejwt
+5.3
+JWT émission + refresh tokens
+Paiement
+Wave SDK + Orange Money API
+—
+Abonnements, facturation FCFA
+PDF
+WeasyPrint
+61
+Rapports certifiés OHADA
+Tests
+pytest-django
+4.8
+Coverage > 80% obligatoire
+
+5.2.2 Service FastAPI — ML & Performance
+Composant
+Technologie
+Version
+Rôle
+Framework
+FastAPI
+0.115
+API async, Swagger auto, performance
+Serveur ASGI
+Uvicorn
+0.30
+Production async, workers multiples
+Prévision
+Prophet (Meta)
+1.1
+Séries temporelles, saisonnalité
+Scoring
+XGBoost
+2.1
+Risque de défaillance, score crédit
+Détection anomalies
+Isolation Forest (scikit-learn)
+1.5
+Transactions anormales
+Insights LLM
+Anthropic Claude API
+—
+Recommandations en langage naturel
+MLOps
+MLflow
+2.14
+Versioning modèles, expériences, registry
+Données
+SQLAlchemy + Alembic
+2.0
+ORM async, migrations
+Validation
+Pydantic v2
+2.7
+Schémas, validation entrées/sorties
+Tests
+pytest + httpx
+—
+Tests async, coverage > 80%
+
+5.2.3 Infrastructure partagée
+Composant
+Technologie
+Rôle
+Base de données
+PostgreSQL 16
+Source de vérité unique — schémas isolés par PME
+Cache & pub/sub
+Redis 7
+Sessions Django, cache ML, alertes temps réel
+Reverse proxy
+Nginx 1.26
+Routage /api/core → Django · /api/ml → FastAPI
+Conteneurs
+Docker + Kubernetes (K8s)
+Déploiement, scalabilité indépendante des services
+CI/CD
+GitHub Actions
+Tests, lint, build, déploiement automatique
+Stockage fichiers
+AWS S3
+Fichiers PME importés, modèles ML sérialisés, PDF
+Infrastructure cloud
+AWS (eu-west-3 Paris)
+Latence Europe/Afrique optimale
+Monitoring
+Sentry + Datadog
+Erreurs temps réel, métriques, alertes infra
+Feature store ML
+Feast
+Features centralisées pour réentraînement
+
+5.3 Architecture de routage Nginx
+Nginx est le point d'entrée unique de l'application. Il route les requêtes vers le bon service sans que le frontend React ne connaisse l'existence de deux services distincts.
+
+Préfixe URL
+Service cible
+Port interne
+Exemples d'endpoints
+/api/core/
+Django (DRF)
+8000
+/api/core/pme/ · /api/core/auth/ · /api/core/alerts/
+/api/ml/
+FastAPI
+8001
+/api/ml/previsions/ · /api/ml/score/ · /api/ml/insights/
+/admin/
+Django Admin
+8000
+Back-office opérateur
+/docs/
+FastAPI Swagger
+8001
+Documentation API auto-générée
+/static/
+Nginx direct
+—
+Assets React, CSS, images
+
+5.4 Communication inter-services et sécurité
+Règle fondamentale : pas d'appel HTTP entre Django et FastAPI
+Les deux services lisent et écrivent dans la même base PostgreSQL.
+Django écrit les données PME. FastAPI les lit pour ses calculs.
+La synchronisation fine passe par Redis pub/sub ou une table d'événements PostgreSQL.
+Ce choix élimine le couplage synchrone et garantit la résilience indépendante des services.
+
+Scénario
+Mécanisme
+Détail
+Requête ML depuis le frontend
+JWT Django → FastAPI
+Le frontend envoie le même JWT. FastAPI valide la signature avec la clé secrète partagée.
+FastAPI a besoin de données PME
+Lecture directe PostgreSQL
+SQLAlchemy async lit le schéma PME — pas de requête HTTP vers Django.
+Django déclenche un calcul ML
+Redis pub/sub
+Django publie un événement, le worker FastAPI souscrit et calcule.
+Réentraînement des modèles ML
+Celery worker Django
+Django planifie, le worker Python appelle le pipeline MLflow indépendamment.
+Résultat ML persisté
+FastAPI écrit en PostgreSQL
+Le score calculé est écrit par FastAPI dans la table scores_credit.
+
+5.5 Structure du dépôt (monorepo)
+L'ensemble du projet est géré dans un unique dépôt Git pour simplifier le CI/CD, la gestion des dépendances partagées et la cohérence des versions.
+
+Répertoire
+Contenu
+Responsable
+backend-core/
+Django 5 — apps pme, billing, alerts, reports, auth
+Lead backend
+backend-ml/
+FastAPI — routers predictions, scoring, insights, b2b
+Data scientist
+frontend/
+React 18 + TypeScript — dashboard PME, PWA
+Dev frontend
+ml-models/
+Modèles ML sérialisés, notebooks, pipelines MLflow
+Data scientist
+infra/
+Docker Compose, K8s manifests, Nginx config, Terraform
+CTO
+shared/
+Schémas Pydantic partagés, constantes, utilitaires communs
+Lead backend
+.github/
+Workflows CI/CD — test, lint, build, deploy par service
+CTO
+
+
+5.6 Modèle de données principal
+Le modèle de données est conçu autour de l'entité centrale PME, avec isolation stricte par schéma PostgreSQL (architecture multi-tenant). Django est propriétaire du schéma, FastAPI dispose d'un accès lecture via un rôle PostgreSQL dédié en lecture seule.
+
+Entité
+Propriétaire
+Champs clés
+Relations
+PME
+Django
+id, nom, secteur, siren, plan, created_at
+1:N Transactions, Users, Alertes
+Transaction
+Django
+id, pme_id, date, montant, type, catégorie
+N:1 PME
+Alerte
+Django
+id, pme_id, type, seuil, statut, canal
+N:1 PME
+Prévision
+FastAPI (écrit)
+id, pme_id, horizon, valeurs_json, confiance
+N:1 PME
+ScoreCrédit
+FastAPI (écrit)
+id, pme_id, score, composantes_json, date
+N:1 PME
+RapportPDF
+Django
+id, pme_id, type, url_s3, signature, prix
+N:1 PME
+Partenaire
+Django
+id, type, nom, api_config, commission_pct
+N:M MiseEnRelation
+EvenementML
+Partagé
+id, pme_id, type, payload_json, processed_at
+Bus d'événements Redis
+
+5.7 API — Endpoints principaux
+5.7.1 Django REST Framework — /api/core/
+Endpoint
+Méthode
+Description
+Auth
+/api/core/auth/login/
+POST
+Connexion — émission JWT
+Public
+/api/core/auth/refresh/
+POST
+Renouvellement token
+JWT
+/api/core/pme/{id}/
+GET/PUT
+Profil PME
+JWT
+/api/core/pme/{id}/transactions/
+GET/POST
+Transactions financières
+JWT
+/api/core/pme/{id}/alertes/
+GET/POST
+Configuration alertes
+JWT
+/api/core/pme/{id}/rapport/
+POST
+Génération rapport PDF
+JWT + Paiement
+/api/core/import/excel/
+POST
+Upload fichier données
+JWT
+/api/core/partenaires/dossier/
+POST
+Soumettre dossier crédit
+JWT
+/api/core/webhook/wave/
+POST
+Réception transactions Wave
+HMAC
+
+5.7.2 FastAPI — /api/ml/
+Endpoint
+Méthode
+Description
+Auth
+/api/ml/previsions/{pme_id}/
+GET
+Prévision trésorerie Prophet 6 mois
+JWT
+/api/ml/score/{pme_id}/
+GET
+Score crédit XGBoost temps réel
+JWT
+/api/ml/anomalies/{pme_id}/
+GET
+Détection anomalies transactions
+JWT
+/api/ml/insights/{pme_id}/
+GET
+Recommandations LLM personnalisées
+JWT
+/api/ml/simulation/
+POST
+Simulateur de croissance
+JWT
+/api/ml/b2b/secteur/{code}/
+GET
+Données agrégées anonymisées
+API Key B2B
+/api/ml/b2b/batch-score/
+POST
+Scoring en masse (banques)
+API Key B2B
+/docs/
+GET
+Swagger UI auto-générée
+Public
+
+6. Plans tarifaires et monétisation
+
+
+Fonctionnalité
+Starter (Gratuit)
+Pilote (15 000 F/mois)
+Croissance (45 000 F/mois)
+Tableau de bord financier
+Basique
+Complet
+Complet
+Historique de données
+3 mois
+24 mois
+Illimité
+Alertes trésorerie IA
+Non
+Oui
+Oui
+Prévisions ML 6 mois
+Non
+Oui
+Oui
+Score crédit PME
+Non
+Oui
+Oui
+Benchmark sectoriel
+Non
+Oui
+Oui
+Rapport PDF certifié
+Non
+25 000 F/unité
+5 inclus/mois
+Place de marché financière
+Non
+Oui
+Prioritaire
+Multi-utilisateurs
+1
+3
+Illimité
+API B2B partenaires
+Non
+Non
+Oui
+Analyste dédié
+Non
+Non
+1x/mois
+SLA support
+Best effort
+< 24h
+< 4h
+
+6.1 Revenus complémentaires
+Commission crédit : 1–2% du montant financé (place de marché)
+Commission assurance : 8–15% de la prime annuelle
+Rapport sectoriel B2B : 500 000 – 2 000 000 FCFA par rapport
+Accès API institutionnel (banques, ADPME) : 5 000 000+ FCFA/an
+
+
+
+8. Contraintes et risques
+
+
+8.1 Contraintes réglementaires
+Agrément CDP obligatoire avant tout traitement de données personnelles
+Notification BCEAO pour les services de paiement (partenariat Wave)
+Archivage réglementaire 10 ans des données comptables (OHADA)
+Obtention du statut d'apporteur d'affaires bancaires (BCEAO)
+
+8.2 Contraintes techniques — Architecture hybride
+Points de vigilance spécifiques à l'architecture Django + FastAPI
+1. Les deux services ne doivent jamais s'appeler en HTTP direct — toujours via PostgreSQL ou Redis.
+2. Le JWT doit partager la même clé secrète — configurée via variable d'environnement partagée.
+3. Les migrations Alembic (FastAPI) et Django doivent rester cohérentes sur les tables partagées.
+4. Le monitoring doit couvrir les deux services indépendamment (deux dashboards Datadog).
+5. Le déploiement K8s doit permettre de scaler Django et FastAPI indépendamment.
+
+8.3 Matrice des risques
+Risque
+Probabilité
+Impact
+Mitigation
+Churn élevé
+Moyenne
+Critique
+Ancrage via dossier crédit et historique accumulé
+Adoption lente digitalisation
+Élevée
+Élevé
+Onboarding terrain + tutoriels Wolof + WhatsApp
+Qualité données PME insuffisante
+Élevée
+Élevé
+Validation auto + correction guidée à l'import
+Désynchronisation Django/FastAPI
+Faible
+Élevé
+Tests d'intégration obligatoires en CI/CD
+Retard partenariat bancaire
+Moyenne
+Moyen
+Démarrer avec microfinance et coopératives
+Faible connectivité réseau
+Élevée
+Moyen
+PWA offline, 3G opt, SMS pour alertes critiques
+
+9. Critères de succès
+
+
+9.1 KPIs produit — Année 1
+Métrique
+Cible M6
+Cible M12
+Mesure
+PME abonnées (Pilote+)
+50
+500
+CRM abonnements actifs
+MRR
+750 000 FCFA
+9 000 000 FCFA
+Wave / dashboard facturation
+Taux de churn mensuel
+< 5%
+< 3%
+Mixpanel — résiliations
+NPS
+40+
+55+
+Enquête mensuelle in-app
+Précision modèle trésorerie
+75%
+85%
+Backtesting MLflow automatique
+Latence API ML (p95)
+< 1,5s
+< 1s
+Datadog FastAPI metrics
+Partenaires financiers signés
+0
+3
+CRM partenaires
+Pays couverts (UEMOA)
+1 (SN)
+2 (SN + CI)
+Géolocalisation comptes
+
+9.2 Critères techniques de validation
+Critère
+Seuil
+Service concerné
+Couverture de tests unitaires
+> 80%
+Django + FastAPI
+Temps de réponse API core (p95)
+< 300 ms
+Django DRF
+Temps de réponse API ML (p95)
+< 1 000 ms
+FastAPI
+Précision score crédit XGBoost
+> 85% sur jeu de test
+FastAPI / MLflow
+Disponibilité mensuelle
+> 99,5%
+Infrastructure AWS
+Zéro appel HTTP inter-services
+0 violation
+Architecture
+Audit sécurité CDP
+Conformité complète
+Django (auth, données)
+
+10. Glossaire
+
+
+Terme
+Définition
+Django
+Framework web Python full-stack, utilisé pour le core métier, l'ORM et l'administration
+FastAPI
+Framework Python async haute performance, utilisé pour les endpoints ML et l'API B2B
+DRF
+Django REST Framework — bibliothèque pour construire des API REST avec Django
+JWT
+JSON Web Token — standard d'authentification utilisé pour sécuriser les deux services
+Celery
+File de tâches asynchrones Python — utilisé pour PDF, emails, SMS et réentraînement ML
+MLflow
+Plateforme MLOps pour le versioning et le suivi des modèles de Machine Learning
+Prophet
+Modèle de prévision de séries temporelles développé par Meta, utilisé pour la trésorerie
+XGBoost
+Algorithme ML basé sur le boosting de gradient, utilisé pour le score de défaillance
+Alembic
+Outil de migration de base de données pour SQLAlchemy (FastAPI)
+SQLAlchemy
+ORM Python async utilisé par FastAPI pour accéder à PostgreSQL
+Nginx
+Reverse proxy routant les requêtes entre le frontend, Django et FastAPI
+OHADA
+Organisation pour l'Harmonisation en Afrique du Droit des Affaires
+SYSCOHADA
+Système Comptable OHADA — plan comptable de référence pour les pays membres
+FCFA
+Franc CFA — monnaie officielle de 14 pays d'Afrique de l'Ouest et Centrale
+UEMOA
+Union Économique et Monétaire Ouest Africaine — 8 pays
+CDP
+Commission de Protection des Données Personnelles du Sénégal
+BCEAO
+Banque Centrale des États de l'Afrique de l'Ouest
+ADPME
+Agence de Développement et d'Encadrement des PME du Sénégal
+MRR
+Monthly Recurring Revenue — revenu mensuel récurrent
+NPS
+Net Promoter Score — indicateur de satisfaction et recommandation client
+PWA
+Progressive Web App — application web utilisable hors ligne
+SOC 2
+Standard de sécurité pour les prestataires de services SaaS
+Feature store
+Référentiel centralisé des variables utilisées par les modèles ML (Feast)
+
+
+
+
+PME Analytix
+Transformer les données des PME en décisions.
+Architecture hybride Django + FastAPI — Version 2.0
+Dakar, Sénégal — Juin 2026

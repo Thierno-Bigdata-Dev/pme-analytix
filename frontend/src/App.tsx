@@ -162,6 +162,7 @@ export default function App() {
   const [loadingAlerts, setLoadingAlerts] = useState(false);
   const [reports, setReports] = useState<any[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [monthlyExpenses, setMonthlyExpenses] = useState<any[]>([]);
   
   // Loading states
   const [loadingScore, setLoadingScore] = useState(false);
@@ -1014,6 +1015,14 @@ export default function App() {
 
     // 7. Load Intelligent Alerts
     loadAlertsList(currentPmeId);
+
+    // 8. Load Monthly Expenses Aggregation
+    try {
+      const expData = await api.getExpensesByMonth(currentPmeId);
+      setMonthlyExpenses(expData);
+    } catch (err: any) {
+      console.error("Monthly Expenses Error:", err);
+    }
   };
 
   const handleChangePlan = async (targetPlan: string) => {
@@ -2863,6 +2872,94 @@ export default function App() {
                     <span style={{ fontSize: '7pt', color: 'var(--text-secondary)' }}>{Math.round(biMetrics.chargesVariables / 1000).toLocaleString('fr-FR')} k FCFA</span>
                   </div>
                 </div>
+              </div>
+
+              {/* Analyse Mensuelle des Dépenses */}
+              <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '16px', background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.05)', gridColumn: 'span 2' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <h4 style={{ margin: 0, fontSize: '9.5pt', color: 'var(--text-primary)', fontWeight: 600 }}>Analyse Mensuelle des Dépenses</h4>
+                    <span style={{ fontSize: '7.5pt', color: 'var(--text-secondary)' }}>Répartition par mois glissants et catégories (débits uniquement)</span>
+                  </div>
+                </div>
+
+                {monthlyExpenses.length === 0 ? (
+                  <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '8.5pt' }}>
+                    Aucune donnée de dépenses disponible pour cette période.
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    {/* SVG Bar Chart representing the expenses by month */}
+                    <div style={{ display: 'flex', alignItems: 'flex-end', height: '160px', gap: '20px', paddingBottom: '24px', borderBottom: '1px solid rgba(255,255,255,0.04)', position: 'relative', marginTop: '12px' }}>
+                      {monthlyExpenses.map((mItem, idx) => {
+                        const maxExp = Math.max(...monthlyExpenses.map(x => x.total), 1);
+                        const height = (mItem.total / maxExp) * 100;
+                        const isHovered = hoveredIdx === idx + 500; // use an offset to avoid conflicts with other tooltips
+                        return (
+                          <div 
+                            key={idx} 
+                            style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', position: 'relative' }}
+                            onMouseEnter={(e) => {
+                              setHoveredIdx(idx + 500);
+                              setTooltipPos({ x: e.currentTarget.offsetLeft + 10, y: e.currentTarget.offsetTop - 50 });
+                            }}
+                            onMouseLeave={() => setHoveredIdx(null)}
+                          >
+                            <div style={{ fontSize: '7pt', color: 'var(--text-secondary)', fontWeight: 700 }}>
+                              {Math.round(mItem.total).toLocaleString('fr-FR')} F
+                            </div>
+                            <div 
+                              style={{ 
+                                width: '100%', 
+                                height: `${height}px`, 
+                                maxHeight: '90px',
+                                background: 'linear-gradient(to top, rgba(239, 68, 68, 0.15), var(--error))', 
+                                borderRadius: '6px 6px 0 0',
+                                transition: 'height 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                boxShadow: isHovered ? '0 0 15px rgba(239,68,68,0.4)' : 'none',
+                                cursor: 'pointer'
+                              }} 
+                            />
+                            <span style={{ fontSize: '7.5pt', color: 'var(--text-primary)', fontWeight: 600 }}>
+                              {mItem.month}
+                            </span>
+
+                            {/* Tooltip containing category details */}
+                            {isHovered && (
+                              <div style={{
+                                position: 'absolute',
+                                bottom: '110%',
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                background: 'rgba(15, 23, 42, 0.95)',
+                                backdropFilter: 'blur(8px)',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                padding: '10px 14px',
+                                borderRadius: '12px',
+                                width: '190px',
+                                zIndex: 100,
+                                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)',
+                                color: 'white',
+                                fontSize: '7.5pt',
+                                textAlign: 'left'
+                              }}>
+                                <div style={{ fontWeight: 700, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px', marginBottom: '6px', color: '#fda4af' }}>
+                                  Détail {mItem.month}
+                                </div>
+                                {Object.entries(mItem.categories).map(([cat, val]: any) => (
+                                  <div key={cat} style={{ display: 'flex', justifyContent: 'space-between', margin: '3px 0' }}>
+                                    <span style={{ color: 'var(--text-secondary)' }}>{cat} :</span>
+                                    <span style={{ fontWeight: 600 }}>{Math.round(val).toLocaleString('fr-FR')} F</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
 
             </div>

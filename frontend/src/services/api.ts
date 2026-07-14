@@ -78,6 +78,10 @@ export const api = {
         return apiFetch(`/api/ml/previsions/${pmeId}/`);
     },
     
+    getExpensesByMonth(pmeId: number) {
+        return apiFetch(`/api/core/pme/${pmeId}/depenses/`);
+    },
+    
     getCreditScore(pmeId: number) {
         return apiFetch(`/api/ml/score/${pmeId}/`);
     },

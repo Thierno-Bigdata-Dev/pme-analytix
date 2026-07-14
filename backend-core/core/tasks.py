@@ -5,6 +5,7 @@ from celery import shared_task
 from django.db import connection
 from django.conf import settings
 from django.template.loader import render_to_string
+# pyrefly: ignore [missing-import]
 from weasyprint import HTML
 from core.models import PME, Transaction, RapportPDF
 
@@ -225,13 +226,3 @@ def check_pme_alerts_scheduled():
             
     with connection.cursor() as cursor:
         cursor.execute("SET search_path TO public")
-
-
-@shared_task
-def check_and_generate_alerts_task(pme_id):
-    """
-    Asynchronous task to run the automated alerts engine for a PME.
-    """
-    from core.alerts_engine import check_and_generate_alerts
-    check_and_generate_alerts(pme_id)
-

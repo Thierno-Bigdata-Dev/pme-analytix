@@ -22,7 +22,8 @@ from .views import (
     TransactionDetailView,
     FactureView,
     ReconciliationSuggestionView,
-    ReconciliationConfirmView
+    ReconciliationConfirmView,
+    PMEExpensesAggregationView
 )
 
 def home_view(request):
@@ -43,6 +44,7 @@ urlpatterns = [
     path('api/core/pme/<int:pme_id>/abonnement/', AbonnementView.as_view(), name='pme_abonnement'),
     path('api/core/pme/<int:pme_id>/import/', CSVImportView.as_view(), name='pme_import'),
     path('api/core/pme/<int:pme_id>/import/<int:transaction_id>/', TransactionDetailView.as_view(), name='pme_transaction_detail'),
+    path('api/core/pme/<int:pme_id>/depenses/', PMEExpensesAggregationView.as_view(), name='pme_depenses_aggregation'),
     path('api/core/pme/<int:pme_id>/rendezvous/', RendezVousView.as_view(), name='pme_rendezvous'),
     path('api/core/pme/<int:pme_id>/alerts/', AlerteListView.as_view(), name='pme_alerts'),
     path('api/core/pme/<int:pme_id>/alerts/<int:alert_id>/', AlerteDetailView.as_view(), name='pme_alert_detail'),

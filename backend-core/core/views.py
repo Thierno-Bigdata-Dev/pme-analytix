@@ -1266,3 +1266,65 @@ class ReconciliationConfirmView(APIView):
             "message": f"Transaction #{tx.id} rapprochée avec succès de la facture {inv.numero}.",
             "reconciliation_id": rec.id
         }, status=status.HTTP_201_CREATED)
+
+
+class PMEExpensesAggregationView(APIView):
+    """
+    Endpoint to retrieve monthly expenses aggregated by category for a PME.
+    Uses multi-tenant schema switching context.
+    """
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, pme_id):
+        # 1. Access Control: user must be 'operateur' or belong to this PME
+        user = request.user
+        if user.role != 'operateur' and user.pme_id != pme_id:
+            return Response(
+                {"detail": "Vous n'êtes pas autorisé à accéder aux données de cette PME"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+            
+        from .models import PME, Transaction
+        from .utils import tenant_schema_context
+        from django.db.models.functions import TruncMonth
+        from django.db.models import Sum
+        from datetime import date, timedelta
+        
+        try:
+            pme = PME.objects.get(id=pme_id)
+        except PME.DoesNotExist:
+            return Response({"detail": "PME non trouvée"}, status=status.HTTP_404_NOT_FOUND)
+            
+        # 12 months glissants limit
+        cutoff_date = date.today() - timedelta(days=365)
+        
+        with tenant_schema_context(pme.nom_schema):
+            db_data = Transaction.objects.filter(
+                type='debit',
+                date__gte=cutoff_date
+            ).annotate(
+                month=TruncMonth('date')
+            ).values('month', 'categorie').annotate(
+                total=Sum('montant')
+            ).order_by('month')
+            
+            # Format results
+            formatted = {}
+            for item in db_data:
+                if not item['month']:
+                    continue
+                m_str = item['month'].strftime('%Y-%m')
+                cat = item['categorie'] or 'Autres'
+                val = float(item['total'])
+                
+                if m_str not in formatted:
+                    formatted[m_str] = {
+                        "month": m_str,
+                        "total": 0.0,
+                        "categories": {}
+                    }
+                formatted[m_str]["total"] += val
+                formatted[m_str]["categories"][cat] = formatted[m_str]["categories"].get(cat, 0.0) + val
+                
+            sorted_res = sorted(formatted.values(), key=lambda x: x["month"])
+            return Response(sorted_res, status=status.HTTP_200_OK)
