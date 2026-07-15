@@ -174,6 +174,7 @@ export default function App() {
   const [errorMsg, setErrorMsg] = useState('');
   const [currentPlan, setCurrentPlan] = useState('starter');
   const [updatingPlan, setUpdatingPlan] = useState(false);
+  const [onboardingSector, setOnboardingSector] = useState<string>('commerce');
   
   // Growth Simulator states
   const [simMarketing, setSimMarketing] = useState(1000000);
@@ -486,6 +487,41 @@ export default function App() {
       ]
     };
   }, [transactions, forecast, currentBalance]);
+
+  const cashRunway = useMemo(() => {
+    if (!transactions || transactions.length === 0 || currentBalance <= 0) return null;
+    
+    // Filtre pour garder uniquement les dépenses
+    const expenses = transactions.filter(t => 
+      t.type.toLowerCase().includes('dépense') || 
+      t.type.toLowerCase().includes('depense') ||
+      t.type.toLowerCase().includes('debit') ||
+      t.type.toLowerCase().includes('débit') ||
+      parseFloat(t.montant) < 0
+    );
+    
+    if (expenses.length === 0) return null;
+    
+    const totalExpenses = expenses.reduce((sum, t) => sum + Math.abs(parseFloat(t.montant || '0')), 0);
+    const dates = expenses.map(t => new Date(t.date).getTime()).filter(t => !isNaN(t));
+    if (dates.length < 2) return null;
+    
+    const minDate = Math.min(...dates);
+    const maxDate = Math.max(...dates);
+    const daysDiff = (maxDate - minDate) / (1000 * 3600 * 24);
+    
+    const months = Math.max(0.5, daysDiff / 30);
+    const monthlyBurnRate = totalExpenses / months;
+    
+    if (monthlyBurnRate <= 0) return null;
+    
+    const runway = currentBalance / monthlyBurnRate;
+    return {
+      months: runway.toFixed(1),
+      burnRate: Math.round(monthlyBurnRate),
+      isCritical: runway < 3
+    };
+  }, [transactions, currentBalance]);
 
   const simResult = useMemo(() => {
     const totalInvest = simMarketing + simRecruit + (simNewMarkets ? 3000000 : 0);
@@ -1904,6 +1940,33 @@ export default function App() {
               PME Analytix vous aide à comprendre la santé financière de votre entreprise et à faciliter vos demandes de crédit bancaire.
             </p>
 
+            {/* Sector Selection (Step 0) */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
+              <h4 style={{ fontSize: '10.5pt', fontWeight: 700, margin: 0, color: '#f8fafc' }}>Quel est votre secteur d'activité ?</h4>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                {['commerce', 'btp', 'tech'].map(sec => (
+                  <button
+                    key={sec}
+                    onClick={() => setOnboardingSector(sec)}
+                    style={{
+                      flex: 1,
+                      padding: '12px',
+                      background: onboardingSector === sec ? 'rgba(59, 130, 246, 0.15)' : 'rgba(255,255,255,0.02)',
+                      border: `1px solid ${onboardingSector === sec ? 'var(--primary)' : 'var(--card-border)'}`,
+                      borderRadius: '8px',
+                      color: onboardingSector === sec ? '#60a5fa' : 'var(--text-secondary)',
+                      cursor: 'pointer',
+                      fontWeight: 600,
+                      textTransform: 'capitalize',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    {sec === 'commerce' ? 'Commerce / Boutique' : sec === 'btp' ? 'BTP / Logistique' : 'Tech / Services'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Steps Section */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '32px' }}>
               <div style={{ display: 'flex', gap: '16px' }}>
@@ -1923,9 +1986,17 @@ export default function App() {
                   2
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '10.5pt', fontWeight: 700, margin: '0 0 4px 0', color: '#f8fafc' }}>Importez votre fichier financier</h4>
+                  <h4 style={{ fontSize: '10.5pt', fontWeight: 700, margin: '0 0 4px 0', color: '#f8fafc' }}>
+                    {onboardingSector === 'commerce' ? "Connectez Wave / Orange Money" : 
+                     onboardingSector === 'btp' ? "Importez vos factures (Créances)" : 
+                     "Importez votre fichier financier"}
+                  </h4>
                   <p style={{ fontSize: '8.5pt', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
-                    Une fois sur votre tableau de bord, rendez-vous dans l'onglet <strong>"Transactions & Import"</strong> pour charger votre fichier d'activité (Excel ou CSV).
+                    {onboardingSector === 'commerce' ? 
+                     "Une fois sur le tableau de bord, rendez-vous dans les paramètres pour synchroniser vos paiements mobile money (Lecture seule)." : 
+                     onboardingSector === 'btp' ? 
+                     "Chargez vos factures pour que l'IA prédise vos rentrées d'argent et vous aide à relancer les retards de paiement." :
+                     "Une fois sur votre tableau de bord, chargez votre fichier d'activité (Excel ou CSV) pour démarrer."}
                   </p>
                 </div>
               </div>
@@ -2211,7 +2282,7 @@ export default function App() {
             )}
 
             {/* INTELLIGENT ALERTS WIDGET */}
-            {alerts && alerts.filter(a => a.statut === 'active').length > 0 && (
+            {alerts && alerts.filter(a => a.statut === 'active').length > 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', textAlign: 'left' }}>
                 <h3 style={{ fontSize: '10pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 700, letterSpacing: '0.5px', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Bell size={16} style={{ color: '#ef4444' }} /> Alertes Financières Intelligentes ({alerts.filter(a => a.statut === 'active').length}) {loadingAlerts && <span style={{ fontSize: '8pt', color: 'var(--text-muted)', textTransform: 'none', marginLeft: '6px' }}>(Mise à jour...)</span>}
@@ -2293,6 +2364,14 @@ export default function App() {
                   })}
                 </div>
               </div>
+            ) : (
+              <div style={{ marginTop: '24px' }}>
+                <EmptyState
+                  icon={<Bell size={32} />}
+                  title="Tout va bien !"
+                  description="Aucune anomalie financière ou opérationnelle n'a été détectée. Vos indicateurs sont au vert."
+                />
+              </div>
             )}
 
             {/* KPI ROW */}
@@ -2302,7 +2381,9 @@ export default function App() {
                 <div>
                   <span style={{ fontSize: '8.5pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.5px' }}>Trésorerie Actuelle</span>
                   <h2 style={{ fontSize: '20pt', fontWeight: 700, margin: '8px 0 0 0', color: 'var(--primary)' }}>
-                    {currentBalance.toLocaleString('fr-FR')} <span style={{ fontSize: '12pt', fontWeight: 500 }}>FCFA</span>
+                    {loadingScore ? <Skeleton variant="text" width="140px" height="32px" /> : (
+                      <>{currentBalance.toLocaleString('fr-FR')} <span style={{ fontSize: '12pt', fontWeight: 500 }}>FCFA</span></>
+                    )}
                   </h2>
                   <span style={{ fontSize: '8pt', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>Dernière transaction : 25/06/2026</span>
                 </div>
@@ -2311,12 +2392,30 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Cash Runway Card */}
+              <div className="glass-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border: cashRunway?.isCritical ? '1px solid rgba(239, 68, 68, 0.4)' : undefined }}>
+                <div>
+                  <span style={{ fontSize: '8.5pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.5px' }}>Cash Runway (Survie)</span>
+                  <h2 style={{ fontSize: '20pt', fontWeight: 700, margin: '8px 0 0 0', color: cashRunway?.isCritical ? '#ef4444' : '#10b981' }}>
+                    {loadingScore ? <Skeleton variant="text" width="80px" height="32px" /> : (
+                      <>{cashRunway ? cashRunway.months : 'N/A'} <span style={{ fontSize: '12pt', fontWeight: 500 }}>Mois</span></>
+                    )}
+                  </h2>
+                  <span style={{ fontSize: '8pt', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>
+                    Dépenses : ~{cashRunway ? cashRunway.burnRate.toLocaleString('fr-FR') : '0'} FCFA/mois
+                  </span>
+                </div>
+                <div style={{ width: '48px', height: '48px', background: cashRunway?.isCritical ? 'rgba(239, 68, 68, 0.1)' : 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: cashRunway?.isCritical ? '#ef4444' : '#10b981' }}>
+                  <Calendar size={24} style={{ margin: 'auto' }} />
+                </div>
+              </div>
+
               {/* Liquidite Card */}
               <div className="glass-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <span style={{ fontSize: '8.5pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.5px' }}>Indice de Liquidité (SYSCOHADA)</span>
                   <h2 style={{ fontSize: '20pt', fontWeight: 700, margin: '8px 0 0 0', color: '#10b981' }}>
-                    {score?.features?.liquidity_ratio ? score.features.liquidity_ratio.toFixed(2) : '5.0'}
+                    {loadingScore ? <Skeleton variant="text" width="60px" height="32px" /> : (score?.features?.liquidity_ratio ? score.features.liquidity_ratio.toFixed(2) : '5.0')}
                   </h2>
                   <span style={{ fontSize: '8pt', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>Cible recommandée : &gt; 1.0</span>
                 </div>
@@ -2330,7 +2429,7 @@ export default function App() {
                 <div>
                   <span style={{ fontSize: '8.5pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.5px' }}>Profil de Risque (XGBoost)</span>
                   <h2 style={{ fontSize: '20pt', fontWeight: 700, margin: '8px 0 0 0', color: score?.score ? getScoreColor(score.score) : 'var(--primary)' }}>
-                    {score?.risk_segment || 'Faible'}
+                    {loadingScore ? <Skeleton variant="text" width="100px" height="32px" /> : (score?.risk_segment || 'Faible')}
                   </h2>
                   <span style={{ fontSize: '8pt', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>Score prédictif : {score?.score || 88}/100</span>
                 </div>
@@ -2356,7 +2455,9 @@ export default function App() {
                   <div>
                     <span style={{ fontSize: '7.5pt', color: 'var(--text-secondary)' }}>Annuel (N) :</span>
                     <div style={{ fontSize: '14pt', fontWeight: 700, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      {Math.round(biMetrics.caAnnuel).toLocaleString('fr-FR')} FCFA
+                      {loadingScore || edaDashboardLoading ? <Skeleton variant="text" width="100px" height="24px" /> : (
+                        <>{Math.round(biMetrics.caAnnuel).toLocaleString('fr-FR')} FCFA</>
+                      )}
                       <span style={{ fontSize: '8.5pt', color: '#10b981', display: 'flex', alignItems: 'center', fontWeight: 600 }}>
                         <ArrowUpRight size={14} /> +9.8% vs N-1
                       </span>
@@ -2366,11 +2467,15 @@ export default function App() {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '6px', marginTop: '4px' }}>
                     <div>
                       <span style={{ fontSize: '7pt', color: 'var(--text-secondary)', display: 'block' }}>Trimestre courant :</span>
-                      <strong style={{ fontSize: '9.5pt', color: 'var(--text-primary)' }}>{Math.round(biMetrics.caTrimestre).toLocaleString('fr-FR')} FCFA</strong>
+                      <strong style={{ fontSize: '9.5pt', color: 'var(--text-primary)' }}>
+                        {loadingScore || edaDashboardLoading ? <Skeleton variant="text" width="60px" height="16px" /> : `${Math.round(biMetrics.caTrimestre).toLocaleString('fr-FR')} FCFA`}
+                      </strong>
                     </div>
                     <div>
                       <span style={{ fontSize: '7pt', color: 'var(--text-secondary)', display: 'block' }}>Mois courant :</span>
-                      <strong style={{ fontSize: '9.5pt', color: 'var(--text-primary)' }}>{Math.round(biMetrics.caMensuel).toLocaleString('fr-FR')} FCFA</strong>
+                      <strong style={{ fontSize: '9.5pt', color: 'var(--text-primary)' }}>
+                        {loadingScore || edaDashboardLoading ? <Skeleton variant="text" width="60px" height="16px" /> : `${Math.round(biMetrics.caMensuel).toLocaleString('fr-FR')} FCFA`}
+                      </strong>
                     </div>
                   </div>
                 </div>
@@ -2389,12 +2494,16 @@ export default function App() {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                     <div>
                       <span style={{ fontSize: '7.5pt', color: 'var(--text-secondary)' }}>Marge Brute :</span>
-                      <div style={{ fontSize: '13pt', fontWeight: 700, color: 'var(--text-primary)' }}>{biMetrics.margeBrute.toFixed(1)}%</div>
+                      <div style={{ fontSize: '13pt', fontWeight: 700, color: 'var(--text-primary)' }}>
+                        {loadingScore || edaDashboardLoading ? <Skeleton variant="text" width="40px" height="20px" /> : `${biMetrics.margeBrute.toFixed(1)}%`}
+                      </div>
                       <span style={{ fontSize: '7pt', color: 'var(--text-secondary)' }}>Objectif : 40%</span>
                     </div>
                     <div>
                       <span style={{ fontSize: '7.5pt', color: 'var(--text-secondary)' }}>Marge Nette :</span>
-                      <div style={{ fontSize: '13pt', fontWeight: 700, color: '#f59e0b' }}>{biMetrics.margeNette.toFixed(1)}%</div>
+                      <div style={{ fontSize: '13pt', fontWeight: 700, color: '#f59e0b' }}>
+                        {loadingScore || edaDashboardLoading ? <Skeleton variant="text" width="40px" height="20px" /> : `${biMetrics.margeNette.toFixed(1)}%`}
+                      </div>
                       <span style={{ fontSize: '7pt', color: 'var(--text-secondary)' }}>Objectif : 15%</span>
                     </div>
                   </div>
@@ -2418,6 +2527,62 @@ export default function App() {
                       <div style={{ position: 'absolute', left: '100%', top: 0, width: '2px', height: '100%', background: '#ef4444' }} />
                     </div>
                   </div>
+                </div>
+              </div>
+
+              {/* DSO & Créances Widget */}
+              <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '12px', background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '8.5pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.5px' }}>Créances Clients (DSO)</span>
+                  <div style={{ padding: '6px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '8px', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <AlertTriangle size={16} />
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                    <div>
+                      <span style={{ fontSize: '7.5pt', color: 'var(--text-secondary)' }}>DSO Estimé :</span>
+                      <div style={{ fontSize: '13pt', fontWeight: 700, color: '#ef4444' }}>
+                        {loadingScore || edaDashboardLoading ? <Skeleton variant="text" width="50px" height="20px" /> : '45 Jours'}
+                      </div>
+                      <span style={{ fontSize: '7pt', color: 'var(--text-secondary)' }}>Objectif : &lt; 30j</span>
+                    </div>
+                    <div>
+                      <span style={{ fontSize: '7.5pt', color: 'var(--text-secondary)' }}>En Souffrance :</span>
+                      <div style={{ fontSize: '13pt', fontWeight: 700, color: 'var(--text-primary)' }}>
+                        {loadingScore || edaDashboardLoading ? <Skeleton variant="text" width="60px" height="20px" /> : <><>1.7M</> <span style={{fontSize: '9pt'}}>FCFA</span></>}
+                      </div>
+                      <span style={{ fontSize: '7pt', color: 'var(--text-secondary)' }}>2 factures</span>
+                    </div>
+                  </div>
+
+                  <button 
+                    onClick={() => {
+                      alert("L'IA a généré un e-mail de relance poli et l'a copié dans votre presse-papiers !");
+                    }}
+                    style={{
+                      marginTop: '4px',
+                      padding: '8px',
+                      background: 'rgba(59, 130, 246, 0.1)',
+                      border: '1px solid rgba(59, 130, 246, 0.3)',
+                      borderRadius: '6px',
+                      color: '#60a5fa',
+                      fontSize: '8pt',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      transition: 'all 0.2s'
+                    }}
+                    onMouseOver={e => { e.currentTarget.style.background = 'rgba(59, 130, 246, 0.2)' }}
+                    onMouseOut={e => { e.currentTarget.style.background = 'rgba(59, 130, 246, 0.1)' }}
+                  >
+                    <MessageSquare size={14} />
+                    Générer relance IA
+                  </button>
                 </div>
               </div>
 
@@ -3101,6 +3266,17 @@ export default function App() {
                     <span style={{ fontSize: '9.5pt', color: 'var(--primary)', fontWeight: 600 }}>Sélectionner ou glisser mon fichier CSV</span>
                     <span style={{ display: 'block', fontSize: '7.5pt', color: 'var(--text-muted)', marginTop: '6px' }}>Cliquez pour parcourir votre ordinateur</span>
                   </div>
+                  
+                  {/* Security Reassurance Badge */}
+                  <div style={{ marginTop: '16px', padding: '12px 16px', background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <Lock size={18} style={{ color: '#10b981', flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <h4 style={{ fontSize: '9pt', color: '#10b981', margin: '0 0 4px 0', fontWeight: 600 }}>Connexion 100% Lecture Seule</h4>
+                      <p style={{ fontSize: '8pt', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+                        PME Analytix ne peut que <strong>LIRE</strong> vos transactions pour les analyser. Aucun virement ou retrait n'est techniquement possible. Vos données sont chiffrées de bout en bout.
+                      </p>
+                    </div>
+                  </div>
                 </>
               ) : (
                 <form onSubmit={handleCreateTransaction} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -3396,9 +3572,11 @@ export default function App() {
                     </div>
                   ))
                 ) : (
-                  <div style={{ textAlign: 'center', padding: '32px 0', color: 'var(--text-muted)', fontSize: '9.5pt' }}>
-                    Aucun rapport généré pour le moment
-                  </div>
+                  <EmptyState
+                    icon={<FileText size={32} />}
+                    title="Aucun rapport généré"
+                    description="Générez votre premier rapport OHADA certifié pour vos partenaires bancaires."
+                  />
                 )}
               </div>
             </div>

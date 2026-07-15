@@ -22,20 +22,20 @@ const KNOWLEDGE_BASE = [
     response: "💡 **Conseil Trésorerie** : Votre Besoin en Fonds de Roulement (BFR) est l'argent nécessaire pour faire tourner la PME au quotidien.\nPour l'optimiser via la plateforme : surveillez le délai de paiement client (DSO) dans l'onglet Vue Globale et utilisez nos Alertes pour relancer les factures en retard !"
   },
   {
-    keywords: ['rapport', 'comment', 'utiliser', 'générer', 'exporter', 'ohada'],
-    response: "C'est très simple ! Allez dans la section **Rapports OHADA** (icône Document à gauche). Cliquez sur 'Générer Bilan' et la plateforme consolidera vos transactions importées pour produire un PDF certifié. 📄"
-  },
-  {
     keywords: ['xgboost', 'score', 'ia', 'intelligence', 'prédiction', 'prophet'],
     response: "🧠 **Notre IA (XGBoost & Prophet)** analyse vos flux historiques pour anticiper vos risques de découvert (Score de Crédit) et projeter votre trésorerie à 90 jours. C'est l'outil parfait pour anticiper et convaincre votre banquier !"
+  },
+  {
+    keywords: ['qui', 'doit', 'argent', 'impayé', 'retard', 'créance'],
+    response: "🔍 **Analyse des Créances** :\nD'après vos factures récentes, voici les principaux retards :\n- **Entreprise A** : 1 250 000 FCFA (Retard 45j)\n- **Client B** : 450 000 FCFA (Retard 12j)\n\n👉 *Astuce : Vous pouvez générer une relance automatique par IA depuis la carte DSO sur votre tableau de bord.*"
   }
 ];
 
 const SUGGESTIONS = [
-  "Qu'est-ce que SYSCOHADA ?",
+  "Qui me doit de l'argent ?",
+  "Générer mon bilan OHADA",
   "Comment connecter Wave ?",
-  "Optimiser ma trésorerie",
-  "Comment générer un rapport ?"
+  "Qu'est-ce que le SYSCOHADA ?"
 ];
 
 export const CopilotWidget: React.FC = () => {

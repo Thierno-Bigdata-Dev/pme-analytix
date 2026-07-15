@@ -477,3 +477,74 @@ input:focus {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* --- RESPONSIVE DESIGN & SKELETONS --- */
+
+.sidebar-aside {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--card-border);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+/* Mobile Sidebar Toggle Button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  /* Layout adjustments */
+  .dashboard-layout {
+    flex-direction: column !important;
+  }
+  
+  .main-content {
+    padding: 16px !important;
+    padding-top: 64px !important; /* space for fixed mobile header */
+  }
+
+  /* Sidebar transforms into offcanvas on mobile */
+  .sidebar-aside {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    background: rgba(11, 15, 25, 0.98);
+    backdrop-filter: blur(20px);
+  }
+
+  .sidebar-aside.open {
+    transform: translateX(0);
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 101;
+    background: rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+  }
+
+  /* KPI rows adapt */
+  .kpi-row {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Make all grids responsive by default */
+  div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
