@@ -204,12 +204,13 @@ export default function App() {
   const [selectedPmeId, setSelectedPmeId] = useState<number | null>(null);
   const [selectedPmeName, setSelectedPmeName] = useState('');
 
-  // Chat Support states
-  const [chatOpen, setChatOpen] = useState(false);
-  const [chatMessages, setChatMessages] = useState<any[]>([
-    { sender: 'bot', text: 'Bonjour ! Je suis l\'assistant intelligent de PME Analytix. Je suis à votre écoute pour toute question technique ou réglementaire.' }
-  ]);
-  const [chatInput, setChatInput] = useState('');
+  // Chat Support states (deprecated, replaced by CopilotWidget)
+  // const [chatOpen, setChatOpen] = useState(false);
+  // const [chatMessages, setChatMessages] = useState<any[]>([
+  //   { sender: 'bot', text: 'Bonjour ! Je suis l\'assistant intelligent de PME Analytix. Je suis à votre écoute pour toute question technique ou réglementaire.' }
+  // ]);
+  // const [chatInput, setChatInput] = useState('');
+  // const chatMessagesEndRef = useRef<HTMLDivElement>(null);
 
   // Rendez-vous states
   const [rendezvousList, setRendezvousList] = useState<any[]>([]);
@@ -861,6 +862,7 @@ export default function App() {
     }
   };
 
+  /*
   const handleSendChatMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!chatInput.trim()) return;
@@ -905,6 +907,7 @@ export default function App() {
       }, 500);
     }
   };
+  */
 
   const handleBookRendezvous = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -920,7 +923,7 @@ export default function App() {
         const updatedList = await api.getRendezVous(pmeId);
         setRendezvousList(updatedList);
         // Add a message in chat
-        setChatMessages(prev => [...prev, { sender: 'bot', text: `Votre rendez-vous avec ${rdvPartenaire} le ${rdvDate} à ${rdvHeure} pour '${rdvMotif}' a été enregistré.` }]);
+        // setChatMessages(prev => [...prev, { sender: 'bot', text: `Votre rendez-vous avec ${rdvPartenaire} le ${rdvDate} à ${rdvHeure} pour '${rdvMotif}' a été enregistré.` }]);
       }
     } catch (err: any) {
       showToast("Erreur de planification : " + err.message, "error");

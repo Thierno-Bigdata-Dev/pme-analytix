@@ -1,13 +1,14 @@
 import React from 'react';
 import { cn } from './utils';
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   headerAction?: React.ReactNode;
   children: React.ReactNode;
   noPadding?: boolean;
   isError?: boolean;
+  hoverable?: boolean;
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -18,13 +19,14 @@ export const Card: React.FC<CardProps> = ({
   children,
   noPadding = false,
   isError = false,
+  hoverable = false,
   ...props
 }) => {
   return (
     <div
       className={cn(
         'glass-card',
-        { 'card-error': isError },
+        { 'card-error': isError, 'hover-scale': hoverable },
         className
       )}
       {...props}

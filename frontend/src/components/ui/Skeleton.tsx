@@ -6,7 +6,7 @@ export interface SkeletonProps {
   height?: string | number;
   borderRadius?: string | number;
   className?: string;
-  variant?: 'rectangular' | 'circular';
+  variant?: 'rectangular' | 'circular' | 'text';
 }
 
 export const Skeleton: React.FC<SkeletonProps> = ({

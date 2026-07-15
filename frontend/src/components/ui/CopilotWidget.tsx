@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MessageSquare, X, Send, Bot, Sparkles } from 'lucide-react';
-import { cn } from './utils';
 
 interface ChatMessage {
   id: string;
