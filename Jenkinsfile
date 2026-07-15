@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        // Variables d'environnement pour l'orchestration Docker Compose
+        // Variables d'environnement pour l'orchestration Docker Composes
         DB_NAME = 'pme_analytix'
         DB_USER = 'pme_user'
         DB_PASSWORD = 'pme_password'
