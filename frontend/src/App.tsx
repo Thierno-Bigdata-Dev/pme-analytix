@@ -1192,7 +1192,7 @@ export default function App() {
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#0b0f19', color: '#f8fafc', fontFamily: 'Outfit, sans-serif' }}>
         
         {/* Landing Header */}
-        <header className="glass-card" style={{ margin: '24px 24px 0 24px', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderRadius: '16px', border: '1px solid var(--card-border)' }}>
+        <header className="glass-card responsive-header" style={{ margin: '24px 24px 0 24px', padding: '16px 24px', borderRadius: '16px', border: '1px solid var(--card-border)' }}>
           <h1 
             onClick={() => setAuthSubView('home')} 
             style={{ fontSize: '18pt', fontWeight: 700, margin: 0, textTransform: 'uppercase', letterSpacing: '-1px', cursor: 'pointer' }}
@@ -1598,7 +1598,7 @@ export default function App() {
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#0b0f19', color: '#f8fafc', fontFamily: 'Outfit, sans-serif' }}>
         
         {/* Header */}
-        <header className="glass-card" style={{ margin: '24px 24px 0 24px', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderRadius: '16px' }}>
+        <header className="glass-card responsive-header" style={{ margin: '24px 24px 0 24px', padding: '16px 24px', borderRadius: '16px' }}>
           <div style={{ textAlign: 'left' }}>
             <h1 style={{ fontSize: '18pt', fontWeight: 700, margin: 0, textTransform: 'uppercase', letterSpacing: '-1px' }}>
               PME<span style={{ color: 'var(--primary)' }}>Analytix</span>
@@ -1904,7 +1904,7 @@ export default function App() {
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#0b0f19', color: '#f8fafc', fontFamily: 'Outfit, sans-serif' }}>
         
         {/* Header */}
-        <header className="glass-card" style={{ margin: '24px 24px 0 24px', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderRadius: '16px', border: '1px solid var(--card-border)' }}>
+        <header className="glass-card responsive-header" style={{ margin: '24px 24px 0 24px', padding: '16px 24px', borderRadius: '16px', border: '1px solid var(--card-border)' }}>
           <div style={{ textAlign: 'left' }}>
             <h1 style={{ fontSize: '18pt', fontWeight: 700, margin: 0, textTransform: 'uppercase', letterSpacing: '-1px' }}>
               PME<span style={{ color: 'var(--primary)' }}>Analytix</span>

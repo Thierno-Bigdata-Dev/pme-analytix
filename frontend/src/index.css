@@ -548,3 +548,27 @@ input:focus {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Header Responsiveness */
+.responsive-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .responsive-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .responsive-header > div {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .responsive-header > div > button {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+  }
+}
