@@ -331,3 +331,149 @@ input:focus {
   }
 }
 
+/* ========================================= */
+/* --- SYSTEME UI : PRÊT POUR LA PROD ---    */
+/* ========================================= */
+
+/* --- BOUTONS --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  gap: 8px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:disabled, .btn-loading {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+.btn-primary:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+}
+.btn-secondary:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #60a5fa;
+}
+.btn-outline:not(:disabled):hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+.btn-danger:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.3);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.btn-ghost:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.btn-sm { padding: 8px 16px; font-size: 8.5pt; }
+.btn-md { padding: 12px 24px; font-size: 9.5pt; }
+.btn-lg { padding: 16px 32px; font-size: 11pt; }
+
+.btn-spinner {
+  width: 1em;
+  height: 1em;
+  animation: spin 1s linear infinite;
+}
+
+/* --- INPUTS --- */
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(31, 41, 55, 0.5);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 10pt;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.input-field:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input-field[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+.input-field[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 4px var(--danger-glow);
+}
+
+/* --- CARDS --- */
+.card-error {
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.1) !important;
+}
+
+/* --- SKELETONS --- */
+.skeleton-premium {
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0.03) 25%, 
+    rgba(255,255,255,0.08) 50%, 
+    rgba(255,255,255,0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

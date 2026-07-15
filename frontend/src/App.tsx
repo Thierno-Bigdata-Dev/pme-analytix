@@ -5,6 +5,8 @@ import { Card } from './components/ui/Card';
 import { Badge } from './components/ui/Badge';
 import { Input } from './components/ui/Input';
 import { EmptyState } from './components/ui/EmptyState';
+import { Skeleton } from './components/ui/Skeleton';
+import { CopilotWidget } from './components/ui/CopilotWidget';
 import { 
   TrendingUp, 
   Shield, 
@@ -1140,106 +1142,9 @@ export default function App() {
   };
 
   const renderFloatingChat = () => {
-    return (
-      <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 9999 }}>
-        {/* Toggle Button */}
-        <button 
-          onClick={() => setChatOpen(!chatOpen)}
-          style={{
-            width: '56px',
-            height: '56px',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, var(--primary) 0%, #1d4ed8 100%)',
-            border: 'none',
-            color: '#fff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 10px 25px rgba(59,130,246,0.3)',
-            cursor: 'pointer',
-            transition: 'transform 0.2s ease'
-          }}
-          className="hover-scale"
-        >
-          <MessageSquare size={24} />
-        </button>
-
-        {/* Chat window */}
-        {chatOpen && (
-          <div className="glass-card" style={{
-            position: 'absolute',
-            bottom: '72px',
-            right: 0,
-            width: '360px',
-            height: '460px',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: 0,
-            overflow: 'hidden',
-            boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
-            border: '1px solid rgba(255,255,255,0.15)'
-          }}>
-            {/* Header */}
-            <div style={{ padding: '16px', background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid var(--card-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ textAlign: 'left' }}>
-                <span style={{ fontWeight: 700, color: '#f8fafc', fontSize: '10pt', display: 'block' }}>Conseiller PME Analytix</span>
-                <span style={{ fontSize: '7.5pt', color: '#10b981', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-                  <span style={{ width: '6px', height: '6px', background: '#10b981', borderRadius: '50%', display: 'inline-block' }}></span>
-                  En ligne
-                </span>
-              </div>
-              <button 
-                onClick={() => setChatOpen(false)}
-                style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Messages Body */}
-            <div style={{ flexGrow: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px', background: '#0b0f19' }}>
-              {chatMessages.map((m, idx) => (
-                <div 
-                  key={idx} 
-                  style={{
-                    alignSelf: m.sender === 'user' ? 'flex-end' : 'flex-start',
-                    background: m.sender === 'user' ? 'var(--primary-glow)' : 'rgba(255,255,255,0.03)',
-                    color: m.sender === 'user' ? 'var(--primary)' : 'var(--text-primary)',
-                    border: m.sender === 'user' ? '1px solid rgba(59,130,246,0.3)' : '1px solid var(--card-border)',
-                    padding: '10px 14px',
-                    borderRadius: m.sender === 'user' ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
-                    maxWidth: '80%',
-                    fontSize: '9pt',
-                    lineHeight: 1.4,
-                    textAlign: 'left'
-                  }}
-                >
-                  {m.text}
-                </div>
-              ))}
-            </div>
-
-            {/* Input Footer */}
-            <form onSubmit={handleSendChatMessage} style={{ padding: '12px', borderTop: '1px solid var(--card-border)', background: 'rgba(0,0,0,0.2)', display: 'flex', gap: '8px' }}>
-              <input 
-                type="text" 
-                placeholder="Posez votre question..."
-                value={chatInput}
-                onChange={e => setChatInput(e.target.value)}
-                style={{ flexGrow: 1, padding: '8px 12px', background: '#111827', border: '1px solid var(--card-border)', borderRadius: '6px', color: '#f8fafc', fontSize: '9pt' }}
-              />
-              <button 
-                type="submit" 
-                className="btn-primary" 
-                style={{ width: 'auto', padding: '8px 12px', fontSize: '9pt' }}
-              >
-                Envoyer
-              </button>
-            </form>
-          </div>
-        )}
-      </div>
-    );
+    // Les anciens états (chatOpen, chatMessages, etc.) sont gardés pour ne pas 
+    // déclencher de TypeScript warnings, mais le rendu utilise le nouveau composant centralisé.
+    return <CopilotWidget />;
   };
 
   // 0. PUBLIC LANDING PAGE (UNAUTHENTICATED) WITH HOME, LOGIN, REGISTER, & ADMIN_LOGIN SUBVIEWS
@@ -2568,7 +2473,7 @@ export default function App() {
 
                 {loadingForecast ? (
                   <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div className="shimmer" style={{ width: '80%', height: '80%' }}></div>
+                    <Skeleton width="100%" height="260px" />
                   </div>
                 ) : currentPlan === 'starter' ? (
                   <div style={{ height: '250px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)', gap: '12px', textAlign: 'center' }}>
@@ -2702,7 +2607,7 @@ export default function App() {
                 </h3>
                 
                 {loadingScore ? (
-                  <div className="shimmer" style={{ width: '120px', height: '120px', borderRadius: '50%' }}></div>
+                  <Skeleton variant="circular" width="120px" height="120px" />
                 ) : currentPlan === 'starter' ? (
                   <div style={{ height: '130px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)', gap: '8px', padding: '10px', textAlign: 'center' }}>
                     <Lock size={28} style={{ color: 'var(--primary)' }} />
