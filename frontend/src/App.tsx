@@ -164,6 +164,7 @@ export default function App() {
   const [loadingAlerts, setLoadingAlerts] = useState(false);
   const [reports, setReports] = useState<any[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [loadingTransactions, setLoadingTransactions] = useState(false);
   const [monthlyExpenses, setMonthlyExpenses] = useState<any[]>([]);
   
   // Loading states
@@ -981,11 +982,14 @@ export default function App() {
     
     // 1. Fetch transactions first to determine onboarding state
     let txs: Transaction[] = [];
+    setLoadingTransactions(true);
     try {
       txs = await api.getTransactions(currentPmeId);
       setTransactions(txs);
     } catch (err) {
       console.error("Transactions Error:", err);
+    } finally {
+      setLoadingTransactions(false);
     }
 
     // 2. Fetch subscription plan
@@ -1945,27 +1949,19 @@ export default function App() {
 
             {/* Sector Selection (Step 0) */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
-              <h4 style={{ fontSize: '10.5pt', fontWeight: 700, margin: 0, color: '#f8fafc' }}>Quel est votre secteur d'activité ?</h4>
-              <div style={{ display: 'flex', gap: '12px' }}>
+              <h4 id="sector-label" style={{ fontSize: '10.5pt', fontWeight: 700, margin: 0, color: '#f8fafc' }}>Quel est votre secteur d'activité ?</h4>
+              <div role="radiogroup" aria-labelledby="sector-label" style={{ display: 'flex', gap: '12px' }}>
                 {['commerce', 'btp', 'tech'].map(sec => (
-                  <button
+                  <Button
                     key={sec}
+                    role="radio"
+                    aria-checked={onboardingSector === sec}
+                    variant={onboardingSector === sec ? 'primary' : 'outline'}
                     onClick={() => setOnboardingSector(sec)}
-                    style={{
-                      flex: 1,
-                      padding: '12px',
-                      background: onboardingSector === sec ? 'rgba(59, 130, 246, 0.15)' : 'rgba(255,255,255,0.02)',
-                      border: `1px solid ${onboardingSector === sec ? 'var(--primary)' : 'var(--card-border)'}`,
-                      borderRadius: '8px',
-                      color: onboardingSector === sec ? '#60a5fa' : 'var(--text-secondary)',
-                      cursor: 'pointer',
-                      fontWeight: 600,
-                      textTransform: 'capitalize',
-                      transition: 'all 0.2s'
-                    }}
+                    style={{ flex: 1, textTransform: 'capitalize' }}
                   >
                     {sec === 'commerce' ? 'Commerce / Boutique' : sec === 'btp' ? 'BTP / Logistique' : 'Tech / Services'}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>
@@ -2019,13 +2015,14 @@ export default function App() {
 
             {/* Commencer CTA Button */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px' }}>
-              <button 
+              <Button 
                 onClick={() => setViewMode('pricing')} 
-                className="btn-primary" 
-                style={{ padding: '14px 28px', fontSize: '10.5pt', fontWeight: 700, background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%)' }}
+                variant="primary" 
+                size="lg"
+                style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%)', width: '100%', justifyContent: 'center' }}
               >
                 Accéder à mon Tableau de Bord
-              </button>
+              </Button>
             </div>
 
             {/* Ce que PME Analytix apporte à votre entreprise */}
@@ -2098,7 +2095,7 @@ export default function App() {
       ></div>
       
       {/* LEFT SIDEBAR NAVIGATION */}
-      <aside className={`glass-card sidebar-aside ${mobileSidebarOpen ? 'open' : ''}`}>
+      <aside id="mobile-sidebar-nav" className={`glass-card sidebar-aside ${mobileSidebarOpen ? 'open' : ''}`}>
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
             <h1 style={{ fontSize: '18pt', fontWeight: 700, margin: 0, textTransform: 'uppercase', letterSpacing: '-1px' }}>
@@ -2193,6 +2190,9 @@ export default function App() {
             <button 
               onClick={() => setMobileSidebarOpen(true)} 
               className="mobile-menu-toggle"
+              aria-label="Ouvrir le menu de navigation"
+              aria-expanded={mobileSidebarOpen}
+              aria-controls="mobile-sidebar-nav"
               style={{ padding: '8px 12px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--card-border)', color: 'var(--text-primary)', borderRadius: '8px', cursor: 'pointer' }}
             >
               <Menu size={16} />
@@ -2225,7 +2225,17 @@ export default function App() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             
             {/* WELCOME / GET STARTED BANNER */}
-            {transactions.length === 0 && (
+            {loadingTransactions ? (
+              <div style={{ padding: '24px', background: 'var(--card-bg)', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <Skeleton width="60%" height="28px" />
+                <Skeleton width="100%" height="16px" />
+                <Skeleton width="80%" height="16px" />
+                <div style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
+                  <Skeleton width="150px" height="36px" />
+                  <Skeleton width="150px" height="36px" />
+                </div>
+              </div>
+            ) : transactions.length === 0 && (
               <Card
                 title={
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -3048,7 +3058,15 @@ export default function App() {
               style={{ textAlign: 'left' }}
               hoverable={false}
             >
-              {transactions.length === 0 ? (
+              {loadingTransactions ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <Skeleton width="100%" height="40px" />
+                  <Skeleton width="100%" height="40px" />
+                  <Skeleton width="100%" height="40px" />
+                  <Skeleton width="100%" height="40px" />
+                  <Skeleton width="100%" height="40px" />
+                </div>
+              ) : transactions.length === 0 ? (
                 <EmptyState
                   icon={<FileText size={32} />}
                   title="Aucun mouvement financier enregistré"
@@ -3521,22 +3539,16 @@ export default function App() {
                 Lancez la compilation asynchrone (Celery) de votre rapport de solvabilité certifié aux normes OHADA avec signature électronique SHA-256 scellée.
               </p>
 
-              <button 
+              <Button 
                 onClick={triggerPDFGeneration} 
                 disabled={generatingReport}
-                className="btn-primary" 
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', width: '100%' }}
+                loading={generatingReport}
+                variant="primary" 
+                style={{ width: '100%' }}
+                leftIcon={<FileText size={16} />}
               >
-                {generatingReport ? (
-                  <>
-                    <RefreshCw className="spin-anim" size={16} /> Génération Celery...
-                  </>
-                ) : (
-                  <>
-                    <FileText size={16} /> Générer un Rapport Certifié
-                  </>
-                )}
-              </button>
+                Générer un Rapport Certifié
+              </Button>
             </div>
 
             {/* LIST OF HISTORICAL PDF REPORTS */}
@@ -3545,7 +3557,7 @@ export default function App() {
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {loadingReports && reports.length === 0 ? (
-                  <div className="shimmer" style={{ height: '80px', width: '100%' }}></div>
+                  <Skeleton height="80px" width="100%" />
                 ) : reports.length > 0 ? (
                   reports.map((r, idx) => (
                     <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(255,255,255,0.01)', border: '1px solid var(--card-border)', borderRadius: '8px' }}>
