@@ -592,15 +592,17 @@ class CSVImportView(APIView):
         except PME.DoesNotExist:
             return Response({"detail": "PME non trouvée"}, status=status.HTTP_404_NOT_FOUND)
             
-        # Restrict queries based on the active pricing plan
-        if pme.plan == 'starter':
-            cutoff_date = date.today() - timedelta(days=90) # 3 months limit
-            transactions = Transaction.objects.filter(date__gte=cutoff_date).order_by('-date')
-        elif pme.plan == 'pilote':
-            cutoff_date = date.today() - timedelta(days=730) # 24 months limit
-            transactions = Transaction.objects.filter(date__gte=cutoff_date).order_by('-date')
-        else:
-            transactions = Transaction.objects.all().order_by('-date')
+        from .utils import tenant_schema_context
+        with tenant_schema_context(pme.nom_schema):
+            # Restrict queries based on the active pricing plan
+            if pme.plan == 'starter':
+                cutoff_date = date.today() - timedelta(days=90) # 3 months limit
+                transactions = Transaction.objects.filter(date__gte=cutoff_date).order_by('-date')
+            elif pme.plan == 'pilote':
+                cutoff_date = date.today() - timedelta(days=730) # 24 months limit
+                transactions = Transaction.objects.filter(date__gte=cutoff_date).order_by('-date')
+            else:
+                transactions = Transaction.objects.all().order_by('-date')
             
         results = []
         for t in transactions[:100]: # return top 100 within plan limits
@@ -662,14 +664,24 @@ class CSVImportView(APIView):
                         status=status.HTTP_400_BAD_REQUEST
                     )
                     
-                from .models import Transaction
-                tx = Transaction.objects.create(
-                    date=tx_date,
-                    montant=tx_montant,
-                    type=type_val,
-                    categorie=categorie_val,
-                    description=description_val
-                )
+                from .models import Transaction, PME
+                from .utils import tenant_schema_context
+                
+                try:
+                    pme = PME.objects.get(id=pme_id)
+                except PME.DoesNotExist:
+                    from rest_framework.response import Response
+                    from rest_framework import status
+                    return Response({"detail": "PME non trouvée"}, status=status.HTTP_404_NOT_FOUND)
+                    
+                with tenant_schema_context(pme.nom_schema):
+                    tx = Transaction.objects.create(
+                        date=tx_date,
+                        montant=tx_montant,
+                        type=type_val,
+                        categorie=categorie_val,
+                        description=description_val
+                    )
                 
                 from .tasks import check_and_generate_alerts_task
                 from django.db import transaction as db_transaction
@@ -728,10 +740,18 @@ class CSVImportView(APIView):
             created_count = 0
             errors = []
             
-            from .models import Transaction
+            from .models import Transaction, PME
+            from .utils import tenant_schema_context
             from django.db import transaction as db_transaction
             
-            with db_transaction.atomic():
+            try:
+                pme = PME.objects.get(id=pme_id)
+            except PME.DoesNotExist:
+                from rest_framework.response import Response
+                from rest_framework import status
+                return Response({"detail": "PME non trouvée"}, status=status.HTTP_404_NOT_FOUND)
+                
+            with tenant_schema_context(pme.nom_schema), db_transaction.atomic():
                 for idx, row in enumerate(reader):
                     cleaned_row = {k.strip().lower() if k else '': v for k, v in row.items()}
                     
