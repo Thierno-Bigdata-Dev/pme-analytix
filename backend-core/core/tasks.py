@@ -226,3 +226,17 @@ def check_pme_alerts_scheduled():
             
     with connection.cursor() as cursor:
         cursor.execute("SET search_path TO public")
+
+@shared_task
+def check_and_generate_alerts_task(pme_id):
+    """
+    Celery task to check and generate alerts for a specific PME.
+    Triggered asynchronously after data import or transaction modification.
+    """
+    from core.alerts_engine import check_and_generate_alerts
+    try:
+        check_and_generate_alerts(pme_id)
+        print(f"Alertes recalculées avec succès pour la PME {pme_id}")
+    except Exception as e:
+        print(f"Erreur lors du calcul des alertes pour la PME {pme_id}: {str(e)}")
+
