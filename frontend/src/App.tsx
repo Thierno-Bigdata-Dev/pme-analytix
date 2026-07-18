@@ -173,6 +173,7 @@ export default function App() {
   const [loadingReports, setLoadingReports] = useState(false);
   const [generatingReport, setGeneratingReport] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [generatedEmailModal, setGeneratedEmailModal] = useState<string | null>(null);
   const [currentPlan, setCurrentPlan] = useState('starter');
   const [updatingPlan, setUpdatingPlan] = useState(false);
   const [onboardingSector, setOnboardingSector] = useState<string>('commerce');
@@ -2566,7 +2567,11 @@ export default function App() {
 
                   <button 
                     onClick={() => {
-                      alert("L'IA a généré un e-mail de relance poli et l'a copié dans votre presse-papiers !");
+                      const emailText = "Objet : Relance de paiement - Factures en souffrance\n\nBonjour,\n\nSauf erreur ou omission de notre part, nous constatons que certaines de vos factures (montant estimé : 1.7M FCFA) sont arrivées à échéance.\n\nPourriez-vous nous faire un retour sur l'état de leur règlement s'il vous plaît ?\nSi le paiement a déjà été effectué, merci de ne pas tenir compte de ce message.\n\nCordialement,\nL'équipe Financière";
+                      navigator.clipboard.writeText(emailText).then(() => {
+                        showToast("E-mail généré et copié !", "success");
+                        setGeneratedEmailModal(emailText);
+                      });
                     }}
                     style={{
                       marginTop: '4px',
@@ -4283,6 +4288,38 @@ export default function App() {
         )}
         <Footer />
       </main>
+
+      
+      {/* Modal Email Généré */}
+      {generatedEmailModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.7)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(4px)' }}>
+          <div className="glass-card" style={{ width: '500px', maxWidth: '90%', background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '16px 24px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h3 style={{ margin: 0, fontSize: '12pt', display: 'flex', alignItems: 'center', gap: '8px', color: '#f1f5f9' }}>
+                <MessageSquare size={16} color="var(--primary)" />
+                Relance IA générée
+              </h3>
+              <button onClick={() => setGeneratedEmailModal(null)} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+                <X size={18} />
+              </button>
+            </div>
+            <div style={{ padding: '24px', fontSize: '9.5pt', color: '#cbd5e1', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+              {generatedEmailModal}
+            </div>
+            <div style={{ padding: '16px 24px', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'flex-end', gap: '12px', background: 'rgba(0,0,0,0.2)' }}>
+              <button onClick={() => setGeneratedEmailModal(null)} className="btn-secondary" style={{ padding: '8px 16px', fontSize: '9pt', color: '#fff', background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>
+                Fermer
+              </button>
+              <button onClick={() => {
+                navigator.clipboard.writeText(generatedEmailModal).then(() => showToast("Copié !", "success"));
+              }} className="btn-primary" style={{ padding: '8px 16px', fontSize: '9pt', display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--primary)', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>
+                <Copy size={14} />
+                Copier
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* FLOATING SUPPORT CHAT WIDGET */}
       {renderFloatingChat()}
