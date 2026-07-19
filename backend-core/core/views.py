@@ -670,8 +670,6 @@ class CSVImportView(APIView):
                 try:
                     pme = PME.objects.get(id=pme_id)
                 except PME.DoesNotExist:
-                    from rest_framework.response import Response
-                    from rest_framework import status
                     return Response({"detail": "PME non trouvée"}, status=status.HTTP_404_NOT_FOUND)
                     
                 with tenant_schema_context(pme.nom_schema):
@@ -747,8 +745,6 @@ class CSVImportView(APIView):
             try:
                 pme = PME.objects.get(id=pme_id)
             except PME.DoesNotExist:
-                from rest_framework.response import Response
-                from rest_framework import status
                 return Response({"detail": "PME non trouvée"}, status=status.HTTP_404_NOT_FOUND)
                 
             with tenant_schema_context(pme.nom_schema), db_transaction.atomic():

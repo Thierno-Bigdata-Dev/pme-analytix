@@ -1,0 +1,155 @@
+--- SLIDE 1 ---
+
+
+SOUTENANCE DE PROJET  ·  LICENCE 2 BIG DATA
+PME ANALYTIX
+L'intelligence artificielle au service de la résilience financière des PME
+
+Jordi Loubano Voumbi   ·   Thierno Hady Diaw
+Encadré par M. Madické Diop
+Dakar Institute of Technology  —  Année académique 2025 / 2026
+--- SLIDE 2 ---
+PROBLÉMATIQUE
+Le défi des PME ouest-africaines
+
+Pilotage à l’aveugle
+Aucune visibilité sur la trésorerie à venir : les décisions se prennent au jour le jour, sans anticipation.
+
+Conformité SYSCOHADA complexe
+Produire des états financiers conformes exige une expertise comptable que peu de PME ont en interne.
+
+Accès au crédit bloqué
+BCEAO (2024) : le coût du crédit augmente pour les PME quand il baisse pour les grandes entreprises.
+2
+--- SLIDE 3 ---
+LA SOLUTION
+Le copilote financier des PME
+Une plateforme SaaS qui centralise, nettoie et analyse les données financières brutes d'une PME pour en extraire des prédictions fiables.
+
+Centraliser
+
+Analyser
+
+Prédire
+
+Certifier
+
+
+
+
+Capture en mode démonstration
+3
+--- SLIDE 4 ---
+DATA SCIENCE
+La data science au cœur du produit
+
+
+Prévision (Prophet)
+Trésorerie à 90 jours, avec intervalles de confiance à 80 % et 95 %.
+
+
+Scoring (XGBoost)
+Score de crédit sur 100 points, à partir de 6 indicateurs financiers.
+4
+--- SLIDE 5 ---
+ARCHITECTURE
+Stack technique
+
+Frontend
+React 19 + TypeScript
+Interface réactive (SPA)
+→
+
+Backend Core
+Django + PostgreSQL
+Schémas isolés par PME
+(multi-tenant)
+→
+
+Backend ML
+FastAPI + Celery + Redis
+Calcul IA asynchrone,
+sans bloquer l’interface
+
+unifiés derrière Nginx — passerelle HTTP unique (résout le CORS)
+5
+--- SLIDE 6 ---
+ZOOM TECHNIQUE
+Comment l'IA évalue le risque
+
+1
+Données d'entrée
+Historique des transactions (jusqu’à 24 mois selon le plan)
+
+2
+Feature engineering
+6 variables : liquidité, croissance du CA, régularité fournisseurs, diversification client, ancienneté, conformité fiscale
+
+3
+Modèle XGBoost
+Gradient boosting sur arbres de décision — score final borné 0-100
+
+Score /100 + segment de risque (Faible → Critique)
+6
+--- SLIDE 7 ---
+BUSINESS MODEL
+Modèle SaaS scalable
+
+STARTER
+0 FCFA
+à vie
+Dashboard de base
+Import CSV manuel
+Historique 90 jours
+
+
+POPULAIRE
+PILOTE
+15 000 FCFA
+/ mois
+Prévisions IA (Prophet)
+Score de crédit (XGBoost)
+Rapports certifiés PDF
+Historique 24 mois
+
+CROISSANCE
+45 000 FCFA
+/ mois
+Historique illimité
+Simulateur de croissance
+API B2B (banques partenaires)
+7
+--- SLIDE 8 ---
+
+
+DÉMONSTRATION
+Tableau de bord   ·   Prévision de trésorerie   ·   Simulateur de croissance
+8
+--- SLIDE 9 ---
+PERSPECTIVES
+Les prochaines étapes
+
+
+Réentraîner le scoring sur des données réelles
+Remplacer le jeu de données synthétique par un historique réel de remboursement, dès qu’il sera disponible.
+
+
+Intégrer un moteur d'OCR réel
+Automatiser l'extraction de factures par reconnaissance d'image, au-delà de l'analyse de texte actuelle.
+
+
+Nouer des partenariats avec des incubateurs
+Déployer PME Analytix à plus grande échelle dans l'espace UEMOA.
+9
+--- SLIDE 10 ---
+
+Merci de votre attention
+Place aux questions
+Jordi Loubano Voumbi   ·   Thierno Hady Diaw
+[ email ]
+[ LinkedIn ]
+[ dépôt GitHub ]
+
+QR CODE
+(à ajouter)
+10
