@@ -2407,15 +2407,7 @@ export default function App() {
                   })}
                 </div>
               </div>
-            ) : (
-              <div style={{ marginTop: '24px' }}>
-                <EmptyState
-                  icon={<Bell size={32} />}
-                  title="Tout va bien !"
-                  description="Aucune anomalie financière ou opérationnelle n'a été détectée. Vos indicateurs sont au vert."
-                />
-              </div>
-            )}
+            ) : null}
 
             {/* KPI ROW */}
             <div className="kpi-row" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px' }}>

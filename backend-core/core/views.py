@@ -604,17 +604,17 @@ class CSVImportView(APIView):
             else:
                 transactions = Transaction.objects.all().order_by('-date')
             
-        results = []
-        for t in transactions[:100]: # return top 100 within plan limits
-            results.append({
-                "id": t.id,
-                "date": t.date.strftime("%Y-%m-%d"),
-                "montant": str(t.montant),
-                "type": t.type,
-                "categorie": t.categorie,
-                "description": t.description
-            })
-        return Response(results, status=status.HTTP_200_OK)
+            results = []
+            for t in transactions[:100]: # return top 100 within plan limits
+                results.append({
+                    "id": t.id,
+                    "date": t.date.strftime("%Y-%m-%d"),
+                    "montant": str(t.montant),
+                    "type": t.type,
+                    "categorie": t.categorie,
+                    "description": t.description
+                })
+            return Response(results, status=status.HTTP_200_OK)
 
     def post(self, request, pme_id):
         user = request.user
