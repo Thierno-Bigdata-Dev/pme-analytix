@@ -97,7 +97,8 @@ async def calculate_pme_score(db: AsyncSession, pme_id: int):
     debits = df[df['type'] == 'debit']['amount'].sum()
     current_cash = credits - debits
     avg_monthly_expenses = debits / 12.0 if debits > 0 else 100000.0
-    liquidity_ratio = min(max(current_cash / avg_monthly_expenses, 0.0), 5.0) / 5.0
+    raw_liquidity_ratio = current_cash / avg_monthly_expenses
+    liquidity_ratio = min(max(raw_liquidity_ratio, 0.0), 5.0) / 5.0
     
     # 2. Régularité des paiements fournisseurs (20%)
     supplier_keywords = ['fournisseur', 'achat', 'prestataire', 'matière', 'stock', 'service']
@@ -163,7 +164,7 @@ async def calculate_pme_score(db: AsyncSession, pme_id: int):
         "score": final_score,
         "risk_segment": segment,
         "features": {
-            "liquidity_ratio": round(liquidity_ratio * 5.0, 2),
+            "liquidity_ratio": round(raw_liquidity_ratio, 2),
             "supplier_payment_regularity": round(supplier_payment_regularity * 100, 1),
             "ca_growth_rate": round(ca_growth, 2),
             "client_diversification": round(client_diversification * 100, 1),

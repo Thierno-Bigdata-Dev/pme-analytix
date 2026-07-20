@@ -64,7 +64,8 @@ async def run_strategic_simulation(
     
     # Fit base score
     base_avg_monthly_expenses = base_debits / 12.0 if base_debits > 0 else 100000.0
-    base_liquidity_ratio = min(max(base_cash / base_avg_monthly_expenses, 0.0), 5.0) / 5.0
+    raw_base_liquidity = base_cash / base_avg_monthly_expenses
+    base_liquidity_ratio = min(max(raw_base_liquidity, 0.0), 5.0) / 5.0
     
     supplier_keywords = ['fournisseur', 'achat', 'prestataire', 'matière', 'stock', 'service']
     supplier_txs = df_raw[(df_raw['type'] == 'debit') & df_raw['categorie'].str.lower().str.contains('|'.join(supplier_keywords))]
@@ -86,7 +87,7 @@ async def run_strategic_simulation(
     base_fiscal_compliance = min(len(tax_txs), 4) / 4.0
     
     base_features = np.array([[
-        base_liquidity_ratio, 
+        raw_base_liquidity, 
         base_supplier_payment_regularity, 
         base_ca_growth_norm, 
         base_client_diversification, 
@@ -162,7 +163,8 @@ async def run_strategic_simulation(
     
     # We include simulated recruitment salary/costs inside simulated avg monthly expenses
     sim_avg_monthly_expenses = (sim_debits / 12.0) * (1.0 + expense_inflation_rate) + (recruitment_cost / 12.0)
-    sim_liquidity_ratio = min(max(sim_final_cash / sim_avg_monthly_expenses, 0.0), 5.0) / 5.0
+    raw_sim_liquidity = sim_final_cash / sim_avg_monthly_expenses
+    sim_liquidity_ratio = min(max(raw_sim_liquidity, 0.0), 5.0) / 5.0
     
     # CA growth with simulated rate & final additions
     cutoff_date = df_sim['date'].max() - timedelta(days=180)
@@ -174,7 +176,7 @@ async def run_strategic_simulation(
     sim_ca_growth_norm = (min(max(sim_ca_growth, -1.0), 1.0) + 1.0) / 2.0
     
     sim_features = np.array([[
-        sim_liquidity_ratio,
+        raw_sim_liquidity,
         base_supplier_payment_regularity,
         sim_ca_growth_norm,
         base_client_diversification,
