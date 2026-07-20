@@ -275,5 +275,9 @@ export const api = {
             method: 'POST',
             body: JSON.stringify({ message })
         });
+    },
+
+    getFactures(pmeId: number) {
+        return apiFetch(`/api/core/pme/${pmeId}/factures/`);
     }
 };
