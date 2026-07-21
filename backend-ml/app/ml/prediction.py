@@ -6,8 +6,8 @@ import numpy as np
 import pandas as pd
 from typing import Dict, Any, List
 
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, RobustScaler
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
@@ -79,7 +79,7 @@ def train_custom_predictor(file_bytes: bytes, target_col: str, feature_cols: Lis
     if len(numeric_cols) > 0:
         num_pipeline = Pipeline(steps=[
             ('imputer', SimpleImputer(strategy='median')),
-            ('scaler', StandardScaler())
+            ('scaler', RobustScaler())
         ])
         transformers.append(('num', num_pipeline, numeric_cols))
         
@@ -92,25 +92,36 @@ def train_custom_predictor(file_bytes: bytes, target_col: str, feature_cols: Lis
         
     preprocessor = ColumnTransformer(transformers=transformers)
     
-    # 4. Define ML Regressor
-    if algo == 'linear':
-        model = LinearRegression()
-    else:
-        model = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1)
-        
-    pipeline = Pipeline(steps=[
-        ('preprocessor', preprocessor),
-        ('model', model)
-    ])
-    
     # 5. Split train/test
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     
-    # Fit pipeline
-    pipeline.fit(X_train, y_train)
+    # 6. Define ML Regressor and Fit with Hyperparameter Tuning
+    if algo == 'linear':
+        model = LinearRegression()
+        pipeline = Pipeline(steps=[
+            ('preprocessor', preprocessor),
+            ('model', model)
+        ])
+        pipeline.fit(X_train, y_train)
+        best_pipeline = pipeline
+    else:
+        model = RandomForestRegressor(random_state=42, n_jobs=-1)
+        pipeline = Pipeline(steps=[
+            ('preprocessor', preprocessor),
+            ('model', model)
+        ])
+        param_grid = {
+            'model__n_estimators': [50, 100, 200],
+            'model__max_depth': [None, 10, 20],
+            'model__min_samples_split': [2, 5]
+        }
+        # Utiliser GridSearchCV pour trouver les meilleurs hyperparamètres
+        grid_search = GridSearchCV(pipeline, param_grid, cv=3, scoring='r2', n_jobs=-1)
+        grid_search.fit(X_train, y_train)
+        best_pipeline = grid_search.best_estimator_
     
     # Evaluate
-    y_pred = pipeline.predict(X_test)
+    y_pred = best_pipeline.predict(X_test)
     r2 = r2_score(y_test, y_pred)
     mae = mean_absolute_error(y_test, y_pred)
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
@@ -119,7 +130,7 @@ def train_custom_predictor(file_bytes: bytes, target_col: str, feature_cols: Lis
     importance_map = {col: 0.0 for col in feature_cols}
     
     try:
-        transformer = pipeline.named_steps['preprocessor']
+        transformer = best_pipeline.named_steps['preprocessor']
         
         # Get feature names after transformer
         feature_names = []
@@ -133,9 +144,9 @@ def train_custom_predictor(file_bytes: bytes, target_col: str, feature_cols: Lis
         # Get raw importances/coefficients
         raw_importances = []
         if algo == 'linear':
-            raw_importances = np.abs(pipeline.named_steps['model'].coef_)
+            raw_importances = np.abs(best_pipeline.named_steps['model'].coef_)
         else:
-            raw_importances = pipeline.named_steps['model'].feature_importances_
+            raw_importances = best_pipeline.named_steps['model'].feature_importances_
             
         # Normalize Linear Regression coefficients to represent relative contribution
         if algo == 'linear':

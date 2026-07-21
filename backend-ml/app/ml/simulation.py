@@ -64,8 +64,7 @@ async def run_strategic_simulation(
     
     # Fit base score
     base_avg_monthly_expenses = base_debits / 12.0 if base_debits > 0 else 100000.0
-    raw_base_liquidity = base_cash / base_avg_monthly_expenses
-    base_liquidity_ratio = min(max(raw_base_liquidity, 0.0), 5.0) / 5.0
+    base_liquidity_ratio = min(max(base_cash / base_avg_monthly_expenses, 0.0), 5.0) / 5.0
     
     supplier_keywords = ['fournisseur', 'achat', 'prestataire', 'matière', 'stock', 'service']
     supplier_txs = df_raw[(df_raw['type'] == 'debit') & df_raw['categorie'].str.lower().str.contains('|'.join(supplier_keywords))]
@@ -108,7 +107,19 @@ async def run_strategic_simulation(
     sim_current_balance = float(df_prophet['y'].iloc[-1])
     
     # Fit Prophet on simulated history
-    model = Prophet(daily_seasonality=False, weekly_seasonality=True, yearly_seasonality=True, interval_width=0.95)
+    model = Prophet(
+        daily_seasonality=False, 
+        weekly_seasonality=True, 
+        yearly_seasonality=True,
+        seasonality_mode='multiplicative',
+        changepoint_prior_scale=0.05,
+        interval_width=0.95
+    )
+    try:
+        model.add_country_holidays(country_name='SN') # Sénégal / Zone UEMOA
+    except Exception:
+        pass # Ignorer si le package holidays n'a pas ce pays
+        
     model.fit(df_prophet[['ds', 'y']])
     future = model.make_future_dataframe(periods=90, include_history=False)
     forecast = model.predict(future)
@@ -163,8 +174,7 @@ async def run_strategic_simulation(
     
     # We include simulated recruitment salary/costs inside simulated avg monthly expenses
     sim_avg_monthly_expenses = (sim_debits / 12.0) * (1.0 + expense_inflation_rate) + (recruitment_cost / 12.0)
-    raw_sim_liquidity = sim_final_cash / sim_avg_monthly_expenses
-    sim_liquidity_ratio = min(max(raw_sim_liquidity, 0.0), 5.0) / 5.0
+    sim_liquidity_ratio = min(max(sim_final_cash / sim_avg_monthly_expenses, 0.0), 5.0) / 5.0
     
     # CA growth with simulated rate & final additions
     cutoff_date = df_sim['date'].max() - timedelta(days=180)
