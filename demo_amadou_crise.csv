@@ -1,0 +1,555 @@
+date,description,categorie,type,montant
+2025-01-02,Plein de Carburant (Flotte),Carburant,debit,84855
+2025-01-03,Réparation Camion / Achat de Pièces,Entretien,debit,643858
+2025-01-04,Plein de Carburant (Flotte),Carburant,debit,60980
+2025-01-05,Plein de Carburant (Flotte),Carburant,debit,95481
+2025-01-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-01-06,Plein de Carburant (Flotte),Carburant,debit,81950
+2025-01-09,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,150698
+2025-01-09,Facture Client - Fret Régional,Ventes,credit,143216
+2025-01-10,Facture Client - Fret Régional,Ventes,credit,187874
+2025-01-10,Plein de Carburant (Flotte),Carburant,debit,104578
+2025-01-11,Plein de Carburant (Flotte),Carburant,debit,76194
+2025-01-14,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,139023
+2025-01-14,Facture Client - Fret Régional,Ventes,credit,124544
+2025-01-14,Plein de Carburant (Flotte),Carburant,debit,80209
+2025-01-15,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,112863
+2025-01-15,Plein de Carburant (Flotte),Carburant,debit,93013
+2025-01-16,Plein de Carburant (Flotte),Carburant,debit,66710
+2025-01-18,Plein de Carburant (Flotte),Carburant,debit,103110
+2025-01-20,Plein de Carburant (Flotte),Carburant,debit,69546
+2025-01-22,Plein de Carburant (Flotte),Carburant,debit,92104
+2025-01-23,Facture Client - Livraison Express,Ventes,credit,83377
+2025-01-23,Facture Client - Fret Régional,Ventes,credit,183570
+2025-01-23,Plein de Carburant (Flotte),Carburant,debit,90837
+2025-01-24,Facture Client - Fret Régional,Ventes,credit,128509
+2025-01-24,Facture Client - Fret Régional,Ventes,credit,168458
+2025-01-24,Réparation Camion / Achat de Pièces,Entretien,debit,380760
+2025-01-27,Facture Client - Fret Régional,Ventes,credit,137001
+2025-01-27,Plein de Carburant (Flotte),Carburant,debit,93248
+2025-01-28,Facture Client - Livraison Express,Ventes,credit,92528
+2025-01-28,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,95242
+2025-01-28,Plein de Carburant (Flotte),Carburant,debit,107629
+2025-01-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-01-29,Plein de Carburant (Flotte),Carburant,debit,103567
+2025-01-30,Plein de Carburant (Flotte),Carburant,debit,92242
+2025-01-31,Plein de Carburant (Flotte),Carburant,debit,90412
+2025-02-01,Réparation Camion / Achat de Pièces,Entretien,debit,704055
+2025-02-02,Plein de Carburant (Flotte),Carburant,debit,104432
+2025-02-02,Réparation Camion / Achat de Pièces,Entretien,debit,646910
+2025-02-03,Plein de Carburant (Flotte),Carburant,debit,73379
+2025-02-04,Plein de Carburant (Flotte),Carburant,debit,74274
+2025-02-05,Facture Client - Livraison Express,Ventes,credit,182297
+2025-02-05,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,107373
+2025-02-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-02-06,Plein de Carburant (Flotte),Carburant,debit,77484
+2025-02-08,Plein de Carburant (Flotte),Carburant,debit,80195
+2025-02-09,Plein de Carburant (Flotte),Carburant,debit,100643
+2025-02-10,Plein de Carburant (Flotte),Carburant,debit,81924
+2025-02-11,Facture Client - Livraison Express,Ventes,credit,98984
+2025-02-11,Facture Client - Fret Régional,Ventes,credit,140539
+2025-02-11,Plein de Carburant (Flotte),Carburant,debit,87148
+2025-02-12,Facture Client - Fret Régional,Ventes,credit,89295
+2025-02-12,Facture Client - Fret Régional,Ventes,credit,150635
+2025-02-12,Plein de Carburant (Flotte),Carburant,debit,92196
+2025-02-13,Facture Client - Fret Régional,Ventes,credit,84880
+2025-02-13,Facture Client - Livraison Express,Ventes,credit,160848
+2025-02-13,Plein de Carburant (Flotte),Carburant,debit,90296
+2025-02-13,Réparation Camion / Achat de Pièces,Entretien,debit,458371
+2025-02-14,Plein de Carburant (Flotte),Carburant,debit,75866
+2025-02-15,Plein de Carburant (Flotte),Carburant,debit,84711
+2025-02-16,Plein de Carburant (Flotte),Carburant,debit,98604
+2025-02-17,Plein de Carburant (Flotte),Carburant,debit,96511
+2025-02-21,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,189809
+2025-02-21,Facture Client - Livraison Express,Ventes,credit,142019
+2025-02-21,Plein de Carburant (Flotte),Carburant,debit,93296
+2025-02-23,Plein de Carburant (Flotte),Carburant,debit,96617
+2025-02-24,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,123308
+2025-02-24,Plein de Carburant (Flotte),Carburant,debit,99748
+2025-02-25,Plein de Carburant (Flotte),Carburant,debit,66854
+2025-02-26,Plein de Carburant (Flotte),Carburant,debit,81604
+2025-02-27,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,163024
+2025-02-27,Plein de Carburant (Flotte),Carburant,debit,83768
+2025-02-28,Facture Client - Fret Régional,Ventes,credit,129639
+2025-02-28,Plein de Carburant (Flotte),Carburant,debit,76778
+2025-02-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-03-02,Plein de Carburant (Flotte),Carburant,debit,96282
+2025-03-03,Plein de Carburant (Flotte),Carburant,debit,103367
+2025-03-05,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,155084
+2025-03-05,Facture Client - Fret Régional,Ventes,credit,154117
+2025-03-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-03-07,Facture Client - Livraison Express,Ventes,credit,99042
+2025-03-07,Plein de Carburant (Flotte),Carburant,debit,74037
+2025-03-08,Plein de Carburant (Flotte),Carburant,debit,78714
+2025-03-09,Plein de Carburant (Flotte),Carburant,debit,70837
+2025-03-10,Plein de Carburant (Flotte),Carburant,debit,90857
+2025-03-11,Plein de Carburant (Flotte),Carburant,debit,64717
+2025-03-12,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,150749
+2025-03-13,Réparation Camion / Achat de Pièces,Entretien,debit,457106
+2025-03-14,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,106870
+2025-03-14,Plein de Carburant (Flotte),Carburant,debit,62550
+2025-03-14,Réparation Camion / Achat de Pièces,Entretien,debit,731358
+2025-03-15,Plein de Carburant (Flotte),Carburant,debit,74440
+2025-03-15,Paiement Taxes / Patente,Impôts,debit,600000
+2025-03-16,Plein de Carburant (Flotte),Carburant,debit,66634
+2025-03-18,Plein de Carburant (Flotte),Carburant,debit,100780
+2025-03-19,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,133618
+2025-03-19,Facture Client - Fret Régional,Ventes,credit,199741
+2025-03-19,Plein de Carburant (Flotte),Carburant,debit,104074
+2025-03-20,Plein de Carburant (Flotte),Carburant,debit,107101
+2025-03-21,Plein de Carburant (Flotte),Carburant,debit,89276
+2025-03-23,Plein de Carburant (Flotte),Carburant,debit,60026
+2025-03-24,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,117085
+2025-03-24,Plein de Carburant (Flotte),Carburant,debit,70379
+2025-03-25,Plein de Carburant (Flotte),Carburant,debit,78490
+2025-03-26,Plein de Carburant (Flotte),Carburant,debit,69744
+2025-03-27,Plein de Carburant (Flotte),Carburant,debit,78170
+2025-03-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-03-30,Plein de Carburant (Flotte),Carburant,debit,106636
+2025-03-31,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,194957
+2025-03-31,Facture Client - Fret Régional,Ventes,credit,113444
+2025-03-31,Plein de Carburant (Flotte),Carburant,debit,70155
+2025-04-02,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,169399
+2025-04-02,Facture Client - Fret Régional,Ventes,credit,119663
+2025-04-02,Plein de Carburant (Flotte),Carburant,debit,107036
+2025-04-02,Réparation Camion / Achat de Pièces,Entretien,debit,727439
+2025-04-03,Plein de Carburant (Flotte),Carburant,debit,100384
+2025-04-03,Réparation Camion / Achat de Pièces,Entretien,debit,455689
+2025-04-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-04-06,Plein de Carburant (Flotte),Carburant,debit,103092
+2025-04-08,Plein de Carburant (Flotte),Carburant,debit,89714
+2025-04-09,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,99059
+2025-04-09,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,92134
+2025-04-09,Plein de Carburant (Flotte),Carburant,debit,104867
+2025-04-11,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,116445
+2025-04-12,Plein de Carburant (Flotte),Carburant,debit,106862
+2025-04-14,Facture Client - Livraison Express,Ventes,credit,85104
+2025-04-14,Facture Client - Livraison Express,Ventes,credit,91790
+2025-04-14,Plein de Carburant (Flotte),Carburant,debit,79323
+2025-04-15,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,196685
+2025-04-15,Facture Client - Livraison Express,Ventes,credit,134115
+2025-04-16,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,116397
+2025-04-16,Plein de Carburant (Flotte),Carburant,debit,61965
+2025-04-18,Plein de Carburant (Flotte),Carburant,debit,93843
+2025-04-20,Plein de Carburant (Flotte),Carburant,debit,105975
+2025-04-21,Plein de Carburant (Flotte),Carburant,debit,90928
+2025-04-22,Plein de Carburant (Flotte),Carburant,debit,86823
+2025-04-23,Plein de Carburant (Flotte),Carburant,debit,96744
+2025-04-24,Plein de Carburant (Flotte),Carburant,debit,92559
+2025-04-26,Plein de Carburant (Flotte),Carburant,debit,106841
+2025-04-27,Plein de Carburant (Flotte),Carburant,debit,102410
+2025-04-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-04-29,Plein de Carburant (Flotte),Carburant,debit,108911
+2025-05-01,Plein de Carburant (Flotte),Carburant,debit,87522
+2025-05-04,Plein de Carburant (Flotte),Carburant,debit,60819
+2025-05-05,Plein de Carburant (Flotte),Carburant,debit,106091
+2025-05-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-05-06,Plein de Carburant (Flotte),Carburant,debit,85601
+2025-05-07,Réparation Camion / Achat de Pièces,Entretien,debit,766711
+2025-05-08,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,157392
+2025-05-09,Plein de Carburant (Flotte),Carburant,debit,105963
+2025-05-10,Plein de Carburant (Flotte),Carburant,debit,105396
+2025-05-11,Plein de Carburant (Flotte),Carburant,debit,94895
+2025-05-12,Plein de Carburant (Flotte),Carburant,debit,92920
+2025-05-13,Plein de Carburant (Flotte),Carburant,debit,97358
+2025-05-14,Plein de Carburant (Flotte),Carburant,debit,80904
+2025-05-15,Plein de Carburant (Flotte),Carburant,debit,75880
+2025-05-16,Facture Client - Fret Régional,Ventes,credit,114927
+2025-05-18,Plein de Carburant (Flotte),Carburant,debit,73189
+2025-05-19,Plein de Carburant (Flotte),Carburant,debit,70956
+2025-05-22,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,157865
+2025-05-22,Facture Client - Livraison Express,Ventes,credit,188747
+2025-05-25,Plein de Carburant (Flotte),Carburant,debit,73042
+2025-05-27,Plein de Carburant (Flotte),Carburant,debit,105694
+2025-05-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-05-29,Plein de Carburant (Flotte),Carburant,debit,105321
+2025-05-30,Plein de Carburant (Flotte),Carburant,debit,71511
+2025-06-01,Plein de Carburant (Flotte),Carburant,debit,95691
+2025-06-02,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,160325
+2025-06-02,Facture Client - Livraison Express,Ventes,credit,89408
+2025-06-02,Plein de Carburant (Flotte),Carburant,debit,73508
+2025-06-03,Plein de Carburant (Flotte),Carburant,debit,102949
+2025-06-04,Facture Client - Fret Régional,Ventes,credit,161314
+2025-06-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-06-06,Facture Client - Fret Régional,Ventes,credit,96006
+2025-06-08,Plein de Carburant (Flotte),Carburant,debit,75536
+2025-06-09,Plein de Carburant (Flotte),Carburant,debit,66729
+2025-06-10,Plein de Carburant (Flotte),Carburant,debit,105554
+2025-06-11,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,197735
+2025-06-13,Facture Client - Livraison Express,Ventes,credit,118533
+2025-06-13,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,119377
+2025-06-14,Plein de Carburant (Flotte),Carburant,debit,87966
+2025-06-14,Réparation Camion / Achat de Pièces,Entretien,debit,547289
+2025-06-15,Plein de Carburant (Flotte),Carburant,debit,105931
+2025-06-15,Paiement Taxes / Patente,Impôts,debit,600000
+2025-06-17,Plein de Carburant (Flotte),Carburant,debit,71733
+2025-06-19,Réparation Camion / Achat de Pièces,Entretien,debit,734620
+2025-06-21,Plein de Carburant (Flotte),Carburant,debit,68755
+2025-06-22,Plein de Carburant (Flotte),Carburant,debit,63710
+2025-06-23,Plein de Carburant (Flotte),Carburant,debit,99009
+2025-06-25,Plein de Carburant (Flotte),Carburant,debit,68425
+2025-06-27,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,144671
+2025-06-27,Plein de Carburant (Flotte),Carburant,debit,87826
+2025-06-28,Plein de Carburant (Flotte),Carburant,debit,83307
+2025-06-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-06-29,Plein de Carburant (Flotte),Carburant,debit,95682
+2025-06-30,Plein de Carburant (Flotte),Carburant,debit,103781
+2025-07-01,Plein de Carburant (Flotte),Carburant,debit,93414
+2025-07-03,Facture Client - Livraison Express,Ventes,credit,161629
+2025-07-03,Plein de Carburant (Flotte),Carburant,debit,67317
+2025-07-04,Plein de Carburant (Flotte),Carburant,debit,60110
+2025-07-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-07-07,Facture Client - Livraison Express,Ventes,credit,109619
+2025-07-07,Facture Client - Livraison Express,Ventes,credit,127766
+2025-07-07,Plein de Carburant (Flotte),Carburant,debit,93780
+2025-07-10,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,172155
+2025-07-10,Facture Client - Fret Régional,Ventes,credit,86129
+2025-07-11,Plein de Carburant (Flotte),Carburant,debit,68345
+2025-07-12,Plein de Carburant (Flotte),Carburant,debit,98289
+2025-07-13,Plein de Carburant (Flotte),Carburant,debit,97017
+2025-07-14,Plein de Carburant (Flotte),Carburant,debit,71863
+2025-07-15,Plein de Carburant (Flotte),Carburant,debit,70476
+2025-07-16,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,155102
+2025-07-16,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,99868
+2025-07-16,Plein de Carburant (Flotte),Carburant,debit,90495
+2025-07-17,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,109749
+2025-07-17,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,158503
+2025-07-17,Plein de Carburant (Flotte),Carburant,debit,105620
+2025-07-18,Plein de Carburant (Flotte),Carburant,debit,65629
+2025-07-19,Plein de Carburant (Flotte),Carburant,debit,100516
+2025-07-22,Plein de Carburant (Flotte),Carburant,debit,99376
+2025-07-23,Facture Client - Fret Régional,Ventes,credit,129499
+2025-07-23,Facture Client - Fret Régional,Ventes,credit,122254
+2025-07-23,Plein de Carburant (Flotte),Carburant,debit,80358
+2025-07-24,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,100042
+2025-07-24,Plein de Carburant (Flotte),Carburant,debit,97527
+2025-07-25,Facture Client - Fret Régional,Ventes,credit,108235
+2025-07-26,Plein de Carburant (Flotte),Carburant,debit,73169
+2025-07-27,Plein de Carburant (Flotte),Carburant,debit,62931
+2025-07-28,Facture Client - Fret Régional,Ventes,credit,103980
+2025-07-28,Facture Client - Fret Régional,Ventes,credit,156487
+2025-07-28,Plein de Carburant (Flotte),Carburant,debit,75960
+2025-07-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-07-31,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,85310
+2025-07-31,Facture Client - Fret Régional,Ventes,credit,180924
+2025-07-31,Plein de Carburant (Flotte),Carburant,debit,86719
+2025-08-01,Facture Client - Fret Régional,Ventes,credit,85065
+2025-08-02,Plein de Carburant (Flotte),Carburant,debit,83511
+2025-08-03,Plein de Carburant (Flotte),Carburant,debit,66693
+2025-08-04,Plein de Carburant (Flotte),Carburant,debit,105413
+2025-08-05,Facture Client - Fret Régional,Ventes,credit,122683
+2025-08-05,Facture Client - Fret Régional,Ventes,credit,151388
+2025-08-05,Plein de Carburant (Flotte),Carburant,debit,78095
+2025-08-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-08-06,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,139349
+2025-08-06,Facture Client - Livraison Express,Ventes,credit,196134
+2025-08-06,Plein de Carburant (Flotte),Carburant,debit,96353
+2025-08-07,Plein de Carburant (Flotte),Carburant,debit,99858
+2025-08-08,Plein de Carburant (Flotte),Carburant,debit,66533
+2025-08-08,Réparation Camion / Achat de Pièces,Entretien,debit,505372
+2025-08-09,Plein de Carburant (Flotte),Carburant,debit,98574
+2025-08-10,Plein de Carburant (Flotte),Carburant,debit,89283
+2025-08-11,Facture Client - Fret Régional,Ventes,credit,151024
+2025-08-11,Plein de Carburant (Flotte),Carburant,debit,106739
+2025-08-12,Plein de Carburant (Flotte),Carburant,debit,89140
+2025-08-13,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,116968
+2025-08-13,Plein de Carburant (Flotte),Carburant,debit,95189
+2025-08-16,Plein de Carburant (Flotte),Carburant,debit,76446
+2025-08-20,Facture Client - Livraison Express,Ventes,credit,118124
+2025-08-20,Facture Client - Fret Régional,Ventes,credit,197311
+2025-08-20,Plein de Carburant (Flotte),Carburant,debit,86852
+2025-08-21,Plein de Carburant (Flotte),Carburant,debit,72128
+2025-08-21,Réparation Camion / Achat de Pièces,Entretien,debit,508714
+2025-08-22,Facture Client - Fret Régional,Ventes,credit,162551
+2025-08-22,Plein de Carburant (Flotte),Carburant,debit,63508
+2025-08-24,Plein de Carburant (Flotte),Carburant,debit,81021
+2025-08-26,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,116693
+2025-08-26,Facture Client - Livraison Express,Ventes,credit,121141
+2025-08-26,Plein de Carburant (Flotte),Carburant,debit,102117
+2025-08-27,Plein de Carburant (Flotte),Carburant,debit,92379
+2025-08-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-08-29,Plein de Carburant (Flotte),Carburant,debit,77457
+2025-08-30,Plein de Carburant (Flotte),Carburant,debit,104782
+2025-08-31,Plein de Carburant (Flotte),Carburant,debit,84680
+2025-09-02,Plein de Carburant (Flotte),Carburant,debit,80650
+2025-09-03,Réparation Camion / Achat de Pièces,Entretien,debit,362127
+2025-09-04,Plein de Carburant (Flotte),Carburant,debit,93795
+2025-09-05,Facture Client - Livraison Express,Ventes,credit,181373
+2025-09-05,Facture Client - Livraison Express,Ventes,credit,140857
+2025-09-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-09-07,Plein de Carburant (Flotte),Carburant,debit,94479
+2025-09-08,Plein de Carburant (Flotte),Carburant,debit,107968
+2025-09-09,Plein de Carburant (Flotte),Carburant,debit,76450
+2025-09-10,Facture Client - Livraison Express,Ventes,credit,127005
+2025-09-10,Plein de Carburant (Flotte),Carburant,debit,108795
+2025-09-11,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,110634
+2025-09-13,Plein de Carburant (Flotte),Carburant,debit,108571
+2025-09-15,Plein de Carburant (Flotte),Carburant,debit,60696
+2025-09-15,Paiement Taxes / Patente,Impôts,debit,600000
+2025-09-18,Plein de Carburant (Flotte),Carburant,debit,102962
+2025-09-20,Plein de Carburant (Flotte),Carburant,debit,63472
+2025-09-21,Plein de Carburant (Flotte),Carburant,debit,68419
+2025-09-22,Facture Client - Livraison Express,Ventes,credit,140948
+2025-09-22,Plein de Carburant (Flotte),Carburant,debit,64480
+2025-09-26,Plein de Carburant (Flotte),Carburant,debit,99544
+2025-09-26,Réparation Camion / Achat de Pièces,Entretien,debit,481946
+2025-09-27,Plein de Carburant (Flotte),Carburant,debit,68602
+2025-09-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-09-28,Réparation Camion / Achat de Pièces,Entretien,debit,399487
+2025-09-29,Plein de Carburant (Flotte),Carburant,debit,77782
+2025-09-30,Plein de Carburant (Flotte),Carburant,debit,72911
+2025-10-03,Plein de Carburant (Flotte),Carburant,debit,63076
+2025-10-03,Réparation Camion / Achat de Pièces,Entretien,debit,414491
+2025-10-05,Plein de Carburant (Flotte),Carburant,debit,78863
+2025-10-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-10-07,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,100496
+2025-10-07,Plein de Carburant (Flotte),Carburant,debit,90897
+2025-10-08,Plein de Carburant (Flotte),Carburant,debit,93716
+2025-10-09,Plein de Carburant (Flotte),Carburant,debit,100074
+2025-10-10,Facture Client - Fret Régional,Ventes,credit,138560
+2025-10-10,Plein de Carburant (Flotte),Carburant,debit,93857
+2025-10-11,Réparation Camion / Achat de Pièces,Entretien,debit,432459
+2025-10-14,Plein de Carburant (Flotte),Carburant,debit,92745
+2025-10-15,Facture Client - Fret Régional,Ventes,credit,194141
+2025-10-15,Plein de Carburant (Flotte),Carburant,debit,101850
+2025-10-16,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,90322
+2025-10-16,Facture Client - Fret Régional,Ventes,credit,87887
+2025-10-16,Plein de Carburant (Flotte),Carburant,debit,95248
+2025-10-16,Réparation Camion / Achat de Pièces,Entretien,debit,258957
+2025-10-17,Plein de Carburant (Flotte),Carburant,debit,81706
+2025-10-18,Plein de Carburant (Flotte),Carburant,debit,79761
+2025-10-19,Plein de Carburant (Flotte),Carburant,debit,76537
+2025-10-20,Plein de Carburant (Flotte),Carburant,debit,94055
+2025-10-21,Plein de Carburant (Flotte),Carburant,debit,89803
+2025-10-22,Plein de Carburant (Flotte),Carburant,debit,107402
+2025-10-23,Facture Client - Fret Régional,Ventes,credit,84055
+2025-10-23,Facture Client - Livraison Express,Ventes,credit,152480
+2025-10-23,Plein de Carburant (Flotte),Carburant,debit,90385
+2025-10-26,Plein de Carburant (Flotte),Carburant,debit,107346
+2025-10-27,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,101224
+2025-10-27,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,128075
+2025-10-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-10-29,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,124751
+2025-10-29,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,152291
+2025-10-30,Plein de Carburant (Flotte),Carburant,debit,72054
+2025-10-31,Facture Client - Livraison Express,Ventes,credit,160458
+2025-10-31,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,170606
+2025-10-31,Plein de Carburant (Flotte),Carburant,debit,84939
+2025-11-01,Plein de Carburant (Flotte),Carburant,debit,82969
+2025-11-04,Plein de Carburant (Flotte),Carburant,debit,79497
+2025-11-05,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,167203
+2025-11-05,Plein de Carburant (Flotte),Carburant,debit,69848
+2025-11-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-11-07,Plein de Carburant (Flotte),Carburant,debit,84116
+2025-11-08,Plein de Carburant (Flotte),Carburant,debit,95839
+2025-11-09,Plein de Carburant (Flotte),Carburant,debit,94273
+2025-11-11,Facture Client - Livraison Express,Ventes,credit,153673
+2025-11-12,Plein de Carburant (Flotte),Carburant,debit,79735
+2025-11-13,Facture Client - Fret Régional,Ventes,credit,93871
+2025-11-13,Plein de Carburant (Flotte),Carburant,debit,69192
+2025-11-14,Plein de Carburant (Flotte),Carburant,debit,78732
+2025-11-17,Plein de Carburant (Flotte),Carburant,debit,96194
+2025-11-18,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,100431
+2025-11-19,Plein de Carburant (Flotte),Carburant,debit,83135
+2025-11-20,Plein de Carburant (Flotte),Carburant,debit,72964
+2025-11-21,Facture Client - Livraison Express,Ventes,credit,107961
+2025-11-21,Plein de Carburant (Flotte),Carburant,debit,91556
+2025-11-21,Réparation Camion / Achat de Pièces,Entretien,debit,333738
+2025-11-22,Plein de Carburant (Flotte),Carburant,debit,72515
+2025-11-23,Plein de Carburant (Flotte),Carburant,debit,86535
+2025-11-24,Plein de Carburant (Flotte),Carburant,debit,107234
+2025-11-26,Plein de Carburant (Flotte),Carburant,debit,94692
+2025-11-27,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,92212
+2025-11-27,Plein de Carburant (Flotte),Carburant,debit,103707
+2025-11-28,Plein de Carburant (Flotte),Carburant,debit,82033
+2025-11-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-11-29,Plein de Carburant (Flotte),Carburant,debit,95571
+2025-12-03,Plein de Carburant (Flotte),Carburant,debit,90938
+2025-12-04,Plein de Carburant (Flotte),Carburant,debit,69138
+2025-12-05,Plein de Carburant (Flotte),Carburant,debit,78697
+2025-12-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2025-12-06,Réparation Camion / Achat de Pièces,Entretien,debit,454278
+2025-12-08,Plein de Carburant (Flotte),Carburant,debit,60113
+2025-12-09,Plein de Carburant (Flotte),Carburant,debit,74755
+2025-12-09,Réparation Camion / Achat de Pièces,Entretien,debit,399910
+2025-12-10,Plein de Carburant (Flotte),Carburant,debit,67972
+2025-12-12,Plein de Carburant (Flotte),Carburant,debit,97920
+2025-12-14,Plein de Carburant (Flotte),Carburant,debit,64525
+2025-12-15,Paiement Taxes / Patente,Impôts,debit,600000
+2025-12-15,Pénalité de retard (Fisc),Impôts,debit,150000
+2025-12-16,Plein de Carburant (Flotte),Carburant,debit,97026
+2025-12-17,Plein de Carburant (Flotte),Carburant,debit,109588
+2025-12-20,Plein de Carburant (Flotte),Carburant,debit,66433
+2025-12-21,Réparation Camion / Achat de Pièces,Entretien,debit,649677
+2025-12-22,Plein de Carburant (Flotte),Carburant,debit,66216
+2025-12-27,Plein de Carburant (Flotte),Carburant,debit,104099
+2025-12-28,Plein de Carburant (Flotte),Carburant,debit,78279
+2025-12-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2025-12-29,Plein de Carburant (Flotte),Carburant,debit,104601
+2025-12-30,Plein de Carburant (Flotte),Carburant,debit,84318
+2026-01-01,Plein de Carburant (Flotte),Carburant,debit,93885
+2026-01-04,Plein de Carburant (Flotte),Carburant,debit,96993
+2026-01-05,Plein de Carburant (Flotte),Carburant,debit,61461
+2026-01-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2026-01-05,Réparation Camion / Achat de Pièces,Entretien,debit,667372
+2026-01-06,Plein de Carburant (Flotte),Carburant,debit,84622
+2026-01-08,Plein de Carburant (Flotte),Carburant,debit,92905
+2026-01-09,Réparation Camion / Achat de Pièces,Entretien,debit,610680
+2026-01-10,Réparation Camion / Achat de Pièces,Entretien,debit,534861
+2026-01-12,Plein de Carburant (Flotte),Carburant,debit,60436
+2026-01-12,Réparation Camion / Achat de Pièces,Entretien,debit,348605
+2026-01-14,Plein de Carburant (Flotte),Carburant,debit,87046
+2026-01-15,Plein de Carburant (Flotte),Carburant,debit,70410
+2026-01-16,Plein de Carburant (Flotte),Carburant,debit,91862
+2026-01-17,Plein de Carburant (Flotte),Carburant,debit,65118
+2026-01-18,Plein de Carburant (Flotte),Carburant,debit,104401
+2026-01-21,Plein de Carburant (Flotte),Carburant,debit,73407
+2026-01-21,Réparation Camion / Achat de Pièces,Entretien,debit,225309
+2026-01-23,Plein de Carburant (Flotte),Carburant,debit,65690
+2026-01-24,Plein de Carburant (Flotte),Carburant,debit,87283
+2026-01-25,Plein de Carburant (Flotte),Carburant,debit,97964
+2026-01-26,Plein de Carburant (Flotte),Carburant,debit,71444
+2026-01-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2026-02-01,Plein de Carburant (Flotte),Carburant,debit,86320
+2026-02-02,Plein de Carburant (Flotte),Carburant,debit,94220
+2026-02-03,Plein de Carburant (Flotte),Carburant,debit,108459
+2026-02-05,Plein de Carburant (Flotte),Carburant,debit,103171
+2026-02-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2026-02-05,Réparation Camion / Achat de Pièces,Entretien,debit,647696
+2026-02-06,Plein de Carburant (Flotte),Carburant,debit,61548
+2026-02-08,Réparation Camion / Achat de Pièces,Entretien,debit,410790
+2026-02-09,Plein de Carburant (Flotte),Carburant,debit,90653
+2026-02-11,Plein de Carburant (Flotte),Carburant,debit,107716
+2026-02-12,Plein de Carburant (Flotte),Carburant,debit,101844
+2026-02-13,Réparation Camion / Achat de Pièces,Entretien,debit,323742
+2026-02-16,Plein de Carburant (Flotte),Carburant,debit,92963
+2026-02-17,Plein de Carburant (Flotte),Carburant,debit,69972
+2026-02-19,Plein de Carburant (Flotte),Carburant,debit,86431
+2026-02-21,Réparation Camion / Achat de Pièces,Entretien,debit,695906
+2026-02-24,Plein de Carburant (Flotte),Carburant,debit,92928
+2026-02-25,Plein de Carburant (Flotte),Carburant,debit,72482
+2026-02-26,Plein de Carburant (Flotte),Carburant,debit,66521
+2026-02-28,Plein de Carburant (Flotte),Carburant,debit,87087
+2026-02-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2026-03-02,Plein de Carburant (Flotte),Carburant,debit,89556
+2026-03-05,Plein de Carburant (Flotte),Carburant,debit,98662
+2026-03-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2026-03-06,Plein de Carburant (Flotte),Carburant,debit,99197
+2026-03-07,Plein de Carburant (Flotte),Carburant,debit,105951
+2026-03-08,Plein de Carburant (Flotte),Carburant,debit,65157
+2026-03-09,Plein de Carburant (Flotte),Carburant,debit,97770
+2026-03-09,Réparation Camion / Achat de Pièces,Entretien,debit,659169
+2026-03-10,Plein de Carburant (Flotte),Carburant,debit,65143
+2026-03-11,Plein de Carburant (Flotte),Carburant,debit,63418
+2026-03-11,Réparation Camion / Achat de Pièces,Entretien,debit,792492
+2026-03-12,Plein de Carburant (Flotte),Carburant,debit,75746
+2026-03-13,Plein de Carburant (Flotte),Carburant,debit,97938
+2026-03-14,Plein de Carburant (Flotte),Carburant,debit,98403
+2026-03-15,Paiement Taxes / Patente,Impôts,debit,600000
+2026-03-15,Pénalité de retard (Fisc),Impôts,debit,150000
+2026-03-16,Plein de Carburant (Flotte),Carburant,debit,105743
+2026-03-17,Plein de Carburant (Flotte),Carburant,debit,109130
+2026-03-19,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,77914
+2026-03-19,Réparation Camion / Achat de Pièces,Entretien,debit,311893
+2026-03-20,Plein de Carburant (Flotte),Carburant,debit,88214
+2026-03-21,Plein de Carburant (Flotte),Carburant,debit,91197
+2026-03-23,Plein de Carburant (Flotte),Carburant,debit,98874
+2026-03-24,Plein de Carburant (Flotte),Carburant,debit,94472
+2026-03-25,Réparation Camion / Achat de Pièces,Entretien,debit,502792
+2026-03-26,Plein de Carburant (Flotte),Carburant,debit,85461
+2026-03-27,Plein de Carburant (Flotte),Carburant,debit,62772
+2026-03-28,Plein de Carburant (Flotte),Carburant,debit,66933
+2026-03-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2026-03-31,Plein de Carburant (Flotte),Carburant,debit,88345
+2026-04-01,Plein de Carburant (Flotte),Carburant,debit,99463
+2026-04-03,Plein de Carburant (Flotte),Carburant,debit,65532
+2026-04-05,Plein de Carburant (Flotte),Carburant,debit,79557
+2026-04-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2026-04-05,Réparation Camion / Achat de Pièces,Entretien,debit,593965
+2026-04-08,Plein de Carburant (Flotte),Carburant,debit,67042
+2026-04-09,Facture Client - Livraison Express,Ventes,credit,26856
+2026-04-09,Plein de Carburant (Flotte),Carburant,debit,73999
+2026-04-10,Réparation Camion / Achat de Pièces,Entretien,debit,297621
+2026-04-11,Plein de Carburant (Flotte),Carburant,debit,93783
+2026-04-12,Plein de Carburant (Flotte),Carburant,debit,107220
+2026-04-13,Réparation Camion / Achat de Pièces,Entretien,debit,684487
+2026-04-14,Plein de Carburant (Flotte),Carburant,debit,90805
+2026-04-15,Plein de Carburant (Flotte),Carburant,debit,80598
+2026-04-17,Plein de Carburant (Flotte),Carburant,debit,98702
+2026-04-19,Plein de Carburant (Flotte),Carburant,debit,64027
+2026-04-20,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,56793
+2026-04-20,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,46131
+2026-04-22,Plein de Carburant (Flotte),Carburant,debit,85827
+2026-04-23,Plein de Carburant (Flotte),Carburant,debit,76263
+2026-04-25,Plein de Carburant (Flotte),Carburant,debit,96832
+2026-04-26,Plein de Carburant (Flotte),Carburant,debit,76307
+2026-04-27,Plein de Carburant (Flotte),Carburant,debit,98722
+2026-04-27,Réparation Camion / Achat de Pièces,Entretien,debit,310822
+2026-04-28,Plein de Carburant (Flotte),Carburant,debit,82974
+2026-04-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2026-04-29,Plein de Carburant (Flotte),Carburant,debit,105212
+2026-04-30,Plein de Carburant (Flotte),Carburant,debit,94602
+2026-05-01,Plein de Carburant (Flotte),Carburant,debit,86355
+2026-05-03,Plein de Carburant (Flotte),Carburant,debit,88915
+2026-05-04,Plein de Carburant (Flotte),Carburant,debit,81759
+2026-05-05,Plein de Carburant (Flotte),Carburant,debit,74232
+2026-05-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2026-05-06,Plein de Carburant (Flotte),Carburant,debit,85299
+2026-05-06,Réparation Camion / Achat de Pièces,Entretien,debit,581530
+2026-05-07,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,28921
+2026-05-08,Réparation Camion / Achat de Pièces,Entretien,debit,301338
+2026-05-10,Plein de Carburant (Flotte),Carburant,debit,68695
+2026-05-11,Plein de Carburant (Flotte),Carburant,debit,68354
+2026-05-14,Plein de Carburant (Flotte),Carburant,debit,78064
+2026-05-15,Plein de Carburant (Flotte),Carburant,debit,61765
+2026-05-16,Réparation Camion / Achat de Pièces,Entretien,debit,370647
+2026-05-17,Réparation Camion / Achat de Pièces,Entretien,debit,475762
+2026-05-18,Plein de Carburant (Flotte),Carburant,debit,79586
+2026-05-19,Plein de Carburant (Flotte),Carburant,debit,67823
+2026-05-19,Réparation Camion / Achat de Pièces,Entretien,debit,415227
+2026-05-20,Plein de Carburant (Flotte),Carburant,debit,71440
+2026-05-21,Réparation Camion / Achat de Pièces,Entretien,debit,652318
+2026-05-22,Plein de Carburant (Flotte),Carburant,debit,93302
+2026-05-23,Plein de Carburant (Flotte),Carburant,debit,83694
+2026-05-24,Plein de Carburant (Flotte),Carburant,debit,86085
+2026-05-25,Réparation Camion / Achat de Pièces,Entretien,debit,705312
+2026-05-26,Plein de Carburant (Flotte),Carburant,debit,91277
+2026-05-27,Facture Client - Fret Régional (Retard de paiement),Ventes,credit,62393
+2026-05-27,Plein de Carburant (Flotte),Carburant,debit,77954
+2026-05-28,Plein de Carburant (Flotte),Carburant,debit,104638
+2026-05-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2026-05-28,Réparation Camion / Achat de Pièces,Entretien,debit,631413
+2026-06-02,Plein de Carburant (Flotte),Carburant,debit,82385
+2026-06-03,Plein de Carburant (Flotte),Carburant,debit,60233
+2026-06-04,Réparation Camion / Achat de Pièces,Entretien,debit,614971
+2026-06-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2026-06-06,Plein de Carburant (Flotte),Carburant,debit,68448
+2026-06-07,Plein de Carburant (Flotte),Carburant,debit,93024
+2026-06-08,Plein de Carburant (Flotte),Carburant,debit,93614
+2026-06-09,Plein de Carburant (Flotte),Carburant,debit,84262
+2026-06-12,Plein de Carburant (Flotte),Carburant,debit,65578
+2026-06-12,Réparation Camion / Achat de Pièces,Entretien,debit,667864
+2026-06-13,Plein de Carburant (Flotte),Carburant,debit,102975
+2026-06-14,Plein de Carburant (Flotte),Carburant,debit,99895
+2026-06-15,Réparation Camion / Achat de Pièces,Entretien,debit,381532
+2026-06-15,Paiement Taxes / Patente,Impôts,debit,600000
+2026-06-15,Pénalité de retard (Fisc),Impôts,debit,150000
+2026-06-18,Facture Client - Livraison Express (Retard de paiement),Ventes,credit,23612
+2026-06-22,Facture Client - Fret Régional,Ventes,credit,72370
+2026-06-23,Plein de Carburant (Flotte),Carburant,debit,89440
+2026-06-25,Plein de Carburant (Flotte),Carburant,debit,103860
+2026-06-26,Plein de Carburant (Flotte),Carburant,debit,64733
+2026-06-28,Plein de Carburant (Flotte),Carburant,debit,96694
+2026-06-28,Paiement Salaires (Chauffeurs et Admin),Salaires,debit,1200000
+2026-07-02,Plein de Carburant (Flotte),Carburant,debit,80632
+2026-07-05,Loyer Entrepôt Logistique,Loyer,debit,550000
+2026-07-07,Réparation Camion / Achat de Pièces,Entretien,debit,668277
+2026-07-10,Plein de Carburant (Flotte),Carburant,debit,103573
+2026-07-11,Plein de Carburant (Flotte),Carburant,debit,79707
+2026-07-13,Facture Client - Fret Régional,Ventes,credit,45511
+2026-07-14,Réparation Camion / Achat de Pièces,Entretien,debit,363901
+2026-07-15,Plein de Carburant (Flotte),Carburant,debit,63786
+2026-07-15,Réparation Camion / Achat de Pièces,Entretien,debit,697297
+2026-07-16,Plein de Carburant (Flotte),Carburant,debit,61059
+2026-07-17,Plein de Carburant (Flotte),Carburant,debit,107458
+2026-07-19,Plein de Carburant (Flotte),Carburant,debit,107393

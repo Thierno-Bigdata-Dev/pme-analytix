@@ -87,7 +87,7 @@ async def run_strategic_simulation(
     base_fiscal_compliance = min(len(tax_txs), 4) / 4.0
     
     base_features = np.array([[
-        raw_base_liquidity, 
+        base_liquidity_ratio, 
         base_supplier_payment_regularity, 
         base_ca_growth_norm, 
         base_client_diversification, 
@@ -176,7 +176,7 @@ async def run_strategic_simulation(
     sim_ca_growth_norm = (min(max(sim_ca_growth, -1.0), 1.0) + 1.0) / 2.0
     
     sim_features = np.array([[
-        raw_sim_liquidity,
+        sim_liquidity_ratio,
         base_supplier_payment_regularity,
         sim_ca_growth_norm,
         base_client_diversification,
