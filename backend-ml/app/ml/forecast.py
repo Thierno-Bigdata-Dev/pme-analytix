@@ -3,8 +3,11 @@ import pandas as pd
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 from prophet import Prophet
-from datetime import datetime
 from app.database import redis_client
+
+# Pre-computed constant: Z-score scale factor 80% CI from 95% CI
+_CI_SCALE_FACTOR = 1.282 / 1.960
+
 
 async def predict_treasury(db: AsyncSession, pme_id: int):
     """
@@ -12,8 +15,10 @@ async def predict_treasury(db: AsyncSession, pme_id: int):
     forecasting model, and returns a 90-day cash flow projection with confidence bounds.
     """
     cache_key = f"pme:forecast:{pme_id}"
+
+    # PERF FIX: redis_client is now async — await the call instead of blocking the event loop.
     try:
-        cached_data = redis_client.get(cache_key)
+        cached_data = await redis_client.get(cache_key)
         if cached_data:
             return json.loads(cached_data)
     except Exception as e:
@@ -28,86 +33,87 @@ async def predict_treasury(db: AsyncSession, pme_id: int):
             "ORDER BY date ASC"
         ))
     else:
-        result = await db.execute(text("SELECT date, type, montant FROM core_transaction ORDER BY date ASC"))
+        result = await db.execute(text(
+            "SELECT date, type, montant FROM core_transaction ORDER BY date ASC"
+        ))
     rows = result.all()
-    
+
     if not rows or len(rows) < 10:
         return {
             "status": "insufficient_data",
             "message": "Historique de transactions insuffisant pour entraîner le modèle prédictif (minimum 10 transactions requises)",
             "forecast": []
         }
-        
-    # 2. Structure data into pandas DataFrame
-    data = []
-    for r in rows:
-        amount = float(r.montant) if r.type == 'credit' else -float(r.montant)
-        data.append({"date": r.date, "amount": amount})
-        
-    df = pd.DataFrame(data)
-    
-    # 3. Calculate running daily balance
-    # Group by date to aggregate multiple transactions on the same day
-    df_daily = df.groupby('date')['amount'].sum().reset_index()
-    df_daily = df_daily.sort_values('date')
-    
-    # Cumulative sum to calculate daily treasury level
-    df_daily['balance'] = df_daily['amount'].cumsum()
-    
-    # Format columns specifically for Prophet: 'ds' (datestamp) and 'y' (target variable)
-    df_prophet = df_daily.rename(columns={'date': 'ds', 'balance': 'y'})
-    df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
-    
-    # Current cash balance
+
+    # 2. Build DataFrame with vectorised sign application.
+    # PERF FIX: list-comprehension is significantly faster than a Python for-loop
+    # with repeated dict creation and list.append() calls (avoids repeated
+    # attribute lookups and function call overhead per row).
+    amounts = [float(r.montant) if r.type == 'credit' else -float(r.montant) for r in rows]
+    dates   = [r.date for r in rows]
+
+    df = pd.DataFrame({"date": dates, "amount": amounts})
+
+    # 3. Running daily balance
+    df_daily = df.groupby('date', sort=True)['amount'].sum()
+    df_prophet = pd.DataFrame({
+        'ds': pd.to_datetime(df_daily.index),
+        'y':  df_daily.cumsum().values
+    })
+
     current_balance = float(df_prophet['y'].iloc[-1])
-    
-    # 4. Train Prophet model
+
+    # 4. Fit Prophet
     model = Prophet(
         daily_seasonality=False,
         weekly_seasonality=True,
         yearly_seasonality=True,
-        interval_width=0.95  # Predict 95% confidence interval
+        interval_width=0.95
     )
-    # Fit the model
-    model.fit(df_prophet[['ds', 'y']])
-    
-    # 5. Make predictions for the next 90 days
-    future = model.make_future_dataframe(periods=90, include_history=False)
+    model.fit(df_prophet)
+
+    # 5. Predict 90 days
+    future   = model.make_future_dataframe(periods=90, include_history=False)
     forecast = model.predict(future)
-    
-    # 6. Format the forecast series into clean JSON-serializable structures
-    forecast_results = []
-    for idx, row in forecast.iterrows():
-        yhat = float(row['yhat'])
-        yhat_lower_95 = float(row['yhat_lower'])
-        yhat_upper_95 = float(row['yhat_upper'])
-        
-        # Scale 95% confidence interval width to 80% width using Z-score ratio: 1.282 / 1.960
-        scale_factor = 1.282 / 1.960
-        half_width_95 = (yhat_upper_95 - yhat_lower_95) / 2.0
-        half_width_80 = half_width_95 * scale_factor
-        
-        yhat_lower_80 = yhat - half_width_80
-        yhat_upper_80 = yhat + half_width_80
-        
-        forecast_results.append({
-            "date": row['ds'].strftime("%Y-%m-%d"),
-            "value": round(yhat, 2),
-            "lower_80": round(yhat_lower_80, 2),
-            "upper_80": round(yhat_upper_80, 2),
-            "lower_95": round(yhat_lower_95, 2),
-            "upper_95": round(yhat_upper_95, 2),
-        })
-        
+
+    # 6. PERF FIX: replace iterrows() (very slow — O(n) Python overhead per row)
+    # with direct vectorised column access. Builds the entire result with
+    # NumPy array operations; only a single pass through Python for the final
+    # dict assembly, which is unavoidable for JSON serialisation.
+    yhat       = forecast['yhat'].to_numpy()
+    yhat_lower = forecast['yhat_lower'].to_numpy()
+    yhat_upper = forecast['yhat_upper'].to_numpy()
+    ds         = forecast['ds']
+
+    half_width_95 = (yhat_upper - yhat_lower) / 2.0
+    half_width_80 = half_width_95 * _CI_SCALE_FACTOR
+    lower_80 = yhat - half_width_80
+    upper_80 = yhat + half_width_80
+
+    forecast_results = [
+        {
+            "date":      ds.iat[i].strftime("%Y-%m-%d"),
+            "value":     round(float(yhat[i]),       2),
+            "lower_80":  round(float(lower_80[i]),   2),
+            "upper_80":  round(float(upper_80[i]),   2),
+            "lower_95":  round(float(yhat_lower[i]), 2),
+            "upper_95":  round(float(yhat_upper[i]), 2),
+        }
+        for i in range(len(yhat))
+    ]
+
     res = {
-        "status": "success",
-        "pme_id": pme_id,
+        "status":        "success",
+        "pme_id":        pme_id,
         "current_balance": round(current_balance, 2),
         "forecast_days": 90,
-        "forecast": forecast_results
+        "forecast":      forecast_results,
     }
+
+    # PERF FIX: async Redis write — does not block event loop.
     try:
-        redis_client.setex(cache_key, 300, json.dumps(res))
+        await redis_client.setex(cache_key, 300, json.dumps(res))
     except Exception as e:
         print(f"Redis set error: {e}")
+
     return res

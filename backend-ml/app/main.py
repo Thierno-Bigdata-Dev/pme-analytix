@@ -47,7 +47,7 @@ async def health_check(db: AsyncSession = Depends(get_db_session)):
     redis_ok = False
     try:
         from app.database import redis_client
-        redis_client.ping()
+        await redis_client.ping()
         redis_ok = True
     except Exception as e:
         print(f"Healthcheck Redis Error: {e}")
