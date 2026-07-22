@@ -112,7 +112,7 @@ def extract_financial_features(df: pd.DataFrame) -> dict:
     # Guard: avoid division by zero when a PME has no recorded expenses yet
     avg_monthly_expenses = debits / 12.0 if debits > 0 else 100_000.0
 
-    raw_liquidity_ratio = current_cash / avg_monthly_expenses
+    raw_liquidity_ratio = (current_cash / avg_monthly_expenses) if current_cash > 0 else 0.0
     liquidity_ratio     = min(max(raw_liquidity_ratio, 0.0), 5.0) / 5.0
 
     # Supplier payment regularity — uses pre-compiled pattern

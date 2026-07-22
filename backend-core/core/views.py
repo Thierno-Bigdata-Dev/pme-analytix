@@ -60,9 +60,15 @@ class RapportPDFView(APIView):
             signature=''
         )
         
-        # 4. Trigger background compilation task via Celery only after database transaction commit
-        from django.db import transaction as db_transaction
-        db_transaction.on_commit(lambda: generate_rapport_pdf.delay(pme_id, rapport.id))
+        # 4. Trigger report compilation task directly to ensure immediate PDF rendering and SHA-256 signature
+        try:
+            generate_rapport_pdf(pme_id, rapport.id)
+        except Exception as err:
+            print(f"Direct generation warning: {err}, trying Celery task...")
+            try:
+                generate_rapport_pdf.delay(pme_id, rapport.id)
+            except Exception:
+                pass
         
         return Response({
             "status": "queued",

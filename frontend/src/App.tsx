@@ -2562,18 +2562,26 @@ export default function App() {
               <div className="glass-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <span style={{ fontSize: '8.5pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.5px' }}>Indice de Liquidité (SYSCOHADA)</span>
-                  <h2 style={{ fontSize: '20pt', fontWeight: 700, margin: '8px 0 0 0', color: '#10b981' }}>
+                  <h2 style={{ fontSize: '20pt', fontWeight: 700, margin: '8px 0 0 0', color: computedTreasuryBalance > 0 ? '#10b981' : '#ef4444' }}>
                     {loadingScore ? <Skeleton variant="text" width="60px" height="32px" /> : (
-                      score?.features?.liquidity_ratio !== undefined ? (
-                        <>{Math.min(score.features.liquidity_ratio, 5.0).toFixed(2)} <span style={{ fontSize: '12pt', fontWeight: 500 }}>x</span></>
-                      ) : 'N/A'
+                      computedTreasuryBalance <= 0 ? (
+                        <>0.00 <span style={{ fontSize: '12pt', fontWeight: 500 }}>x</span></>
+                      ) : (
+                        score?.features?.liquidity_ratio !== undefined ? (
+                          <>{Math.min(score.features.liquidity_ratio, 5.0).toFixed(2)} <span style={{ fontSize: '12pt', fontWeight: 500 }}>x</span></>
+                        ) : '0.00 x'
+                      )
                     )}
                   </h2>
                   <span style={{ fontSize: '8pt', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>
-                    Cible recommandée : &gt; 1.0x {score?.features?.liquidity_ratio ? `(${score.features.liquidity_ratio.toFixed(1)} mois de couverture)` : ''}
+                    {computedTreasuryBalance <= 0 ? (
+                      <span style={{ color: '#ef4444', fontWeight: 600 }}>Déficit de trésorerie (0.0 mois de couverture)</span>
+                    ) : (
+                      <>Cible recommandée : &gt; 1.0x {score?.features?.liquidity_ratio ? `(${score.features.liquidity_ratio.toFixed(1)} mois de couverture)` : ''}</>
+                    )}
                   </span>
                 </div>
-                <div style={{ width: '48px', height: '48px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#10b981' }}>
+                <div style={{ width: '48px', height: '48px', background: computedTreasuryBalance > 0 ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: computedTreasuryBalance > 0 ? '#10b981' : '#ef4444' }}>
                   <Activity size={24} style={{ margin: 'auto' }} />
                 </div>
               </div>
