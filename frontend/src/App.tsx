@@ -1171,6 +1171,18 @@ export default function App() {
     }
   };
 
+  useEffect(() => {
+    const handleAuthChanged = () => {
+      const token = localStorage.getItem('pme_token');
+      if (!token) {
+        setViewMode('landing');
+        setSelectedPmeId(null);
+      }
+    };
+    window.addEventListener('auth-changed', handleAuthChanged);
+    return () => window.removeEventListener('auth-changed', handleAuthChanged);
+  }, []);
+
   const loadReportsList = async () => {
     setLoadingReports(true);
     try {
@@ -1183,7 +1195,9 @@ export default function App() {
         startReportsPolling();
       }
     } catch (err: any) {
-      console.error("Reports Error:", err);
+      if (!err.message?.includes("Informations d'authentification")) {
+        console.error("Reports Error:", err);
+      }
     } finally {
       setLoadingReports(false);
     }
