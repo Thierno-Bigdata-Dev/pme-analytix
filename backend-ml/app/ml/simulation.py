@@ -161,8 +161,8 @@ async def run_strategic_simulation(
     sim_final_cash         = sim_current_balance + float(cumulative_adjust[-1])
     sim_credits            = df_sim[df_sim['type'] == 'credit']['amount'].sum()
     sim_debits             = df_sim[df_sim['type'] == 'debit']['amount'].sum()
-    sim_avg_monthly_exp    = (sim_debits / 12.0) + (recruitment_cost / 12.0)
-    sim_liquidity_ratio    = min(max(sim_final_cash / sim_avg_monthly_exp, 0.0), 5.0) / 5.0
+    sim_avg_monthly_exp    = (sim_debits / 12.0) + (recruitment_cost / 12.0) + (marketing_budget / 12.0)
+    sim_liquidity_ratio    = min(max(sim_final_cash / (sim_avg_monthly_exp if sim_avg_monthly_exp > 0 else 1.0), 0.0), 5.0) / 5.0
 
     cutoff_date        = df_sim['date'].max() - timedelta(days=180)
     sim_credits_recent = df_sim[(df_sim['type'] == 'credit') & (df_sim['date'] >= cutoff_date)]['amount'].sum()
@@ -172,13 +172,20 @@ async def run_strategic_simulation(
     sim_ca_growth      = (sim_credits_recent - sim_credits_older) / sim_credits_older if sim_credits_older > 0 else 0.0
     sim_ca_growth_norm = (min(max(sim_ca_growth, -1.0), 1.0) + 1.0) / 2.0
 
+    # Strategic Levers feature adjustments:
+    # 1. New markets expansion improves client portfolio diversification (+0.25)
+    sim_client_div = min(1.0, max(0.0, base_feats["client_diversification"] + (0.25 if new_markets else 0.0)))
+    
+    # 2. Liquidity level impacts supplier payment regularity
+    sim_supplier_reg = min(1.0, max(0.0, base_feats["supplier_payment_regularity"] + (0.10 if sim_liquidity_ratio >= 0.5 else (-0.10 if sim_liquidity_ratio < 0.2 else 0.0))))
+
     sim_feature_vector = np.array([[
         sim_liquidity_ratio,
-        base_feats["supplier_payment_regularity"],   # unchanged by simulation
+        sim_supplier_reg,
         sim_ca_growth_norm,
-        base_feats["client_diversification"],        # unchanged by simulation
-        base_feats["seniority_stability"],           # unchanged by simulation
-        base_feats["fiscal_compliance"],             # unchanged by simulation
+        sim_client_div,
+        base_feats["seniority_stability"],
+        base_feats["fiscal_compliance"],
     ]])
 
     # ── 6. Score both base and simulated with shared XGBoost model ───────────

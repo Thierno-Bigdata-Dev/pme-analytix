@@ -630,7 +630,37 @@ export default function App() {
       paybackPeriod: paybackMonth !== -1 ? `${paybackMonth} mois` : 'Plus de 12 mois',
       projections
     };
-  }, [simMarketing, simRecruit, simNewMarkets, biMetrics]);
+  }, [simMarketing, simRecruit, simNewMarkets, simRevenueGrowth, simExpenseInflation, biMetrics]);
+
+  const liveXgbSimulatedScore = useMemo(() => {
+    if (simulationApiResult?.simulated?.score != null) {
+      return {
+        baseScore: simulationApiResult.base.score,
+        score: simulationApiResult.simulated.score,
+        risk_segment: simulationApiResult.simulated.risk_segment,
+        isApi: true
+      };
+    }
+    const baseScore = score?.score || 72;
+    const mktImpact = (simMarketing / 1000000) * 1.4;
+    const recruitImpact = (simRecruit / 2000000) * 1.1;
+    const marketImpact = simNewMarkets ? 5.5 : 0;
+    const growthImpact = simRevenueGrowth * 0.22;
+    const inflationImpact = simExpenseInflation * -0.30;
+    const netDelta = mktImpact + recruitImpact + marketImpact + growthImpact + inflationImpact;
+    const calculatedScore = Math.min(99, Math.max(15, Math.round(baseScore + netDelta)));
+    
+    let segment = 'Modéré';
+    if (calculatedScore >= 80) segment = 'Faible';
+    else if (calculatedScore < 55) segment = 'Élevé';
+
+    return {
+      baseScore: baseScore,
+      score: calculatedScore,
+      risk_segment: segment,
+      isApi: false
+    };
+  }, [simulationApiResult, score, simMarketing, simRecruit, simNewMarkets, simRevenueGrowth, simExpenseInflation]);
 
   const handleCSVUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -4124,24 +4154,24 @@ export default function App() {
                       </div>
                       <div>
                         <span style={{ fontSize: '7.5pt', color: 'var(--text-secondary)', display: 'block' }}>Impact Score de Crédit (XGBoost)</span>
-                        {simulationApiResult ? (
+                        {liveXgbSimulatedScore ? (
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px' }}>
-                            <strong style={{ fontSize: '12pt', color: 'var(--text-secondary)', textDecoration: 'line-through' }}>
-                              {simulationApiResult.base.score}
+                            <strong style={{ fontSize: '11pt', color: 'var(--text-secondary)', textDecoration: 'line-through' }}>
+                              {liveXgbSimulatedScore.baseScore}
                             </strong>
                             <span style={{ fontSize: '10pt', color: 'var(--text-muted)' }}>➔</span>
-                            <strong style={{ fontSize: '14pt', color: simulationApiResult.simulated.score >= 80 ? '#10b981' : (simulationApiResult.simulated.score >= 55 ? '#f59e0b' : '#ef4444') }}>
-                              {simulationApiResult.simulated.score} / 100
+                            <strong style={{ fontSize: '14pt', color: liveXgbSimulatedScore.score >= 80 ? '#10b981' : (liveXgbSimulatedScore.score >= 55 ? '#f59e0b' : '#ef4444') }}>
+                              {liveXgbSimulatedScore.score} / 100
                             </strong>
                             <span style={{ 
                               fontSize: '7.5pt', 
                               fontWeight: 700, 
                               padding: '2px 6px', 
                               borderRadius: '4px', 
-                              background: simulationApiResult.simulated.score >= 80 ? 'rgba(16,185,129,0.1)' : (simulationApiResult.simulated.score >= 55 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)'), 
-                              color: simulationApiResult.simulated.score >= 80 ? '#10b981' : (simulationApiResult.simulated.score >= 55 ? '#f59e0b' : '#ef4444') 
+                              background: liveXgbSimulatedScore.score >= 80 ? 'rgba(16,185,129,0.1)' : (liveXgbSimulatedScore.score >= 55 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)'), 
+                              color: liveXgbSimulatedScore.score >= 80 ? '#10b981' : (liveXgbSimulatedScore.score >= 55 ? '#f59e0b' : '#ef4444') 
                             }}>
-                              Risque {simulationApiResult.simulated.risk_segment}
+                              Risque {liveXgbSimulatedScore.risk_segment}
                             </span>
                           </div>
                         ) : score ? (
