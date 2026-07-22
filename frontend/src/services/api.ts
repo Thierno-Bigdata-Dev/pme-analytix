@@ -11,10 +11,19 @@ async function apiFetch(path: string, options: RequestInit = {}) {
         ...(options.headers as Record<string, string> || {})
     };
     
-    const response = await fetch(`${BASE_API_URL}${path}`, {
+    let response = await fetch(`${BASE_API_URL}${path}`, {
         ...options,
         headers
     });
+    
+    // Auto-retry once on temporary Gateway/Restart errors (502, 503, 504)
+    if ([502, 503, 504].includes(response.status)) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        response = await fetch(`${BASE_API_URL}${path}`, {
+            ...options,
+            headers
+        });
+    }
     
     if (response.status === 401) {
         // Token expired or invalid, log out
