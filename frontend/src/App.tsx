@@ -542,7 +542,7 @@ export default function App() {
   }, [factures, transactions, biMetrics.caAnnuel]);
 
   const cashRunway = useMemo(() => {
-    if (!transactions || transactions.length === 0 || currentBalance <= 0) return null;
+    if (!transactions || transactions.length === 0) return null;
     
     // Filtre pour garder uniquement les dépenses
     const expenses = transactions.filter(t => 
@@ -568,11 +568,11 @@ export default function App() {
     
     if (monthlyBurnRate <= 0) return null;
     
-    const runway = currentBalance / monthlyBurnRate;
+    const runway = currentBalance > 0 ? currentBalance / monthlyBurnRate : 0;
     return {
       months: runway.toFixed(1),
       burnRate: Math.round(monthlyBurnRate),
-      isCritical: runway < 3
+      isCritical: runway < 3 || currentBalance <= 0
     };
   }, [transactions, currentBalance]);
 
@@ -2493,7 +2493,7 @@ export default function App() {
                 <div>
                   <span style={{ fontSize: '8.5pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.5px' }}>Indice de Liquidité (SYSCOHADA)</span>
                   <h2 style={{ fontSize: '20pt', fontWeight: 700, margin: '8px 0 0 0', color: '#10b981' }}>
-                    {loadingScore ? <Skeleton variant="text" width="60px" height="32px" /> : (score?.features?.liquidity_ratio ? score.features.liquidity_ratio.toFixed(2) : 'N/A')}
+                    {loadingScore ? <Skeleton variant="text" width="60px" height="32px" /> : (score?.features?.liquidity_ratio !== undefined ? score.features.liquidity_ratio.toFixed(2) : 'N/A')}
                   </h2>
                   <span style={{ fontSize: '8pt', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>Cible recommandée : &gt; 1.0</span>
                 </div>
