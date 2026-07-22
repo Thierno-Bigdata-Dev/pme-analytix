@@ -3,12 +3,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+import os
 from datetime import datetime
 # pyright: reportMissingImports=false
 import json
 import csv
 from io import TextIOWrapper
 from django.db import connection
+from django.conf import settings
 
 from .serializers import MyTokenObtainPairSerializer
 from .models import PME, RapportPDF
