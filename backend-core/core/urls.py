@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 from .views import (
     MyTokenObtainPairView, 
     RapportPDFView, 
+    RapportPDFDetailView,
     AbonnementView, 
     WaveWebhookView, 
     simulate_wave_payment, 
@@ -41,6 +42,7 @@ urlpatterns = [
     path('api/core/auth/register/', RegisterView.as_view(), name='auth_register'),
     path('api/core/pmes/', PMEListView.as_view(), name='pmes_list'),
     path('api/core/pme/<int:pme_id>/rapport/', RapportPDFView.as_view(), name='pme_rapport'),
+    path('api/core/pme/<int:pme_id>/rapport/<int:rapport_id>/', RapportPDFDetailView.as_view(), name='pme_rapport_detail'),
     path('api/core/pme/<int:pme_id>/abonnement/', AbonnementView.as_view(), name='pme_abonnement'),
     path('api/core/pme/<int:pme_id>/import/', CSVImportView.as_view(), name='pme_import'),
     path('api/core/pme/<int:pme_id>/import/<int:transaction_id>/', TransactionDetailView.as_view(), name='pme_transaction_detail'),

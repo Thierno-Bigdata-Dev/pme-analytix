@@ -18,6 +18,7 @@ import {
   Mail, 
   Download, 
   RefreshCw, 
+  Trash2,
   Calendar,
   Activity,
   MessageSquare,
@@ -1028,6 +1029,18 @@ export default function App() {
     } catch (err: any) {
       console.error("Resolve Alert Error:", err);
       showToast("Erreur lors de la mise à jour de l'alerte.", "error");
+    }
+  };
+
+  const handleDeleteReport = async (reportId: number) => {
+    const currentPmeId = selectedPmeId || api.getPmeId() || 1;
+    try {
+      await api.deleteReport(currentPmeId, reportId);
+      showToast("Rapport supprimé avec succès.", "success");
+      loadReportsList();
+    } catch (err: any) {
+      console.error("Delete Report Error:", err);
+      showToast("Erreur lors de la suppression du rapport : " + err.message, "error");
     }
   };
 
@@ -3633,7 +3646,7 @@ export default function App() {
                         <span style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '9.5pt' }}>Rapport #{r.id} ({r.date_generation})</span>
                         <span style={{ display: 'block', fontSize: '7.5pt', color: 'var(--text-secondary)', marginTop: '2px', fontFamily: 'monospace', maxWidth: '350px', textOverflow: 'ellipsis', overflow: 'hidden' }}>Signature SHA-256 : {r.signature || 'Aucune signature'}</span>
                       </div>
-                      <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         {r.statut === 'termine' ? (
                           <a 
                             href={`${BASE_API_URL}${r.url}`} 
@@ -3651,6 +3664,13 @@ export default function App() {
                             <RefreshCw className="spin-anim" size={14} />
                           </div>
                         )}
+                        <button
+                          onClick={() => handleDeleteReport(r.id)}
+                          style={{ width: '32px', height: '32px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ef4444', cursor: 'pointer' }}
+                          title="Supprimer ce rapport certifié"
+                        >
+                          <Trash2 size={14} />
+                        </button>
                       </div>
                     </div>
                   ))

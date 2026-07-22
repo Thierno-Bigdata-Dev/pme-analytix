@@ -104,6 +104,12 @@ export const api = {
             method: 'POST'
         });
     },
+
+    deleteReport(pmeId: number, reportId: number) {
+        return apiFetch(`/api/core/pme/${pmeId}/rapport/${reportId}/`, {
+            method: 'DELETE'
+        });
+    },
     
     getSubscription(pmeId: number) {
         return apiFetch(`/api/core/pme/${pmeId}/abonnement/`);

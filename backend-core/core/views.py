@@ -92,6 +92,52 @@ class RapportPDFView(APIView):
         return Response(results, status=status.HTTP_200_OK)
 
 
+class RapportPDFDetailView(APIView):
+    """
+    Endpoint to delete a specific certified PDF report.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pme_id, rapport_id):
+        user = request.user
+        if user.role != 'operateur' and user.pme_id != pme_id:
+            return Response(
+                {"detail": "Vous n'êtes pas autorisé à accéder aux données de cette PME"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+            
+        try:
+            pme = PME.objects.get(id=pme_id)
+        except PME.DoesNotExist:
+            return Response(
+                {"detail": "PME non trouvée"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        from core.utils import tenant_schema_context
+        with tenant_schema_context(pme.nom_schema):
+            try:
+                rapport = RapportPDF.objects.get(id=rapport_id)
+                if rapport.url_s3:
+                    try:
+                        filename = os.path.basename(rapport.url_s3)
+                        file_path = os.path.join(settings.MEDIA_ROOT, 'rapports', filename)
+                        if os.path.exists(file_path):
+                            os.remove(file_path)
+                    except Exception as f_err:
+                        print(f"Warning: failed to delete report file: {f_err}")
+                rapport.delete()
+                return Response({
+                    "status": "success",
+                    "message": "Rapport supprimé avec succès."
+                }, status=status.HTTP_200_OK)
+            except RapportPDF.DoesNotExist:
+                return Response(
+                    {"detail": "Rapport non trouvé"},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+
+
 class AbonnementView(APIView):
     """
     Endpoint to retrieve and request plan upgrades.
