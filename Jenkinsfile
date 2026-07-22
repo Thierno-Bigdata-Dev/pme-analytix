@@ -41,9 +41,8 @@ pipeline {
 
         stage('Déploiement local') {
             steps {
-                // Arrête et relance les conteneurs du projet 'pme' pour éviter les conflits de noms de conteneurs
-                sh 'docker compose -p pme down'
-                sh 'docker compose -p pme up -d'
+                // Relance et met à jour uniquement les conteneurs modifiés sans couper la pile
+                sh 'docker compose -p pme up -d --no-deps'
             }
         }
     }
