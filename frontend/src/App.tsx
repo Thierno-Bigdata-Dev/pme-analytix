@@ -2555,9 +2555,15 @@ export default function App() {
                 <div>
                   <span style={{ fontSize: '8.5pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.5px' }}>Indice de Liquidité (SYSCOHADA)</span>
                   <h2 style={{ fontSize: '20pt', fontWeight: 700, margin: '8px 0 0 0', color: '#10b981' }}>
-                    {loadingScore ? <Skeleton variant="text" width="60px" height="32px" /> : (score?.features?.liquidity_ratio !== undefined ? score.features.liquidity_ratio.toFixed(2) : 'N/A')}
+                    {loadingScore ? <Skeleton variant="text" width="60px" height="32px" /> : (
+                      score?.features?.liquidity_ratio !== undefined ? (
+                        <>{Math.min(score.features.liquidity_ratio, 5.0).toFixed(2)} <span style={{ fontSize: '12pt', fontWeight: 500 }}>x</span></>
+                      ) : 'N/A'
+                    )}
                   </h2>
-                  <span style={{ fontSize: '8pt', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>Cible recommandée : &gt; 1.0</span>
+                  <span style={{ fontSize: '8pt', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>
+                    Cible recommandée : &gt; 1.0x {score?.features?.liquidity_ratio ? `(${score.features.liquidity_ratio.toFixed(1)} mois de couverture)` : ''}
+                  </span>
                 </div>
                 <div style={{ width: '48px', height: '48px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#10b981' }}>
                   <Activity size={24} style={{ margin: 'auto' }} />
