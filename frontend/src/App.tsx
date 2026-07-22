@@ -2512,7 +2512,15 @@ export default function App() {
                   })}
                 </div>
               </div>
-            ) : null}
+            ) : (
+              <div className="glass-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 18px', background: 'rgba(16, 185, 129, 0.04)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '10px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#10b981', fontSize: '8.5pt', fontWeight: 600 }}>
+                  <CheckCircle size={16} />
+                  <span>Aucune alerte financière critique active — Santé financière optimale (Score {score?.score || 82}/100)</span>
+                </div>
+                <span style={{ fontSize: '7.5pt', color: 'var(--text-muted)' }}>Surveillance IA en continu</span>
+              </div>
+            )}
 
             {/* KPI ROW */}
             <div className="kpi-row" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px' }}>
