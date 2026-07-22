@@ -43,68 +43,52 @@ def generate_rapport_pdf(pme_id, rapport_id):
         avg_monthly_debits = debits / 12.0 if debits > 0 else 1.0
         liquidite_ratio = round(solde_total / avg_monthly_debits, 2) if solde_total > 0 else 0.0
         
-        # Calculate local credit score components
-        # Component 1: Liquidite (25%)
-        liquidity_score = min(max(liquidite_ratio, 0.0), 5.0) / 5.0
+        # Query live ML service to get exact XGBoost credit score & risk segment for THIS specific PME
+        from core.alerts_engine import fetch_ml_service
+        ml_data = fetch_ml_service(f"/api/ml/score/{pme_id}/", pme_id)
         
-        # Component 2: Regulate fournisseurs (20%)
-        supplier_keywords = ['fournisseur', 'achat', 'prestataire', 'matière', 'stock', 'service']
-        supplier_txs = Transaction.objects.filter(type='debit')
-        supplier_count = 0
-        for tx in supplier_txs:
-            cat = str(tx.categorie or '').lower()
-            if any(kw in cat for kw in supplier_keywords):
-                supplier_count += 1
-        supplier_payment_regularity = min(supplier_count, 10) / 10.0
-        
-        # Component 3: Evolution CA (20%)
-        ca_growth_rate = 0.12 # +12% default CA growth
-        ca_growth_norm = (ca_growth_rate + 1.0) / 2.0
-        
-        # Component 4: Diversification clients (15%)
-        client_categories = Transaction.objects.filter(type='credit').values('categorie').distinct().count()
-        client_diversification = min(client_categories, 5) / 5.0
-        
-        # Component 5: Ancienneté & Stabilité (10%)
-        seniority_stability = 0.8
-        
-        # Component 6: Conformité fiscale (10%)
-        tax_keywords = ['taxe', 'impôt', 'dgi', 'tva', 'fiscal']
-        tax_txs = Transaction.objects.filter(type='debit')
-        tax_count = 0
-        for tx in tax_txs:
-            cat = str(tx.categorie or '').lower()
-            if any(kw in cat for kw in tax_keywords):
-                tax_count += 1
-        fiscal_compliance = min(tax_count, 4) / 4.0
-        
-        # Compute final score
-        credit_score = int(
-            liquidity_score * 25 + 
-            supplier_payment_regularity * 20 + 
-            ca_growth_norm * 20 + 
-            client_diversification * 15 + 
-            seniority_stability * 10 + 
-            fiscal_compliance * 10
-        )
+        if ml_data and ml_data.get('status') == 'success':
+            credit_score = int(ml_data.get('score', 70))
+            risk_segment = ml_data.get('risk_segment', 'Moyen')
+        else:
+            # Fallback calculation if ML service is unreachable
+            liquidity_score = min(max(liquidite_ratio, 0.0), 5.0) / 5.0
+            supplier_keywords = ['fournisseur', 'achat', 'prestataire', 'matière', 'stock', 'service']
+            supplier_txs = Transaction.objects.filter(type='debit')
+            supplier_count = sum(1 for tx in supplier_txs if any(kw in str(tx.categorie or '').lower() for kw in supplier_keywords))
+            supplier_payment_regularity = min(supplier_count, 10) / 10.0
+            ca_growth_rate = 0.12
+            ca_growth_norm = (ca_growth_rate + 1.0) / 2.0
+            client_categories = Transaction.objects.filter(type='credit').values('categorie').distinct().count()
+            client_diversification = min(client_categories, 5) / 5.0
+            seniority_stability = 0.8
+            tax_keywords = ['taxe', 'impôt', 'dgi', 'tva', 'fiscal']
+            tax_txs = Transaction.objects.filter(type='debit')
+            tax_count = sum(1 for tx in tax_txs if any(kw in str(tx.categorie or '').lower() for kw in tax_keywords))
+            fiscal_compliance = min(tax_count, 4) / 4.0
+            credit_score = int(
+                liquidity_score * 25 + 
+                supplier_payment_regularity * 20 + 
+                ca_growth_norm * 20 + 
+                client_diversification * 15 + 
+                seniority_stability * 10 + 
+                fiscal_compliance * 10
+            )
+            risk_segment = "Faible" if credit_score >= 80 else ("Moyen" if credit_score >= 55 else ("Élevé" if credit_score >= 35 else "Critique"))
         
         # Sector benchmark position
         if credit_score >= 80:
             benchmark = "Top 10% (Excellent)"
             benchmark_text = "Votre PME se positionne dans le Top 10% des entreprises les plus robustes de son secteur dans l'UEMOA."
-            risk_segment = "Faible"
         elif credit_score >= 55:
             benchmark = "Top 40% (Solide)"
             benchmark_text = "Votre PME se positionne dans la moyenne haute (Top 40%) de son secteur d'activité."
-            risk_segment = "Moyen"
         elif credit_score >= 35:
             benchmark = "Moyenne basse"
             benchmark_text = "Votre PME se positionne en dessous du benchmark sectoriel moyen. Des ajustements sont recommandés."
-            risk_segment = "Élevé"
         else:
             benchmark = "Zone à risque"
             benchmark_text = "Votre PME présente des vulnérabilités de trésorerie importantes par rapport au secteur."
-            risk_segment = "Critique"
             
         # Personalized recommendations
         recoms = []

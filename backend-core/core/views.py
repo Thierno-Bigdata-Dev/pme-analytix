@@ -836,10 +836,11 @@ class CSVImportView(APIView):
                     "message": err_summary
                 }, status=status.HTTP_400_BAD_REQUEST if created_count == 0 else status.HTTP_207_MULTI_STATUS)
                 
-            from .tasks import check_and_generate_alerts_task
-            from django.db import transaction as db_transaction
-            db_transaction.on_commit(lambda: check_and_generate_alerts_task.delay(pme_id))
-
+            from .alerts_engine import check_and_generate_alerts
+            try:
+                check_and_generate_alerts(pme_id)
+            except Exception as alert_err:
+                print(f"CSVImportView: alert generation warning: {alert_err}")
 
             return Response({
                 "status": "success",

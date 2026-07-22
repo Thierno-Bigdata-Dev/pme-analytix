@@ -1,0 +1,703 @@
+date,description,categorie,type,montant
+2025-01-01,Règlement Facture - CSE BTP,Ventes BTP,credit,2458338
+2025-01-02,Règlement Facture - CSE BTP,Ventes BTP,credit,1431937
+2025-01-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-01-02,Carburant Flotte Camions TotalEnergies,Carburant,debit,90675
+2025-01-03,Règlement Facture - CBAO Siège,Ventes BTP,credit,2444276
+2025-01-03,Carburant Flotte Camions TotalEnergies,Carburant,debit,100253
+2025-01-05,Règlement Facture - PromoBeton,Ventes BTP,credit,1436607
+2025-01-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1700193
+2025-01-06,Carburant Flotte Camions TotalEnergies,Carburant,debit,128697
+2025-01-07,Règlement Facture - Getran SA,Ventes BTP,credit,3415076
+2025-01-07,Carburant Flotte Camions TotalEnergies,Carburant,debit,86839
+2025-01-08,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3682834
+2025-01-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,98151
+2025-01-09,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4011572
+2025-01-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,117177
+2025-01-10,Règlement Facture - PromoBeton,Ventes BTP,credit,4408462
+2025-01-12,Règlement Facture - PromoBeton,Ventes BTP,credit,3539813
+2025-01-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2544468
+2025-01-14,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2221045
+2025-01-15,Règlement Facture - CSE BTP,Ventes BTP,credit,3126574
+2025-01-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,681474
+2025-01-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,75158
+2025-01-16,Règlement Facture - CSE BTP,Ventes BTP,credit,2410061
+2025-01-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,60863
+2025-01-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2246064
+2025-01-21,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2009074
+2025-01-22,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3260917
+2025-01-22,Carburant Flotte Camions TotalEnergies,Carburant,debit,139475
+2025-01-23,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,4163590
+2025-01-23,Carburant Flotte Camions TotalEnergies,Carburant,debit,135731
+2025-01-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,104839
+2025-01-25,Règlement Facture - Getran SA,Ventes BTP,credit,3584312
+2025-01-26,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1437411
+2025-01-27,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2714507
+2025-01-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1437310
+2025-01-27,Carburant Flotte Camions TotalEnergies,Carburant,debit,91097
+2025-01-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-01-28,Carburant Flotte Camions TotalEnergies,Carburant,debit,104502
+2025-01-29,Règlement Facture - CSE BTP,Ventes BTP,credit,2950533
+2025-01-30,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,4203067
+2025-01-30,Carburant Flotte Camions TotalEnergies,Carburant,debit,99717
+2025-01-31,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,3805931
+2025-01-31,Carburant Flotte Camions TotalEnergies,Carburant,debit,80743
+2025-02-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-02-03,Règlement Facture - CSE BTP,Ventes BTP,credit,3318695
+2025-02-04,Règlement Facture - PromoBeton,Ventes BTP,credit,3367475
+2025-02-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1505783
+2025-02-05,Carburant Flotte Camions TotalEnergies,Carburant,debit,64473
+2025-02-06,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4005066
+2025-02-07,Carburant Flotte Camions TotalEnergies,Carburant,debit,103882
+2025-02-09,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2829417
+2025-02-10,Règlement Facture - CBAO Siège,Ventes BTP,credit,2178775
+2025-02-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,106838
+2025-02-11,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4081010
+2025-02-12,Règlement Facture - PromoBeton,Ventes BTP,credit,3173945
+2025-02-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2236786
+2025-02-13,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4128232
+2025-02-14,Carburant Flotte Camions TotalEnergies,Carburant,debit,73810
+2025-02-16,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1282183
+2025-02-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,96137
+2025-02-18,Règlement Facture - CBAO Siège,Ventes BTP,credit,3286134
+2025-02-18,Carburant Flotte Camions TotalEnergies,Carburant,debit,71239
+2025-02-19,Règlement Facture - CBAO Siège,Ventes BTP,credit,2446119
+2025-02-19,Carburant Flotte Camions TotalEnergies,Carburant,debit,92364
+2025-02-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1378168
+2025-02-20,Carburant Flotte Camions TotalEnergies,Carburant,debit,134133
+2025-02-21,Règlement Facture - Getran SA,Ventes BTP,credit,2197849
+2025-02-21,Carburant Flotte Camions TotalEnergies,Carburant,debit,80833
+2025-02-22,Règlement Facture - Getran SA,Ventes BTP,credit,894231
+2025-02-24,Règlement Facture - PromoBeton,Ventes BTP,credit,4097327
+2025-02-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,124109
+2025-02-25,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3619223
+2025-02-26,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,4112859
+2025-02-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,118216
+2025-02-27,Règlement Facture - Getran SA,Ventes BTP,credit,1288986
+2025-02-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2197535
+2025-02-27,Carburant Flotte Camions TotalEnergies,Carburant,debit,73399
+2025-02-28,Règlement Facture - PromoBeton,Ventes BTP,credit,1360120
+2025-02-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-03-01,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4170330
+2025-03-02,Règlement Facture - CSE BTP,Ventes BTP,credit,1465821
+2025-03-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-03-03,Règlement Facture - Getran SA,Ventes BTP,credit,3952689
+2025-03-04,Règlement Facture - CBAO Siège,Ventes BTP,credit,2987226
+2025-03-05,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,996519
+2025-03-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1992217
+2025-03-06,Règlement Facture - CBAO Siège,Ventes BTP,credit,2383462
+2025-03-07,Règlement Facture - CSE BTP,Ventes BTP,credit,1637819
+2025-03-10,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3989805
+2025-03-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,73755
+2025-03-11,Règlement Facture - PromoBeton,Ventes BTP,credit,1286811
+2025-03-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1421692
+2025-03-12,Carburant Flotte Camions TotalEnergies,Carburant,debit,80841
+2025-03-13,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2556483
+2025-03-13,Carburant Flotte Camions TotalEnergies,Carburant,debit,98235
+2025-03-14,Règlement Facture - Getran SA,Ventes BTP,credit,4320758
+2025-03-14,Carburant Flotte Camions TotalEnergies,Carburant,debit,114984
+2025-03-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,546214
+2025-03-16,Règlement Facture - PromoBeton,Ventes BTP,credit,3035452
+2025-03-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,67043
+2025-03-18,Règlement Facture - Getran SA,Ventes BTP,credit,1556271
+2025-03-19,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1315289
+2025-03-20,Règlement Facture - PromoBeton,Ventes BTP,credit,3709759
+2025-03-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2527909
+2025-03-20,Carburant Flotte Camions TotalEnergies,Carburant,debit,129762
+2025-03-21,Carburant Flotte Camions TotalEnergies,Carburant,debit,103094
+2025-03-24,Règlement Facture - PromoBeton,Ventes BTP,credit,3631481
+2025-03-25,Règlement Facture - Getran SA,Ventes BTP,credit,3347207
+2025-03-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1322060
+2025-03-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-03-31,Règlement Facture - Getran SA,Ventes BTP,credit,1191759
+2025-03-31,Carburant Flotte Camions TotalEnergies,Carburant,debit,66428
+2025-04-01,Règlement Facture - PromoBeton,Ventes BTP,credit,2081783
+2025-04-02,Règlement Facture - PromoBeton,Ventes BTP,credit,2776769
+2025-04-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-04-02,Carburant Flotte Camions TotalEnergies,Carburant,debit,106155
+2025-04-04,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2241501
+2025-04-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1261413
+2025-04-07,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2753559
+2025-04-07,Carburant Flotte Camions TotalEnergies,Carburant,debit,60569
+2025-04-08,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2674044
+2025-04-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,73789
+2025-04-09,Règlement Facture - PromoBeton,Ventes BTP,credit,1103097
+2025-04-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,127884
+2025-04-10,Règlement Facture - Getran SA,Ventes BTP,credit,4257770
+2025-04-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,126094
+2025-04-11,Règlement Facture - Getran SA,Ventes BTP,credit,2412979
+2025-04-12,Règlement Facture - PromoBeton,Ventes BTP,credit,1452247
+2025-04-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2318326
+2025-04-14,Règlement Facture - Getran SA,Ventes BTP,credit,3922912
+2025-04-14,Carburant Flotte Camions TotalEnergies,Carburant,debit,110211
+2025-04-15,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1869607
+2025-04-16,Règlement Facture - Getran SA,Ventes BTP,credit,3038654
+2025-04-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,111455
+2025-04-18,Règlement Facture - Getran SA,Ventes BTP,credit,3996870
+2025-04-18,Carburant Flotte Camions TotalEnergies,Carburant,debit,94879
+2025-04-20,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2129857
+2025-04-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2670589
+2025-04-21,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1033515
+2025-04-22,Règlement Facture - PromoBeton,Ventes BTP,credit,3179011
+2025-04-23,Règlement Facture - PromoBeton,Ventes BTP,credit,1469367
+2025-04-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,119098
+2025-04-25,Règlement Facture - Getran SA,Ventes BTP,credit,3994353
+2025-04-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1683223
+2025-04-28,Règlement Facture - PromoBeton,Ventes BTP,credit,3617562
+2025-04-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-04-28,Carburant Flotte Camions TotalEnergies,Carburant,debit,121447
+2025-04-29,Carburant Flotte Camions TotalEnergies,Carburant,debit,101872
+2025-04-30,Règlement Facture - Getran SA,Ventes BTP,credit,3396426
+2025-04-30,Carburant Flotte Camions TotalEnergies,Carburant,debit,99617
+2025-05-01,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3095268
+2025-05-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-05-02,Carburant Flotte Camions TotalEnergies,Carburant,debit,111485
+2025-05-03,Règlement Facture - CBAO Siège,Ventes BTP,credit,2845827
+2025-05-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1422693
+2025-05-05,Carburant Flotte Camions TotalEnergies,Carburant,debit,82531
+2025-05-06,Règlement Facture - CSE BTP,Ventes BTP,credit,4089250
+2025-05-06,Carburant Flotte Camions TotalEnergies,Carburant,debit,65445
+2025-05-07,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1125358
+2025-05-07,Carburant Flotte Camions TotalEnergies,Carburant,debit,95485
+2025-05-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,86713
+2025-05-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,137539
+2025-05-12,Règlement Facture - CBAO Siège,Ventes BTP,credit,1040557
+2025-05-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1795645
+2025-05-12,Carburant Flotte Camions TotalEnergies,Carburant,debit,123184
+2025-05-13,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3298009
+2025-05-13,Carburant Flotte Camions TotalEnergies,Carburant,debit,114365
+2025-05-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,455987
+2025-05-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,102453
+2025-05-16,Carburant Flotte Camions TotalEnergies,Carburant,debit,119730
+2025-05-18,Règlement Facture - CBAO Siège,Ventes BTP,credit,4141566
+2025-05-19,Règlement Facture - PromoBeton,Ventes BTP,credit,3963457
+2025-05-19,Carburant Flotte Camions TotalEnergies,Carburant,debit,107713
+2025-05-20,Règlement Facture - CSE BTP,Ventes BTP,credit,3365642
+2025-05-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1975753
+2025-05-21,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,849368
+2025-05-21,Carburant Flotte Camions TotalEnergies,Carburant,debit,62892
+2025-05-22,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4143258
+2025-05-23,Règlement Facture - Getran SA,Ventes BTP,credit,4348071
+2025-05-23,Carburant Flotte Camions TotalEnergies,Carburant,debit,78567
+2025-05-26,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,4370030
+2025-05-27,Règlement Facture - Getran SA,Ventes BTP,credit,1762051
+2025-05-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2356689
+2025-05-27,Carburant Flotte Camions TotalEnergies,Carburant,debit,114179
+2025-05-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-05-30,Règlement Facture - CBAO Siège,Ventes BTP,credit,1405106
+2025-05-30,Carburant Flotte Camions TotalEnergies,Carburant,debit,99438
+2025-05-31,Règlement Facture - CSE BTP,Ventes BTP,credit,2619515
+2025-06-02,Règlement Facture - Getran SA,Ventes BTP,credit,2108004
+2025-06-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-06-02,Carburant Flotte Camions TotalEnergies,Carburant,debit,118633
+2025-06-03,Règlement Facture - Getran SA,Ventes BTP,credit,832826
+2025-06-03,Carburant Flotte Camions TotalEnergies,Carburant,debit,78039
+2025-06-04,Règlement Facture - CSE BTP,Ventes BTP,credit,2362197
+2025-06-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2145126
+2025-06-06,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2974897
+2025-06-06,Carburant Flotte Camions TotalEnergies,Carburant,debit,93877
+2025-06-09,Règlement Facture - CSE BTP,Ventes BTP,credit,3531363
+2025-06-10,Règlement Facture - PromoBeton,Ventes BTP,credit,3584051
+2025-06-11,Règlement Facture - CSE BTP,Ventes BTP,credit,1380577
+2025-06-11,Carburant Flotte Camions TotalEnergies,Carburant,debit,94229
+2025-06-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1226559
+2025-06-12,Carburant Flotte Camions TotalEnergies,Carburant,debit,79270
+2025-06-13,Carburant Flotte Camions TotalEnergies,Carburant,debit,70731
+2025-06-16,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,828427
+2025-06-16,Carburant Flotte Camions TotalEnergies,Carburant,debit,139850
+2025-06-17,Règlement Facture - CBAO Siège,Ventes BTP,credit,1906746
+2025-06-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,105436
+2025-06-18,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2084925
+2025-06-18,Carburant Flotte Camions TotalEnergies,Carburant,debit,67321
+2025-06-20,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1867778
+2025-06-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1622813
+2025-06-23,Carburant Flotte Camions TotalEnergies,Carburant,debit,75748
+2025-06-24,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,3583182
+2025-06-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,137749
+2025-06-25,Règlement Facture - CSE BTP,Ventes BTP,credit,4095126
+2025-06-25,Carburant Flotte Camions TotalEnergies,Carburant,debit,117232
+2025-06-26,Règlement Facture - PromoBeton,Ventes BTP,credit,4379788
+2025-06-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,66905
+2025-06-27,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4459791
+2025-06-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2649579
+2025-06-27,Carburant Flotte Camions TotalEnergies,Carburant,debit,111701
+2025-06-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-06-29,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1522828
+2025-06-30,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2227461
+2025-07-01,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1337786
+2025-07-01,Carburant Flotte Camions TotalEnergies,Carburant,debit,117446
+2025-07-02,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,3087614
+2025-07-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-07-03,Règlement Facture - PromoBeton,Ventes BTP,credit,3471083
+2025-07-04,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3255018
+2025-07-05,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1098055
+2025-07-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1491914
+2025-07-07,Carburant Flotte Camions TotalEnergies,Carburant,debit,92967
+2025-07-08,Règlement Facture - Getran SA,Ventes BTP,credit,2547095
+2025-07-09,Règlement Facture - PromoBeton,Ventes BTP,credit,2248241
+2025-07-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,82620
+2025-07-10,Règlement Facture - CSE BTP,Ventes BTP,credit,2343942
+2025-07-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,96966
+2025-07-11,Règlement Facture - CBAO Siège,Ventes BTP,credit,2323089
+2025-07-11,Carburant Flotte Camions TotalEnergies,Carburant,debit,80165
+2025-07-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2785693
+2025-07-13,Règlement Facture - CSE BTP,Ventes BTP,credit,1602838
+2025-07-15,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1663666
+2025-07-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,674027
+2025-07-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,78504
+2025-07-16,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4387177
+2025-07-17,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2247076
+2025-07-18,Règlement Facture - Getran SA,Ventes BTP,credit,937932
+2025-07-18,Carburant Flotte Camions TotalEnergies,Carburant,debit,80591
+2025-07-19,Règlement Facture - CSE BTP,Ventes BTP,credit,3130576
+2025-07-20,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1520399
+2025-07-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1360159
+2025-07-21,Règlement Facture - PromoBeton,Ventes BTP,credit,3928570
+2025-07-22,Carburant Flotte Camions TotalEnergies,Carburant,debit,108702
+2025-07-23,Carburant Flotte Camions TotalEnergies,Carburant,debit,101998
+2025-07-24,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1339963
+2025-07-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,87550
+2025-07-25,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1597846
+2025-07-25,Carburant Flotte Camions TotalEnergies,Carburant,debit,65328
+2025-07-26,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4365507
+2025-07-27,Règlement Facture - CSE BTP,Ventes BTP,credit,2702234
+2025-07-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1279008
+2025-07-28,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3073935
+2025-07-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-07-28,Carburant Flotte Camions TotalEnergies,Carburant,debit,127603
+2025-07-29,Règlement Facture - CBAO Siège,Ventes BTP,credit,3547038
+2025-07-30,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2432335
+2025-07-30,Carburant Flotte Camions TotalEnergies,Carburant,debit,83552
+2025-07-31,Règlement Facture - CBAO Siège,Ventes BTP,credit,1458075
+2025-08-01,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,838524
+2025-08-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-08-04,Carburant Flotte Camions TotalEnergies,Carburant,debit,107330
+2025-08-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2337214
+2025-08-05,Carburant Flotte Camions TotalEnergies,Carburant,debit,136982
+2025-08-06,Carburant Flotte Camions TotalEnergies,Carburant,debit,120010
+2025-08-07,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,3466709
+2025-08-08,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3247677
+2025-08-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,126567
+2025-08-09,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2455616
+2025-08-11,Règlement Facture - Getran SA,Ventes BTP,credit,952975
+2025-08-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2521566
+2025-08-12,Carburant Flotte Camions TotalEnergies,Carburant,debit,128992
+2025-08-13,Règlement Facture - CBAO Siège,Ventes BTP,credit,2600855
+2025-08-14,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,4146350
+2025-08-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,136615
+2025-08-18,Règlement Facture - CBAO Siège,Ventes BTP,credit,1490137
+2025-08-18,Carburant Flotte Camions TotalEnergies,Carburant,debit,72565
+2025-08-19,Règlement Facture - CSE BTP,Ventes BTP,credit,3263922
+2025-08-20,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2299604
+2025-08-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2525729
+2025-08-21,Carburant Flotte Camions TotalEnergies,Carburant,debit,91415
+2025-08-22,Règlement Facture - Getran SA,Ventes BTP,credit,1606988
+2025-08-23,Règlement Facture - Getran SA,Ventes BTP,credit,1277701
+2025-08-25,Règlement Facture - Getran SA,Ventes BTP,credit,2973128
+2025-08-26,Règlement Facture - PromoBeton,Ventes BTP,credit,1268038
+2025-08-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,95613
+2025-08-27,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3965148
+2025-08-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1813903
+2025-08-27,Carburant Flotte Camions TotalEnergies,Carburant,debit,101395
+2025-08-28,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,908233
+2025-08-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-08-29,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2421794
+2025-08-30,Règlement Facture - CSE BTP,Ventes BTP,credit,3461790
+2025-08-31,Règlement Facture - CSE BTP,Ventes BTP,credit,3167579
+2025-09-01,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1088667
+2025-09-02,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2900440
+2025-09-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-09-03,Carburant Flotte Camions TotalEnergies,Carburant,debit,99804
+2025-09-04,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1213329
+2025-09-05,Règlement Facture - PromoBeton,Ventes BTP,credit,4113141
+2025-09-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1918829
+2025-09-05,Carburant Flotte Camions TotalEnergies,Carburant,debit,75026
+2025-09-08,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4260758
+2025-09-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,119062
+2025-09-09,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2257384
+2025-09-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,108228
+2025-09-11,Carburant Flotte Camions TotalEnergies,Carburant,debit,95060
+2025-09-12,Règlement Facture - CSE BTP,Ventes BTP,credit,3381011
+2025-09-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2421866
+2025-09-15,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,3205914
+2025-09-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,676799
+2025-09-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,97350
+2025-09-16,Règlement Facture - Getran SA,Ventes BTP,credit,1626345
+2025-09-16,Carburant Flotte Camions TotalEnergies,Carburant,debit,90704
+2025-09-17,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2591477
+2025-09-18,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,913927
+2025-09-19,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1562011
+2025-09-19,Carburant Flotte Camions TotalEnergies,Carburant,debit,62297
+2025-09-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2773248
+2025-09-23,Carburant Flotte Camions TotalEnergies,Carburant,debit,134958
+2025-09-24,Règlement Facture - CSE BTP,Ventes BTP,credit,1828658
+2025-09-25,Règlement Facture - Getran SA,Ventes BTP,credit,3352332
+2025-09-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,122006
+2025-09-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1646498
+2025-09-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-09-30,Règlement Facture - CSE BTP,Ventes BTP,credit,1650348
+2025-10-01,Règlement Facture - PromoBeton,Ventes BTP,credit,3553912
+2025-10-01,Carburant Flotte Camions TotalEnergies,Carburant,debit,128829
+2025-10-02,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2380415
+2025-10-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-10-02,Carburant Flotte Camions TotalEnergies,Carburant,debit,88226
+2025-10-03,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1096897
+2025-10-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2478965
+2025-10-06,Règlement Facture - PromoBeton,Ventes BTP,credit,2748498
+2025-10-07,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4248478
+2025-10-07,Carburant Flotte Camions TotalEnergies,Carburant,debit,92055
+2025-10-08,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4116798
+2025-10-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,116858
+2025-10-09,Règlement Facture - PromoBeton,Ventes BTP,credit,4213074
+2025-10-10,Règlement Facture - Getran SA,Ventes BTP,credit,1542678
+2025-10-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,62048
+2025-10-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1977740
+2025-10-13,Règlement Facture - Getran SA,Ventes BTP,credit,3071764
+2025-10-14,Carburant Flotte Camions TotalEnergies,Carburant,debit,90452
+2025-10-15,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1823761
+2025-10-16,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1554001
+2025-10-17,Règlement Facture - PromoBeton,Ventes BTP,credit,1087835
+2025-10-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,122201
+2025-10-20,Règlement Facture - PromoBeton,Ventes BTP,credit,1845456
+2025-10-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1402287
+2025-10-20,Carburant Flotte Camions TotalEnergies,Carburant,debit,62946
+2025-10-21,Carburant Flotte Camions TotalEnergies,Carburant,debit,95857
+2025-10-22,Règlement Facture - Getran SA,Ventes BTP,credit,4286443
+2025-10-22,Carburant Flotte Camions TotalEnergies,Carburant,debit,139862
+2025-10-23,Règlement Facture - CBAO Siège,Ventes BTP,credit,1659345
+2025-10-24,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1763540
+2025-10-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,123690
+2025-10-27,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4031569
+2025-10-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2600301
+2025-10-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-10-28,Carburant Flotte Camions TotalEnergies,Carburant,debit,139849
+2025-10-29,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2004461
+2025-11-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-11-04,Règlement Facture - Getran SA,Ventes BTP,credit,929445
+2025-11-04,Carburant Flotte Camions TotalEnergies,Carburant,debit,113557
+2025-11-05,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4351148
+2025-11-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2226197
+2025-11-06,Règlement Facture - CSE BTP,Ventes BTP,credit,1149052
+2025-11-07,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,980406
+2025-11-10,Règlement Facture - CBAO Siège,Ventes BTP,credit,1506256
+2025-11-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,134149
+2025-11-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2230563
+2025-11-12,Carburant Flotte Camions TotalEnergies,Carburant,debit,92213
+2025-11-13,Règlement Facture - CSE BTP,Ventes BTP,credit,3309347
+2025-11-14,Règlement Facture - Getran SA,Ventes BTP,credit,2150813
+2025-11-15,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1883567
+2025-11-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,649645
+2025-11-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,86877
+2025-11-18,Règlement Facture - PromoBeton,Ventes BTP,credit,2376073
+2025-11-19,Carburant Flotte Camions TotalEnergies,Carburant,debit,71361
+2025-11-20,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3698310
+2025-11-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2460189
+2025-11-20,Carburant Flotte Camions TotalEnergies,Carburant,debit,128098
+2025-11-21,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3591898
+2025-11-21,Carburant Flotte Camions TotalEnergies,Carburant,debit,114007
+2025-11-22,Règlement Facture - PromoBeton,Ventes BTP,credit,3609768
+2025-11-23,Règlement Facture - PromoBeton,Ventes BTP,credit,805417
+2025-11-24,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2932997
+2025-11-25,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,947315
+2025-11-26,Règlement Facture - CBAO Siège,Ventes BTP,credit,2820932
+2025-11-27,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2506593
+2025-11-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2433878
+2025-11-28,Règlement Facture - CSE BTP,Ventes BTP,credit,4451639
+2025-11-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-12-01,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1095533
+2025-12-02,Règlement Facture - CSE BTP,Ventes BTP,credit,2474499
+2025-12-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2025-12-02,Carburant Flotte Camions TotalEnergies,Carburant,debit,89674
+2025-12-03,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2145804
+2025-12-04,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,4038194
+2025-12-04,Carburant Flotte Camions TotalEnergies,Carburant,debit,110713
+2025-12-05,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,957707
+2025-12-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2388732
+2025-12-05,Carburant Flotte Camions TotalEnergies,Carburant,debit,129123
+2025-12-07,Règlement Facture - CBAO Siège,Ventes BTP,credit,2045433
+2025-12-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,62378
+2025-12-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,103780
+2025-12-10,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1017623
+2025-12-11,Règlement Facture - CBAO Siège,Ventes BTP,credit,3241216
+2025-12-11,Carburant Flotte Camions TotalEnergies,Carburant,debit,114456
+2025-12-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2482460
+2025-12-12,Carburant Flotte Camions TotalEnergies,Carburant,debit,102815
+2025-12-15,Règlement Facture - PromoBeton,Ventes BTP,credit,3265531
+2025-12-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,99788
+2025-12-16,Règlement Facture - PromoBeton,Ventes BTP,credit,2996199
+2025-12-16,Carburant Flotte Camions TotalEnergies,Carburant,debit,112307
+2025-12-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,76970
+2025-12-19,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3501595
+2025-12-19,Carburant Flotte Camions TotalEnergies,Carburant,debit,89904
+2025-12-20,Règlement Facture - CSE BTP,Ventes BTP,credit,2846475
+2025-12-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1441435
+2025-12-22,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2828614
+2025-12-22,Carburant Flotte Camions TotalEnergies,Carburant,debit,80901
+2025-12-23,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4479254
+2025-12-24,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,935587
+2025-12-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,113765
+2025-12-25,Règlement Facture - Getran SA,Ventes BTP,credit,2725692
+2025-12-25,Carburant Flotte Camions TotalEnergies,Carburant,debit,71321
+2025-12-26,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,4073773
+2025-12-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,102446
+2025-12-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2279937
+2025-12-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2025-12-29,Règlement Facture - CSE BTP,Ventes BTP,credit,3193245
+2025-12-30,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1662827
+2025-12-31,Carburant Flotte Camions TotalEnergies,Carburant,debit,85876
+2026-01-01,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1342203
+2026-01-01,Carburant Flotte Camions TotalEnergies,Carburant,debit,128450
+2026-01-02,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1411868
+2026-01-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2026-01-02,Carburant Flotte Camions TotalEnergies,Carburant,debit,81087
+2026-01-05,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1584621
+2026-01-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1816285
+2026-01-05,Carburant Flotte Camions TotalEnergies,Carburant,debit,136439
+2026-01-06,Règlement Facture - PromoBeton,Ventes BTP,credit,2393087
+2026-01-06,Carburant Flotte Camions TotalEnergies,Carburant,debit,74678
+2026-01-07,Carburant Flotte Camions TotalEnergies,Carburant,debit,62357
+2026-01-08,Règlement Facture - PromoBeton,Ventes BTP,credit,4045440
+2026-01-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,65473
+2026-01-09,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,940098
+2026-01-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,66003
+2026-01-11,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1903891
+2026-01-12,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3816083
+2026-01-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2178477
+2026-01-12,Carburant Flotte Camions TotalEnergies,Carburant,debit,62551
+2026-01-13,Règlement Facture - Getran SA,Ventes BTP,credit,3752356
+2026-01-14,Règlement Facture - Getran SA,Ventes BTP,credit,2789563
+2026-01-14,Carburant Flotte Camions TotalEnergies,Carburant,debit,136900
+2026-01-15,Règlement Facture - CSE BTP,Ventes BTP,credit,1321608
+2026-01-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,419346
+2026-01-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,115164
+2026-01-16,Règlement Facture - Getran SA,Ventes BTP,credit,834922
+2026-01-16,Carburant Flotte Camions TotalEnergies,Carburant,debit,91944
+2026-01-19,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2585214
+2026-01-19,Carburant Flotte Camions TotalEnergies,Carburant,debit,115364
+2026-01-20,Règlement Facture - CBAO Siège,Ventes BTP,credit,3701219
+2026-01-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2496815
+2026-01-20,Carburant Flotte Camions TotalEnergies,Carburant,debit,128626
+2026-01-21,Règlement Facture - CBAO Siège,Ventes BTP,credit,2894857
+2026-01-22,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1736555
+2026-01-23,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4200248
+2026-01-25,Règlement Facture - PromoBeton,Ventes BTP,credit,2276365
+2026-01-26,Règlement Facture - CSE BTP,Ventes BTP,credit,1200284
+2026-01-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,85214
+2026-01-27,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2156040
+2026-01-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1825202
+2026-01-28,Règlement Facture - CSE BTP,Ventes BTP,credit,1962693
+2026-01-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2026-01-28,Carburant Flotte Camions TotalEnergies,Carburant,debit,119536
+2026-01-29,Règlement Facture - Getran SA,Ventes BTP,credit,3837261
+2026-02-02,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1065870
+2026-02-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2026-02-04,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3343482
+2026-02-05,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3106623
+2026-02-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1521018
+2026-02-06,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1085722
+2026-02-09,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2451440
+2026-02-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,139063
+2026-02-10,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3966887
+2026-02-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,121985
+2026-02-11,Règlement Facture - CBAO Siège,Ventes BTP,credit,4338277
+2026-02-12,Règlement Facture - Getran SA,Ventes BTP,credit,4205417
+2026-02-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1350466
+2026-02-12,Carburant Flotte Camions TotalEnergies,Carburant,debit,105087
+2026-02-13,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4377642
+2026-02-13,Carburant Flotte Camions TotalEnergies,Carburant,debit,106044
+2026-02-16,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2055464
+2026-02-17,Règlement Facture - CSE BTP,Ventes BTP,credit,2913039
+2026-02-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,64604
+2026-02-18,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3097694
+2026-02-18,Carburant Flotte Camions TotalEnergies,Carburant,debit,74391
+2026-02-19,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1447797
+2026-02-19,Carburant Flotte Camions TotalEnergies,Carburant,debit,91132
+2026-02-20,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1059064
+2026-02-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1527643
+2026-02-20,Carburant Flotte Camions TotalEnergies,Carburant,debit,129263
+2026-02-23,Règlement Facture - CSE BTP,Ventes BTP,credit,2484858
+2026-02-24,Règlement Facture - Getran SA,Ventes BTP,credit,1821689
+2026-02-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,95639
+2026-02-25,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4472531
+2026-02-26,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1361054
+2026-02-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,85335
+2026-02-27,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4423538
+2026-02-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1999027
+2026-02-27,Carburant Flotte Camions TotalEnergies,Carburant,debit,104759
+2026-02-28,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1529067
+2026-02-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2026-03-02,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2656835
+2026-03-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2026-03-02,Carburant Flotte Camions TotalEnergies,Carburant,debit,130970
+2026-03-03,Carburant Flotte Camions TotalEnergies,Carburant,debit,69540
+2026-03-04,Carburant Flotte Camions TotalEnergies,Carburant,debit,91736
+2026-03-05,Règlement Facture - CSE BTP,Ventes BTP,credit,2227777
+2026-03-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2345548
+2026-03-05,Carburant Flotte Camions TotalEnergies,Carburant,debit,103605
+2026-03-06,Règlement Facture - Getran SA,Ventes BTP,credit,1759206
+2026-03-09,Règlement Facture - CSE BTP,Ventes BTP,credit,2208058
+2026-03-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,121634
+2026-03-10,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3738329
+2026-03-11,Règlement Facture - CBAO Siège,Ventes BTP,credit,2307135
+2026-03-12,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1382193
+2026-03-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2569626
+2026-03-13,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3754102
+2026-03-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,693201
+2026-03-16,Règlement Facture - CSE BTP,Ventes BTP,credit,1034138
+2026-03-17,Règlement Facture - Getran SA,Ventes BTP,credit,1938134
+2026-03-17,Carburant Flotte Camions TotalEnergies,Carburant,debit,85632
+2026-03-18,Règlement Facture - Getran SA,Ventes BTP,credit,1609025
+2026-03-20,Règlement Facture - PromoBeton,Ventes BTP,credit,847141
+2026-03-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2794390
+2026-03-20,Carburant Flotte Camions TotalEnergies,Carburant,debit,120084
+2026-03-21,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3502372
+2026-03-24,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,2953988
+2026-03-26,Règlement Facture - PromoBeton,Ventes BTP,credit,2453008
+2026-03-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,125472
+2026-03-27,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4264730
+2026-03-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1808569
+2026-03-28,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2964980
+2026-03-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2026-03-30,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1046442
+2026-03-30,Carburant Flotte Camions TotalEnergies,Carburant,debit,127966
+2026-03-31,Carburant Flotte Camions TotalEnergies,Carburant,debit,107058
+2026-04-01,Carburant Flotte Camions TotalEnergies,Carburant,debit,87724
+2026-04-02,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,948144
+2026-04-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2026-04-03,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1924715
+2026-04-03,Carburant Flotte Camions TotalEnergies,Carburant,debit,81856
+2026-04-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2178391
+2026-04-06,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3307609
+2026-04-07,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2858779
+2026-04-07,Carburant Flotte Camions TotalEnergies,Carburant,debit,98253
+2026-04-08,Règlement Facture - PromoBeton,Ventes BTP,credit,2178221
+2026-04-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,132563
+2026-04-09,Règlement Facture - PromoBeton,Ventes BTP,credit,2970331
+2026-04-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,76814
+2026-04-12,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1387895
+2026-04-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1684534
+2026-04-13,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1964305
+2026-04-13,Carburant Flotte Camions TotalEnergies,Carburant,debit,66039
+2026-04-14,Règlement Facture - CBAO Siège,Ventes BTP,credit,1601173
+2026-04-14,Carburant Flotte Camions TotalEnergies,Carburant,debit,85670
+2026-04-15,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1538644
+2026-04-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,120839
+2026-04-16,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,915457
+2026-04-16,Carburant Flotte Camions TotalEnergies,Carburant,debit,81419
+2026-04-17,Règlement Facture - Getran SA,Ventes BTP,credit,1845847
+2026-04-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2045220
+2026-04-22,Règlement Facture - CSE BTP,Ventes BTP,credit,4335478
+2026-04-22,Carburant Flotte Camions TotalEnergies,Carburant,debit,123095
+2026-04-23,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2058945
+2026-04-24,Règlement Facture - Getran SA,Ventes BTP,credit,2777153
+2026-04-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,71550
+2026-04-25,Règlement Facture - Getran SA,Ventes BTP,credit,1919827
+2026-04-27,Règlement Facture - Getran SA,Ventes BTP,credit,4233404
+2026-04-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2447338
+2026-04-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2026-04-28,Carburant Flotte Camions TotalEnergies,Carburant,debit,82497
+2026-04-29,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3530421
+2026-04-29,Carburant Flotte Camions TotalEnergies,Carburant,debit,94711
+2026-04-30,Règlement Facture - CBAO Siège,Ventes BTP,credit,3815757
+2026-04-30,Carburant Flotte Camions TotalEnergies,Carburant,debit,137852
+2026-05-01,Carburant Flotte Camions TotalEnergies,Carburant,debit,116117
+2026-05-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2026-05-03,Règlement Facture - CSE BTP,Ventes BTP,credit,4321941
+2026-05-04,Règlement Facture - PromoBeton,Ventes BTP,credit,3090715
+2026-05-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2073396
+2026-05-06,Règlement Facture - CBAO Siège,Ventes BTP,credit,4074722
+2026-05-07,Carburant Flotte Camions TotalEnergies,Carburant,debit,65968
+2026-05-08,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4132175
+2026-05-11,Règlement Facture - Getran SA,Ventes BTP,credit,3926726
+2026-05-11,Carburant Flotte Camions TotalEnergies,Carburant,debit,137177
+2026-05-12,Règlement Facture - CSE BTP,Ventes BTP,credit,3231538
+2026-05-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2458897
+2026-05-12,Carburant Flotte Camions TotalEnergies,Carburant,debit,97548
+2026-05-13,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,3541725
+2026-05-13,Carburant Flotte Camions TotalEnergies,Carburant,debit,75927
+2026-05-14,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3743639
+2026-05-14,Carburant Flotte Camions TotalEnergies,Carburant,debit,87893
+2026-05-15,Règlement Facture - Getran SA,Ventes BTP,credit,976171
+2026-05-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,629622
+2026-05-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,69989
+2026-05-16,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,3078001
+2026-05-17,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4151059
+2026-05-18,Règlement Facture - Getran SA,Ventes BTP,credit,1865215
+2026-05-19,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4341856
+2026-05-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2594883
+2026-05-22,Règlement Facture - CSE BTP,Ventes BTP,credit,2366029
+2026-05-23,Règlement Facture - CBAO Siège,Ventes BTP,credit,946273
+2026-05-25,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1722953
+2026-05-26,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1977301
+2026-05-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,94074
+2026-05-27,Règlement Facture - Getran SA,Ventes BTP,credit,2181107
+2026-05-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1849207
+2026-05-27,Carburant Flotte Camions TotalEnergies,Carburant,debit,127048
+2026-05-28,Règlement Facture - Getran SA,Ventes BTP,credit,2530695
+2026-05-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2026-05-28,Carburant Flotte Camions TotalEnergies,Carburant,debit,85468
+2026-05-29,Règlement Facture - Getran SA,Ventes BTP,credit,2621581
+2026-06-01,Règlement Facture - PromoBeton,Ventes BTP,credit,3442289
+2026-06-02,Règlement Facture - CBAO Siège,Ventes BTP,credit,3277113
+2026-06-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2026-06-03,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,4369795
+2026-06-03,Carburant Flotte Camions TotalEnergies,Carburant,debit,91882
+2026-06-04,Règlement Facture - Port Autonome de Dakar,Ventes BTP,credit,1494623
+2026-06-05,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,1996687
+2026-06-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1458815
+2026-06-08,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2986535
+2026-06-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,116957
+2026-06-09,Règlement Facture - CSE BTP,Ventes BTP,credit,1912951
+2026-06-10,Règlement Facture - CBAO Siège,Ventes BTP,credit,2061667
+2026-06-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,94991
+2026-06-11,Règlement Facture - PromoBeton,Ventes BTP,credit,1775412
+2026-06-11,Carburant Flotte Camions TotalEnergies,Carburant,debit,99355
+2026-06-12,Règlement Facture - Getran SA,Ventes BTP,credit,3830990
+2026-06-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2492507
+2026-06-13,Règlement Facture - CBAO Siège,Ventes BTP,credit,2942535
+2026-06-14,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2006846
+2026-06-15,Règlement Facture - CSE BTP,Ventes BTP,credit,1819591
+2026-06-16,Règlement Facture - PromoBeton,Ventes BTP,credit,2261949
+2026-06-17,Règlement Facture - PromoBeton,Ventes BTP,credit,2553842
+2026-06-18,Règlement Facture - CBAO Siège,Ventes BTP,credit,902072
+2026-06-19,Carburant Flotte Camions TotalEnergies,Carburant,debit,131675
+2026-06-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1313223
+2026-06-22,Règlement Facture - CSE BTP,Ventes BTP,credit,4382034
+2026-06-23,Carburant Flotte Camions TotalEnergies,Carburant,debit,131232
+2026-06-24,Carburant Flotte Camions TotalEnergies,Carburant,debit,122916
+2026-06-25,Règlement Facture - CSE BTP,Ventes BTP,credit,4016252
+2026-06-25,Carburant Flotte Camions TotalEnergies,Carburant,debit,81639
+2026-06-26,Règlement Facture - Getran SA,Ventes BTP,credit,2010496
+2026-06-26,Carburant Flotte Camions TotalEnergies,Carburant,debit,113023
+2026-06-27,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2268683
+2026-06-28,Virement Salaires Équipes Chantier,Salaires,debit,1850000
+2026-06-29,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2581686
+2026-06-30,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1907749
+2026-07-01,Règlement Facture - Getran SA,Ventes BTP,credit,3792481
+2026-07-01,Carburant Flotte Camions TotalEnergies,Carburant,debit,125580
+2026-07-02,Règlement Facture - CSE BTP,Ventes BTP,credit,1261964
+2026-07-02,Loyer Parc à Matériaux & Bureaux,Loyer,debit,650000
+2026-07-02,Carburant Flotte Camions TotalEnergies,Carburant,debit,76753
+2026-07-03,Carburant Flotte Camions TotalEnergies,Carburant,debit,110930
+2026-07-05,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,1973839
+2026-07-06,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,4362360
+2026-07-06,Carburant Flotte Camions TotalEnergies,Carburant,debit,97217
+2026-07-07,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2751599
+2026-07-08,Règlement Facture - CSE BTP,Ventes BTP,credit,3562857
+2026-07-08,Carburant Flotte Camions TotalEnergies,Carburant,debit,98080
+2026-07-09,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3643060
+2026-07-09,Carburant Flotte Camions TotalEnergies,Carburant,debit,128537
+2026-07-10,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,2015305
+2026-07-10,Carburant Flotte Camions TotalEnergies,Carburant,debit,117705
+2026-07-12,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2779382
+2026-07-13,Règlement Facture - Client Particulier Villa,Ventes BTP,credit,3170462
+2026-07-14,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,2040010
+2026-07-15,Règlement Facture - CBAO Siège,Ventes BTP,credit,2922803
+2026-07-15,Paiement Acompte TVA / DGI Sénégal,Impôts,debit,738913
+2026-07-15,Carburant Flotte Camions TotalEnergies,Carburant,debit,85080
+2026-07-16,Règlement Facture - PromoBeton,Ventes BTP,credit,4052960
+2026-07-17,Règlement Facture - CBAO Siège,Ventes BTP,credit,2631814
+2026-07-19,Règlement Facture - PromoBeton,Ventes BTP,credit,1624680
+2026-07-20,Règlement Facture - Eiffage Sénégal,Ventes BTP,credit,1593845
+2026-07-20,Règlement Fournisseur Sococim / Ciments du Sahel,Fournisseur,debit,2014071
+2026-07-20,Carburant Flotte Camions TotalEnergies,Carburant,debit,118792

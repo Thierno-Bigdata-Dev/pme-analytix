@@ -633,7 +633,8 @@ export default function App() {
       const res = await api.importCSV(pmeId, file);
       showToast(res.message || "Importation réussie !", "success");
       await loadDashboardData();
-      setViewMode('pricing');
+      setViewMode('dashboard');
+      setActiveSection('dashboard');
     } catch (err: any) {
       showToast("Erreur d'import : " + err.message, "error");
     }
@@ -1086,43 +1087,32 @@ export default function App() {
     
     // 3. Load Score & Features
     setLoadingScore(true);
-    if (activePlan !== 'starter') {
-      try {
-        const scoreData = await api.getCreditScore(currentPmeId);
-        if (scoreData.status === 'success') {
-          setScore({
-            score: scoreData.score,
-            risk_segment: scoreData.risk_segment,
-            features: scoreData.features
-          });
-        }
-      } catch (err: any) {
-        console.error("Score Error:", err);
-        setErrorMsg("Impossible de charger le score crédit");
-      } finally {
-        setLoadingScore(false);
+    try {
+      const scoreData = await api.getCreditScore(currentPmeId);
+      if (scoreData.status === 'success') {
+        setScore({
+          score: scoreData.score,
+          risk_segment: scoreData.risk_segment,
+          features: scoreData.features
+        });
       }
-    } else {
-      setScore(null);
+    } catch (err: any) {
+      console.error("Score Error:", err);
+    } finally {
       setLoadingScore(false);
     }
 
     // 4. Load Treasury Forecast
     setLoadingForecast(true);
-    if (activePlan !== 'starter') {
-      try {
-        const forecastData = await api.getTreasuryForecast(currentPmeId);
-        if (forecastData.status === 'success') {
-          setForecast(forecastData.forecast);
-          setCurrentBalance(forecastData.current_balance);
-        }
-      } catch (err: any) {
-        console.error("Forecast Error:", err);
-      } finally {
-        setLoadingForecast(false);
+    try {
+      const forecastData = await api.getTreasuryForecast(currentPmeId);
+      if (forecastData.status === 'success') {
+        setForecast(forecastData.forecast);
+        setCurrentBalance(forecastData.current_balance);
       }
-    } else {
-      setForecast([]);
+    } catch (err: any) {
+      console.error("Forecast Error:", err);
+    } finally {
       setLoadingForecast(false);
     }
 
