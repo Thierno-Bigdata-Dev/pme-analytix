@@ -380,6 +380,11 @@ export default function App() {
     }
   };
 
+  const isAuthError = (err: any) => {
+    const msg = err?.message || '';
+    return msg.includes("Informations d'authentification") || msg.includes("Jeton d'authentification") || msg.includes("Not authenticated") || msg.includes("Unauthorized");
+  };
+
   const biMetrics = useMemo(() => {
     if (!transactions || transactions.length === 0) {
       return {
@@ -1110,7 +1115,7 @@ export default function App() {
         });
       }
     } catch (err: any) {
-      console.error("Score Error:", err);
+      if (!isAuthError(err)) console.error("Score Error:", err);
     } finally {
       setLoadingScore(false);
     }
@@ -1124,7 +1129,7 @@ export default function App() {
         setCurrentBalance(forecastData.current_balance);
       }
     } catch (err: any) {
-      console.error("Forecast Error:", err);
+      if (!isAuthError(err)) console.error("Forecast Error:", err);
     } finally {
       setLoadingForecast(false);
     }
@@ -1137,7 +1142,7 @@ export default function App() {
       const rdvData = await api.getRendezVous(currentPmeId);
       setRendezvousList(rdvData);
     } catch (err: any) {
-      console.error("Rendezvous load error:", err);
+      if (!isAuthError(err)) console.error("Rendezvous load error:", err);
     }
 
     // 7. Load Intelligent Alerts
@@ -1148,7 +1153,7 @@ export default function App() {
       const expData = await api.getExpensesByMonth(currentPmeId);
       setMonthlyExpenses(expData);
     } catch (err: any) {
-      console.error("Monthly Expenses Error:", err);
+      if (!isAuthError(err)) console.error("Monthly Expenses Error:", err);
     }
   };
 
