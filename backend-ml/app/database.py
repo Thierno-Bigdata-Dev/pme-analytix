@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 import os
 import re
 import redis.asyncio as aioredis

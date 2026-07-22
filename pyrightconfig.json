@@ -1,0 +1,21 @@
+{
+  "exclude": [
+    "backend-ml",
+    "backend-core",
+    "**/.pytest_cache",
+    "**/dist",
+    "**/__pycache__",
+    "**/*.egg-info"
+  ],
+  "ignore": [
+    "backend-ml",
+    "backend-core"
+  ],
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none",
+  "reportUndefinedVariable": "none",
+  "pythonVersion": "3.11",
+  "useLibraryCodeForTypes": false,
+  "analyzeUnannotatedFunctions": false,
+  "strictMode": false
+}

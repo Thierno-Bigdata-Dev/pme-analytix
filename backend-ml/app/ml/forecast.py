@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 import json
 import pandas as pd
 from sqlalchemy.ext.asyncio import AsyncSession

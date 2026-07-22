@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
+# pyright: reportMissingImports=false
 import json
 import csv
 from io import TextIOWrapper
@@ -791,7 +792,7 @@ class CSVImportView(APIView):
                         
                     try:
                         # Robust multi-format date parser
-                        date_str_clean = date_str.strip()
+                        date_str_clean = str(date_str or '').strip()
                         date_val = None
                         for fmt in ['%Y-%m-%d', '%d/%m/%Y', '%m/%d/%Y', '%Y/%m/%d']:
                             try:
@@ -1059,8 +1060,27 @@ class AlerteListView(APIView):
                 {"detail": "Vous n'êtes pas autorisé à accéder aux alertes de cette PME"},
                 status=status.HTTP_403_FORBIDDEN
             )
-        
+
         from .models import Alerte
+        from .alerts_engine import check_and_generate_alerts
+        from django.utils import timezone
+        from datetime import timedelta
+
+        # AUTO-SYNC FIX: if the most recent score_baisse alert is older than 5 minutes,
+        # regenerate alerts so the description always reflects the current ML score.
+        # This prevents the "67 vs 72" desync where a stale DB alert contradicts the
+        # live gauge which calls the ML API directly.
+        score_alert = Alerte.objects.filter(
+            type='score_baisse', statut='active'
+        ).order_by('-date_creation').first()
+
+        stale_threshold = timezone.now() - timedelta(minutes=5)
+        if score_alert is None or score_alert.date_creation < stale_threshold:
+            try:
+                check_and_generate_alerts(pme_id)
+            except Exception as e:
+                print(f"AlerteListView: auto-refresh failed silently: {e}")
+
         alerts = Alerte.objects.all().order_by('-statut', '-date_creation')
         results = []
         for a in alerts:

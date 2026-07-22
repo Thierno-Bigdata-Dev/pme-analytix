@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 import json
 import urllib.request
 import urllib.error

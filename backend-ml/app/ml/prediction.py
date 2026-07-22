@@ -1,3 +1,5 @@
+# pyright: reportMissingImports=false
+# pyrefly: disable
 import io
 import os
 import uuid
