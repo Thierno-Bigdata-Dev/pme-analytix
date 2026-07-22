@@ -80,7 +80,7 @@ def train_custom_predictor(file_bytes: bytes, target_col: str, feature_cols: Lis
     if len(numeric_cols) > 0:
         num_pipeline = Pipeline(steps=[
             ('imputer', SimpleImputer(strategy='median')),
-            ('scaler', RobustScaler())
+            ('scaler', StandardScaler())
         ])
         transformers.append(('num', num_pipeline, numeric_cols))
         
@@ -111,15 +111,8 @@ def train_custom_predictor(file_bytes: bytes, target_col: str, feature_cols: Lis
             ('preprocessor', preprocessor),
             ('model', model)
         ])
-        param_grid = {
-            'model__n_estimators': [50, 100, 200],
-            'model__max_depth': [None, 10, 20],
-            'model__min_samples_split': [2, 5]
-        }
-        # Utiliser GridSearchCV pour trouver les meilleurs hyperparamètres
-        grid_search = GridSearchCV(pipeline, param_grid, cv=3, scoring='r2', n_jobs=-1)
-        grid_search.fit(X_train, y_train)
-        best_pipeline = grid_search.best_estimator_
+        pipeline.fit(X_train, y_train)
+        best_pipeline = pipeline
     
     # Evaluate
     y_pred = best_pipeline.predict(X_test)

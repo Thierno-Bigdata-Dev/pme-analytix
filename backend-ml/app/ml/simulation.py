@@ -107,18 +107,7 @@ async def run_strategic_simulation(
     sim_current_balance = float(df_prophet['y'].iloc[-1])
     
     # Fit Prophet on simulated history
-    model = Prophet(
-        daily_seasonality=False, 
-        weekly_seasonality=True, 
-        yearly_seasonality=True,
-        seasonality_mode='multiplicative',
-        changepoint_prior_scale=0.05,
-        interval_width=0.95
-    )
-    try:
-        model.add_country_holidays(country_name='SN') # Sénégal / Zone UEMOA
-    except Exception:
-        pass # Ignorer si le package holidays n'a pas ce pays
+    model = Prophet(daily_seasonality=False, weekly_seasonality=True, yearly_seasonality=True, interval_width=0.95)
         
     model.fit(df_prophet[['ds', 'y']])
     future = model.make_future_dataframe(periods=90, include_history=False)

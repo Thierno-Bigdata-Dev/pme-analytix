@@ -1936,8 +1936,15 @@ export default function App() {
     const uppers = forecast.map(f => f.upper_95);
     const lowers = forecast.map(f => f.lower_95);
     
-    const minVal = Math.min(...lowers, currentBalance) * 0.95;
-    const maxVal = Math.max(...uppers, currentBalance) * 1.05;
+    let minVal = Math.min(...lowers, currentBalance);
+    let maxVal = Math.max(...uppers, currentBalance);
+    const padding = (maxVal - minVal) * 0.05;
+    minVal = minVal - padding;
+    maxVal = maxVal + padding;
+    if (minVal === maxVal) {
+      minVal -= 1000;
+      maxVal += 1000;
+    }
     const valRange = maxVal - minVal;
     
     getX = (index: number) => {
