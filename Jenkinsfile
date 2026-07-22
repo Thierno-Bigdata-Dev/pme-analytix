@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    triggers {
+        githubPush()
+        pollSCM('H/5 * * * *')
+    }
+
     environment {
         // Variables d'environnement pour l'orchestration Docker Composes
         DB_NAME = 'pme_analytix'
