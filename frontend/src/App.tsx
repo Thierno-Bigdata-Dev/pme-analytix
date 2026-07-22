@@ -547,21 +547,23 @@ export default function App() {
     return { encours, count, dso };
   }, [factures, transactions, biMetrics.caAnnuel]);
 
+  const computedTreasuryBalance = useMemo(() => {
+    if (transactions && transactions.length > 0) {
+      return transactions.reduce((acc, t) => {
+        const val = Number(t.montant) || 0;
+        return t.type === 'credit' ? acc + val : acc - val;
+      }, 0);
+    }
+    return currentBalance || 0;
+  }, [transactions, currentBalance]);
+
   const cashRunway = useMemo(() => {
     if (!transactions || transactions.length === 0) return null;
     
-    // Filtre pour garder uniquement les dépenses
-    const expenses = transactions.filter(t => 
-      t.type.toLowerCase().includes('dépense') || 
-      t.type.toLowerCase().includes('depense') ||
-      t.type.toLowerCase().includes('debit') ||
-      t.type.toLowerCase().includes('débit') ||
-      parseFloat(t.montant) < 0
-    );
+    const expenses = transactions.filter(t => t.type === 'debit');
+    const totalExpenses = expenses.reduce((sum, t) => sum + (Number(t.montant) || 0), 0);
+    if (totalExpenses === 0) return null;
     
-    if (expenses.length === 0) return null;
-    
-    const totalExpenses = expenses.reduce((sum, t) => sum + Math.abs(parseFloat(t.montant || '0')), 0);
     const dates = expenses.map(t => new Date(t.date).getTime()).filter(t => !isNaN(t));
     if (dates.length < 2) return null;
     
@@ -574,13 +576,13 @@ export default function App() {
     
     if (monthlyBurnRate <= 0) return null;
     
-    const runway = currentBalance > 0 ? currentBalance / monthlyBurnRate : 0;
+    const runway = computedTreasuryBalance > 0 ? computedTreasuryBalance / monthlyBurnRate : 0;
     return {
       months: runway.toFixed(1),
       burnRate: Math.round(monthlyBurnRate),
-      isCritical: runway < 3 || currentBalance <= 0
+      isCritical: runway < 3 || computedTreasuryBalance <= 0
     };
-  }, [transactions, currentBalance]);
+  }, [transactions, computedTreasuryBalance]);
 
   const simResult = useMemo(() => {
     const totalInvest = simMarketing + simRecruit + (simNewMarkets ? 3000000 : 0);
@@ -2518,8 +2520,8 @@ export default function App() {
                 <div>
                   <span style={{ fontSize: '8.5pt', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.5px' }}>Trésorerie Actuelle</span>
                   <h2 style={{ fontSize: '20pt', fontWeight: 700, margin: '8px 0 0 0', color: 'var(--primary)' }}>
-                    {loadingScore ? <Skeleton variant="text" width="140px" height="32px" /> : (
-                      <>{currentBalance.toLocaleString('fr-FR')} <span style={{ fontSize: '12pt', fontWeight: 500 }}>FCFA</span></>
+                    {loadingTransactions ? <Skeleton variant="text" width="140px" height="32px" /> : (
+                      <>{computedTreasuryBalance.toLocaleString('fr-FR')} <span style={{ fontSize: '12pt', fontWeight: 500 }}>FCFA</span></>
                     )}
                   </h2>
                   <span style={{ fontSize: '8pt', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>Dernière transaction : {transactions && transactions.length > 0 ? new Date(Math.max(...transactions.map((t: any) => new Date(t.date).getTime()))).toLocaleDateString('fr-FR') : 'N/A'}</span>
