@@ -43,6 +43,20 @@ def generate_rapport_pdf(pme_id, rapport_id):
         avg_monthly_debits = debits / 12.0 if debits > 0 else 1.0
         liquidite_ratio = round(solde_total / avg_monthly_debits, 2) if solde_total > 0 else 0.0
         
+        # Compute feature ratios for personalized recommendations & fallback scoring
+        supplier_keywords = ['fournisseur', 'achat', 'prestataire', 'matière', 'stock', 'service']
+        supplier_txs = Transaction.objects.filter(type='debit')
+        supplier_count = sum(1 for tx in supplier_txs if any(kw in str(tx.categorie or '').lower() for kw in supplier_keywords))
+        supplier_payment_regularity = min(supplier_count, 10) / 10.0
+        
+        tax_keywords = ['taxe', 'impôt', 'dgi', 'tva', 'fiscal']
+        tax_txs = Transaction.objects.filter(type='debit')
+        tax_count = sum(1 for tx in tax_txs if any(kw in str(tx.categorie or '').lower() for kw in tax_keywords))
+        fiscal_compliance = min(tax_count, 4) / 4.0
+
+        client_categories = Transaction.objects.filter(type='credit').values('categorie').distinct().count()
+        client_diversification = min(client_categories, 5) / 5.0
+        
         # Query live ML service to get exact XGBoost credit score & risk segment for THIS specific PME
         from core.alerts_engine import fetch_ml_service
         ml_data = fetch_ml_service(f"/api/ml/score/{pme_id}/", pme_id)
@@ -53,19 +67,9 @@ def generate_rapport_pdf(pme_id, rapport_id):
         else:
             # Fallback calculation if ML service is unreachable
             liquidity_score = min(max(liquidite_ratio, 0.0), 5.0) / 5.0
-            supplier_keywords = ['fournisseur', 'achat', 'prestataire', 'matière', 'stock', 'service']
-            supplier_txs = Transaction.objects.filter(type='debit')
-            supplier_count = sum(1 for tx in supplier_txs if any(kw in str(tx.categorie or '').lower() for kw in supplier_keywords))
-            supplier_payment_regularity = min(supplier_count, 10) / 10.0
             ca_growth_rate = 0.12
             ca_growth_norm = (ca_growth_rate + 1.0) / 2.0
-            client_categories = Transaction.objects.filter(type='credit').values('categorie').distinct().count()
-            client_diversification = min(client_categories, 5) / 5.0
             seniority_stability = 0.8
-            tax_keywords = ['taxe', 'impôt', 'dgi', 'tva', 'fiscal']
-            tax_txs = Transaction.objects.filter(type='debit')
-            tax_count = sum(1 for tx in tax_txs if any(kw in str(tx.categorie or '').lower() for kw in tax_keywords))
-            fiscal_compliance = min(tax_count, 4) / 4.0
             credit_score = int(
                 liquidity_score * 25 + 
                 supplier_payment_regularity * 20 + 
