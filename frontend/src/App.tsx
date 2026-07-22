@@ -385,6 +385,16 @@ export default function App() {
     return msg.includes("Informations d'authentification") || msg.includes("Jeton d'authentification") || msg.includes("Not authenticated") || msg.includes("Unauthorized");
   };
 
+  const computedTreasuryBalance = useMemo(() => {
+    if (transactions && transactions.length > 0) {
+      return transactions.reduce((acc, t) => {
+        const val = Number(t.montant) || 0;
+        return t.type === 'credit' ? acc + val : acc - val;
+      }, 0);
+    }
+    return currentBalance || 0;
+  }, [transactions, currentBalance]);
+
   const biMetrics = useMemo(() => {
     if (!transactions || transactions.length === 0) {
       return {
@@ -478,9 +488,10 @@ export default function App() {
     const caTrimestreVal = currentQuarterCredits.reduce((sum, t) => sum + parseFloat((t.montant as any) || '0'), 0);
     const caTrimestreN1Val = prevQuarterCredits.reduce((sum, t) => sum + parseFloat((t.montant as any) || '0'), 0);
 
-    const proj30 = forecast.length >= 30 ? forecast[29].value : currentBalance * 0.98;
-    const proj60 = forecast.length >= 60 ? forecast[59].value : currentBalance * 0.95;
-    const proj90 = forecast.length >= 90 ? forecast[89].value : currentBalance * 0.92;
+    const activeBalance = computedTreasuryBalance;
+    const proj30 = forecast.length >= 30 ? forecast[29].value : activeBalance * 0.98;
+    const proj60 = forecast.length >= 60 ? forecast[59].value : activeBalance * 0.95;
+    const proj90 = forecast.length >= 90 ? forecast[89].value : activeBalance * 0.92;
 
     return {
       caMensuel: caMensuelVal || 0,
@@ -499,7 +510,7 @@ export default function App() {
       monthlyCAEvolution: monthlyCAEvolution,
       revenueByCategory: revenueByCategory
     };
-  }, [transactions, forecast, currentBalance]);
+  }, [transactions, forecast, computedTreasuryBalance]);
 
   const dsoMetrics = useMemo(() => {
     let encours = 0;
@@ -546,16 +557,6 @@ export default function App() {
     
     return { encours, count, dso };
   }, [factures, transactions, biMetrics.caAnnuel]);
-
-  const computedTreasuryBalance = useMemo(() => {
-    if (transactions && transactions.length > 0) {
-      return transactions.reduce((acc, t) => {
-        const val = Number(t.montant) || 0;
-        return t.type === 'credit' ? acc + val : acc - val;
-      }, 0);
-    }
-    return currentBalance || 0;
-  }, [transactions, currentBalance]);
 
   const cashRunway = useMemo(() => {
     if (!transactions || transactions.length === 0) return null;
