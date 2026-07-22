@@ -57,32 +57,49 @@ def check_and_generate_alerts(pme_id):
         current_date = all_tx[0].date
         
         # ----------------------------------------------------
-        # 1. Trésorerie critique: Solde < 500000 FCFA dans les 30 prochains jours
+        # 1. Trésorerie critique: Solde actuel < 500 000 FCFA ou prévision à 30 jours < 500 000 FCFA
         # ----------------------------------------------------
+        total_credits_val = sum(float(tx.montant) for tx in credits)
+        total_debits_val = sum(float(tx.montant) for tx in debits)
+        current_solde_val = total_credits_val - total_debits_val
+
+        is_tresorerie_critique = current_solde_val < 500000
+        desc_tresorerie = (
+            f"Découvert bancaire critique : Votre solde de trésorerie actuel est de {int(current_solde_val):,} FCFA."
+            if current_solde_val < 0 else
+            f"Trésorerie faible : Votre solde actuel ({int(current_solde_val):,} FCFA) est inférieur au seuil de sécurité."
+        )
+        date_tresorerie_critique = current_date
+
         forecast_data = fetch_ml_service(f"/api/ml/previsions/{pme_id}/", pme_id)
         if forecast_data and forecast_data.get("status") == "success":
             forecast_list = forecast_data.get("forecast", [])
-            critical_forecast = None
-            for f in forecast_list[:30]:  # Look at J+30
+            for f in forecast_list[:30]:
                 val = float(f["value"])
                 if val < 500000:
-                    critical_forecast = f
+                    is_tresorerie_critique = True
+                    if current_solde_val >= 0:
+                        desc_tresorerie = f"Votre solde de trésorerie projeté risque de chuter à {int(val):,} FCFA d'ici le {f['date']}."
+                        try:
+                            date_tresorerie_critique = datetime.strptime(f['date'], "%Y-%m-%d").date()
+                        except Exception:
+                            pass
                     break
-                    
-            if critical_forecast:
-                Alerte.objects.update_or_create(
-                    type='tresorerie_critique',
-                    statut='active',
-                    defaults={
-                        'seuil': 500000,
-                        'canal': 'push',
-                        'description': f"Votre solde de trésorerie projeté risque de chuter à {int(critical_forecast['value']):,} FCFA d'ici le {critical_forecast['date']}.",
-                        'date_critique': datetime.strptime(critical_forecast['date'], "%Y-%m-%d").date(),
-                        'montant_jeu': 500000 - float(critical_forecast['value']),
-                        'action_recommandee': "Optimiser les charges courantes ou solliciter un financement de trésorerie.",
-                        'lien_direct': "dashboard"
-                    }
-                )
+
+        if is_tresorerie_critique:
+            Alerte.objects.update_or_create(
+                type='tresorerie_critique',
+                statut='active',
+                defaults={
+                    'seuil': 500000,
+                    'canal': 'push',
+                    'description': desc_tresorerie,
+                    'date_critique': date_tresorerie_critique,
+                    'montant_jeu': abs(current_solde_val) if current_solde_val < 500000 else 500000.0,
+                    'action_recommandee': "Optimiser les charges courantes ou solliciter un financement de trésorerie d'urgence.",
+                    'lien_direct': "dashboard"
+                }
+            )
                 
         # ----------------------------------------------------
         # 2. Retard de paiement client: Ventes facturées sans encaissement depuis 30 jours
